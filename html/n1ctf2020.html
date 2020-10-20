@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-10-20 ti. 11:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>N1CTF2020</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<style>pre.src{background:#1f1f10;color:white;}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">N1CTF2020</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4c14857">General Comments</a></li>
+<li><a href="#orgf91296f">crypto:VSS</a></li>
+<li><a href="#org8d9a139">crypto:FlagBot</a></li>
+<li><a href="#orgf2b7f5a">crypto:curve</a></li>
+<li><a href="#orgcd466f8">crypto:easy RSA?</a></li>
+<li><a href="#org2bcff6d">crypto:babyProof</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Team:</b> <code>mode13h</code>
+</p>
+
+<p>
+<b>Author:</b> <code>tope#9134@Discord</code>
+</p>
+
+<div id="outline-container-org4c14857" class="outline-2">
+<h2 id="org4c14857">General Comments</h2>
+<div class="outline-text-2" id="text-org4c14857">
+<p>
+An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
+difficulty level. Objectively the task set alone deserves a ~100 rating on
+CTFTime<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</p>
+
+<p>
+I did the crypto tasks and will outline solves for those below. I won't post
+full problems or detailed expositions, it's more just notes that should allow
+anyone who attempted the problems to solve them. I also glanced at some of the
+"easier" tasks in misc and web, but even the entry-level tasks in those
+categories was beyond me.
+</p>
+
+<p>
+<i>Personal downside #1</i>: very biased toward web, rev, and pwn, which I am pretty
+clueless about, though those are the "true" staples of CTF. I realize this is
+more like a pure upside for most people.
+</p>
+
+<p>
+On the end of the first day there were only three crypto tasks released yet more
+than fifteen(!?) web, pwn, and rev tasks out. In the end I sat around twiddling
+my thumbs a bit, feeling prtety useless.
+</p>
+
+<p>
+The only misc-like task I saw involved PHP, which is more of a mental plague
+than a programming language<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. I played around with it a bit, but finally
+just went to bed feeling a little bit dumber axnd somewhat frustrated because I
+thought all tasks had been released and that I'd be useless for the rest of the
+CTF.
+</p>
+
+<p>
+<i>Personal downside #2</i>: Two more crypto were released just after I'd gone to
+sleep on day two, so I only had a few hours for them when I woke up. Although
+the new tasks were a nice surprise, the timing was very unfortunate for me.
+</p>
+
+<p>
+<i>Plea for organizers in general: please consider having all tasks out by the
+mid-way point of the CTF.</i> If not, then communicate your planned task release
+schedule so it's possible to better manage our time?
+</p>
+
+<p>
+We ended up placing 13th<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf91296f" class="outline-2">
+<h2 id="orgf91296f">crypto:VSS</h2>
+<div class="outline-text-2" id="text-orgf91296f">
+<p>
+You're given some code which generates a QR-code image of the flag and uses that
+image to create two new randomized images which&#x2013;when combined&#x2013;would
+reconstruct the original (albeit transposed? I am guessing, I didn't actually
+run the code). You also receive <i>one</i> of the images generated. It struck me as a
+little cryptic.
+</p>
+
+<p>
+I ignored the whole visual threshold part of the task and noted it uses Python's
+random module to generate the pixels in the output images. That's a lot of
+random data, and the QR-code image it's based on has a lot of known fixed
+output. After double-checking that the QR-image had enough known pixels (you get
+to reverse one bit of state per pixel) and where it was (it would be hell if it
+wasn't contiguous), it reduces to a "standard" reverse-the-RNG-state task.
+</p>
+
+<p>
+For the reversing Python's MT the <i>easy</i> way you need \(32 \cdot 672\) contiguous
+bits of output. That is if you don't have to worry about missing state. You need
+to undo the tempering that MT does to its output words:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">untemper</span><span style="color: #bdbdb3;">(</span>x<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span>x &gt;&gt; <span style="color: #6a7550;">18</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span>x &lt;&lt; <span style="color: #6a7550;">15</span><span style="color: #bdbdb3;">)</span> &amp; <span style="color: #6a7550;">0xefc60000</span>
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">7</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x9d2c5680</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">14</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x94284000</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">21</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x14200000</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">28</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x10000000</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span>x &gt;&gt; <span style="color: #6a7550;">11</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span>x &gt;&gt; <span style="color: #6a7550;">22</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">return</span> x
+</pre>
+</div>
+
+<p>
+You combine words <code>i</code>, <code>i+1</code>, and <code>i+M</code> to get word <code>i+N</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">tmp</span> = w<span style="color: #bdbdb3;">[</span>i<span style="color: #bdbdb3;">][</span><span style="color: #6a7550;">31</span><span style="color: #bdbdb3;">]</span> ^ w<span style="color: #bdbdb3;">[</span>i+<span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">][</span>:<span style="color: #6a7550;">31</span><span style="color: #bdbdb3;">]</span>  <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">using slice notation to select bits</span>
+<span style="color: #fb8512;">w</span><span style="color: #bdbdb3;">[</span>i+N<span style="color: #bdbdb3;">]</span> = tmp&gt;&gt;<span style="color: #6a7550;">1</span> ^ w<span style="color: #bdbdb3;">[</span>i+M<span style="color: #bdbdb3;">]</span> ^ <span style="color: #bdbdb3;">(</span>A <span style="color: #7d7c61; font-weight: bold;">if</span> tmp<span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span> <span style="color: #7d7c61; font-weight: bold;">else</span> <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+<code>M</code>, <code>N</code>, <code>A</code> are constants from <code>_randommodule.c</code> in CPython source code. Then
+you reapply the tempering (see aforementioned <code>.c</code> source) and it should match
+Python's output. That's the basic idea.
+</p>
+
+<p>
+It was a task which is very easy to realize the solution but rather painful to
+implement. I struggled with infinite little indexing bugs. The headache I got
+from trying to directly indexing into <code>bin(random.getrandbits(...))</code> was not
+worth it. (Bits within words run from bit \(2^{31}\) to \(1\), but the words are in
+little-endian order.) I even had bugs in the final solution as some randomness
+was leaking through, but fortunately QR-codes are highly redundant, so I didn't
+care. Then again I probably did things needlessly complicated by
+reverse-generating the original QR-code instead of simply generating the
+"companion" image to the one shared.
+</p>
+
+<p>
+Apart from headaches it gave me with my own bugs, it's actually a fairly clever
+task, because there aren't any obvious "hints" that points you in the right
+direction, so it might take a while to notice. I was pretty lucky.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8d9a139" class="outline-2">
+<h2 id="org8d9a139">crypto:FlagBot</h2>
+<div class="outline-text-2" id="text-org8d9a139">
+<p>
+Several random 256-bit elliptic curves are generated and used to do a standard
+key exchange to AES-encrypt the flag. The curves are all asserted to be
+non-smooth and resistant to MOV attack. You get the public output of the
+exchanges as well as the encrypted messages. It's a very nice and clean task
+with a likewise straightforward implementation. It was a pure blessing after the
+indexical spaghetti that was VSS.
+</p>
+
+<p>
+The key to realize is that the secret is reused (for both client and server).
+The generated random curves have a lot of small random subgroups, so you can
+solve the discrete log in those subgroups (multiply the generator and public
+keys by \((p-1)/q\) to put it in the subgroup of size \(q\)), get constraints like
+\(secret = x_i \pmod{q_i}\), and then do Chinese Remainder when you have enough. A
+partial Pohlig-Hellman, if you will.
+</p>
+
+<p>
+I think I did most of this task in REPL, but the pseudo-code sketch would be:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">crt_r</span>, <span style="color: #fb8512;">crt_s</span> = <span style="color: #bdbdb3;">[]</span>, <span style="color: #bdbdb3;">[]</span>
+<span style="color: #7d7c61; font-weight: bold;">for</span> ec,pk_r,pk_s <span style="color: #7d7c61; font-weight: bold;">in</span> data:
+  <span style="color: #fb8512;">order</span> = ec.order<span style="color: #bdbdb3;">()</span>
+  <span style="color: #7d7c61; font-weight: bold;">for</span> f <span style="color: #7d7c61; font-weight: bold;">in</span> small_factors<span style="color: #bdbdb3;">(</span>order<span style="color: #bdbdb3;">)</span>:
+    crt_r.append<span style="color: #bdbdb3;">(</span> <span style="color: #6a9550;">(</span>babystepgiantstep<span style="color: #baba36;">(</span>f, pk_r*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span>, g*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span><span style="color: #baba36;">)</span>, f<span style="color: #6a9550;">)</span> <span style="color: #bdbdb3;">)</span>
+    crt_s.append<span style="color: #bdbdb3;">(</span> <span style="color: #6a9550;">(</span>babystepgiantstep<span style="color: #baba36;">(</span>f, pk_s*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span>, g*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span><span style="color: #baba36;">)</span>, f<span style="color: #6a9550;">)</span> <span style="color: #bdbdb3;">)</span>
+
+<span style="color: #fb8512;">r</span>,<span style="color: #fb8512;">s</span> = crt<span style="color: #bdbdb3;">(</span>*crt_r<span style="color: #bdbdb3;">)[</span><span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>, crt<span style="color: #bdbdb3;">(</span>*crt_s<span style="color: #bdbdb3;">)[</span><span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf2b7f5a" class="outline-2">
+<h2 id="orgf2b7f5a">crypto:curve</h2>
+<div class="outline-text-2" id="text-orgf2b7f5a">
+<p>
+In this task (against a live server) you're asked for elliptic curve parameters
+\((p, a, b)\) and two points \((G_1, G_2)\) and then have to solve 30 rounds of
+distinguishing \(G_1 \cdot r \cdot s\) from \(G_1 \cdot x\) when given \(G_1 \cdot r\)
+and \(G_2 \cdot s\) (for random secret integers \(r, s, x\)). It will throw an
+exception if you give it a singular curve or points not on the curve.
+</p>
+
+<p>
+At first glance I thought this was too similar to <code>FlagBot</code>, because there are
+no checks against the points being in a small subgroup. I knew you could also
+use trace 1 curves on which the much-copy-pasted Smart attack works, but I only
+have that code in some Sage docker; I wanted to use my own comfortable code and
+homemade Python libraries. Besides, <i>I got this</i>: I thought it would just be a
+matter of trivially putting them into small subgroups and solving the CRT again.
+A bit too easy, maybe&#x2026;
+</p>
+
+<p>
+Yeah, after a while I realized my oops: it required a very <i>large</i> prime modulus
+\(p\) and calls <code>E.order()</code> on the curve &#x2013; <i>and</i> there's a timer on the program.
+The <code>E.order()</code> call takes well over a minute, sometimes several minutes, and so
+there's no time to do the loop. I wasted some time trying to find random curves for
+which <code>E.order()</code> was smooth or took less time but&#x2026;
+</p>
+
+<p>
+Finally I relented and tested <code>E.order()</code> on a curve with \(|E_p| = p\). It was
+instant, of course, so&#x2026; <i>sigh</i> Copy-pasted Sage code it is, then.
+</p>
+
+<p>
+Now the problem was to generate curves with trace 1, which I didn't know how to
+do, but <code>poiko</code> talked of a DEFCON task which had involved generating such
+curves and gave me a paper: <a href="http://www.monnerat.info/publications/anomalous.pdf">http://www.monnerat.info/publications/anomalous.pdf</a>
+</p>
+
+<p>
+From the paper I figured I wanted curves under primes \(p = 11 m (m+1) + 3\) with
+\((a,b)\) which gives j-invariant equal to \(-2^{15}\), I quickly found plenty such
+curves. Then copy-paste <code>Smart_Attack()</code> and blah, blah, the usual stuff. (I
+really despise copy-pasting.) A bit unrewarding due to my stubbornness, but I
+have to admit it was a good task in the end, even if the "hidden" constraint of
+"the given curve must also have a fast <code>E.order()</code>" was a bit devious<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcd466f8" class="outline-2">
+<h2 id="orgcd466f8">crypto:easy RSA?</h2>
+<div class="outline-text-2" id="text-orgcd466f8">
+<p>
+A fun task which had two stages.
+</p>
+
+<p>
+It generates some RSA-modulus \(n = p*q\) and encrypts a large vector with lots of
+numbers. These numbers are the vector (dot) products between the flag and random
+numbers, offset by some small error, and then modulo a small prime. You are
+given the random numbers used for free, but the errors are secret.
+</p>
+
+<p>
+The primes are generated in a truly bizarre way:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">mark</span> = <span style="color: #6a7550;">3</span>**<span style="color: #6a7550;">66</span>
+<span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">get_random_prime</span><span style="color: #bdbdb3;">()</span>:
+  <span style="color: #fb8512;">total</span> = <span style="color: #6a7550;">0</span>
+  <span style="color: #7d7c61; font-weight: bold;">for</span> i <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">5</span><span style="color: #bdbdb3;">)</span>:
+    <span style="color: #fb8512;">total</span> += mark**i * getRandomNBitInteger<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">32</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">fac</span> = <span style="color: #bdbdb3; font-weight: bold;">str</span><span style="color: #bdbdb3;">(</span>factor<span style="color: #6a9550;">(</span>total<span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>.split<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">" * "</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #bdbdb3; font-weight: bold;">int</span><span style="color: #bdbdb3;">(</span>fac<span style="color: #6a9550;">[</span>-<span style="color: #6a7550;">1</span><span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+It generates a number that has "small" digits in base-\(3^{66}\) and returns the
+largest prime in the factorization of this number. That's one of the oddest ways
+to generate primes I've seen.
+</p>
+
+<p>
+But (the "a-ha" moment) it means that \(n*x\) also has "small" digits in
+base-\(3^{66}\) for some \(x\) which is itself also "small" (compared to \(n\)).
+</p>
+
+<p>
+I used a lattice like
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #bdbdb3;">[</span>   n * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>   <span style="color: #6a7550;">1</span> * HH, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">1</span> * HH, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">2</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">3</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">4</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">5</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">6</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">7</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">8</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+</pre>
+</div>
+
+<p>
+to find \(x\). There might be better ways, but it worked. Now to factor. Trivially
+you can find the first and last digits of the primes. There's probably some more
+clever way to do the whole thing, but I just did the dumb thing and used the
+base-\(B\) digits of \(n*x\) as coefficients for a polynomial over \(\mathbb{Z}_p\)
+for some large \(p\) and factored that. That gave me two numbers back (when
+multiplied so the least/most significant digits match), each of which shared one
+of the big primes with \(n\). This was all a bit rushed because it took me too
+long to discover the "trick" of finding \(n \cdot x\) and I just did everything in
+the REPL at this point, using my own utility libraries and NTL wrapper.
+</p>
+
+<p>
+So now I had \(n=p*q\) and could decrypt the vector to get a big system of linear
+relations with "small errors" modulo some small prime. The lattice is life, the
+lattice is love. Maybe there's a more clever way to solve this as well, but did
+I mention I was a little pressed for time at this point? The system in its
+entirely was too big for my poor, slow LLL, but a small random subset of
+equations worked just fine (every equation involved the entire flag).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2bcff6d" class="outline-2">
+<h2 id="org2bcff6d">crypto:babyProof</h2>
+<div class="outline-text-2" id="text-org2bcff6d">
+<p>
+I "solved" this task but was a little too late. I had already realized the
+solution by the last hour or two, but underestimated how many datasets I needed
+and wasted some time with self-doubt, double-checking, and massaging
+uncooperative lattices. When the competition ended I went to eat and by the time
+I got back there was enough data and I got the (bittersweet) flag easily.
+</p>
+
+<p>
+Like <code>FlagBot</code> it's a deceptively clean and simple task, where you don't realize
+the problem until that sweet "a-ha!" moment. The server uses generated DSA
+constants (a (huge) prime \(p\), a generator \(g\) for a large prime (\(q\)) subgroup
+of \(\mathbb{Z}_p\)) to prove that it knows \(x\) in \(y=g^x \pmod p\) by giving you
+\(y\), \(t=y^v \pmod p\) (for some secret ephemeral key \(v\)) and \(r = v - c \cdot x
+\pmod q\) with \(c\) being a SHA256 constant the recepient can derive from \((g, y,
+t)\). It looks respectable and above the board at first glance&#x2026;
+</p>
+
+<p>
+But basically you need to forget everything I just said and ignore the whole
+business with \(p\) and discrete logs. With \(r\) you're given a system of
+inequalities like \(c_i \cdot flag + r_i < flag \pmod{q_i}\), because the ephemeral
+key is erroneously generated to be less than \(x\) which was asserted to be 247
+bits in the code (while \(q\) is 256 bits), so each equation ought to reveal a
+little bit more about \(x\). It is clearly another lattice problem.
+</p>
+
+<p>
+I'm not sure if there are any better or more clever ways to set up the lattice,
+but what worked for me in the end was the most obvious and straightforward:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #bdbdb3;">[</span><span style="color: #6a9550;">[</span><span style="color: #6a7550;">1</span>,     <span style="color: #6a7550;">0</span>, c0, c1, ...,  cn<span style="color: #6a9550;">]</span>,
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">2</span>^<span style="color: #6a7550;">248</span>, r0, r2, ...,  rn<span style="color: #6a9550;">]</span>,
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,     <span style="color: #6a7550;">0</span>, q0,  <span style="color: #6a7550;">0</span>, ...,   <span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span>
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,     <span style="color: #6a7550;">0</span>,  <span style="color: #6a7550;">0</span>, q1, ...,   <span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span>
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,     <span style="color: #6a7550;">0</span>,  <span style="color: #6a7550;">0</span>,  <span style="color: #6a7550;">0</span>, ...,  qn<span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">]</span>
+</pre>
+</div>
+
+<p>
+<code>b'n1ctf{S0me_kn0wl3dg3_is_leak3d}'</code> Since I can no longer enter it on the site,
+I'll leave it here to be sad and alone. :(
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Given appropriate adjustment of over-rated CTFs that feature stego and
+guess-tasks.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+I firmly believe the inventors of PHP ought to be retroactively
+punished for having made the world a worse place. Every time I had to read a PHP
+doc page and look at the comments by PHP users I could feel myself losing IQ
+points as if breathing in neurotoxic mold.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+We're only a two-man team, so naturally we don't stand a chance for a
+competitive placement, but it was a lot of fun with good, challenging tasks.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+Maybe I'm only critical because I'm embarrassed it fooled me!
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
