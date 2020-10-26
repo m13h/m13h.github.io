@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-10-26 ma. 10:15 -->
+<!-- 2020-10-26 ma. 11:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Hack.lu 2020</title>
@@ -326,7 +326,7 @@ assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'8'</s
 </div>
 
 <p>
-Put <code>__proto__</code> in the object will get hidden by the eval, because <code>:jazzhands-OO:</code>.
+Put <code>__proto__</code> in the object and it will get hidden by the eval, because <code>:jazzhands-OO:</code>.
 </p>
 
 <div class="org-src-container">
@@ -349,7 +349,7 @@ playing around in <code>nodejs</code> and from that a-ha the pieces fell into pl
 <p>
 <code>y = "constructor"</code> so <code>y[y]</code> becomes a function, i.e. <code>y.constructor</code>, and <code>y[y][y]</code> becomes the
 function constructor, which takes its body as a string argument (?!) to be
-eval'd. So <code>"z = return console.log;"</code> for example.
+eval'd. So <code>z = "return console.log;"</code> for example.
 </p>
 </div>
 </div>
@@ -379,12 +379,13 @@ So, textbook reading material:
 Indeed: almost disappointingly so. Finding a correlation based on the
 1-bits-equals-more-power assumption turned out to work directly. You can ignore
 the rounds, ignore the hints<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>, ignore everything, because there's so much
-data and it's so artificially clean. Find the <code>keyiv = key ^ iv</code> such that the
-weight of <code>sbox[keyiv^plaintext]</code> has the highest correlation with (overall)
-power consumption. <code>sbox[keyiv^plaintext]</code> is what the state gets set to in the
+data and it's so artificially clean. Find the <code>key</code> (and <code>iv</code>) such that the
+weight of <code>sbox[key^iv^plaintext]</code> has the highest correlation with (overall)
+power consumption. <code>sbox[key^iv^plaintext]</code> is what the state gets set to in the
 first round (in CBC mode), before <code>ShiftRows</code> etc. (Note that <code>ShiftRows</code>
-doesn't change the weight.) You can simply use the full traces, and don't have
-to target any point in time at all.
+doesn't change the weight.) Technically I ignored IV too because I simply forgot
+about it, but that was fine too. You can simply use the full traces, and don't
+have to target any point in time at all.
 </p>
 
 <p>
@@ -392,14 +393,18 @@ See also:
 <a href="https://teamrocketist.github.io/2018/11/14/Crypto-SquareCtf-2018-C4-leaky-power/">https://teamrocketist.github.io/2018/11/14/Crypto-SquareCtf-2018-C4-leaky-power/</a>
 which I also came across and seems to copy a lot of text/material from the above
 link, but is a much more thorough write-up than anything I can produce.
-Copy-pasting that code should just work out of the box, though it is awful and
-slow so I ended up rewriting it and doing most of my playing in REPL to pretend
-I wasn't a fraud and try to learn something in spite of everything.
 </p>
 
 <p>
-AES ECB to decrypt, so no IV was used, which I guess I implicitly assumed. Can't
-recall if the task hinted to that or not, maybe it did.
+Notice how it's also a verrrry similar problem? Yep: copy-pasting that code
+should just work out of the box here too, though it is awful and slow so I ended
+up rewriting it and doing most of my playing in REPL to pretend I wasn't a
+fraud, trying to learn something in spite of everything.
+</p>
+
+<p>
+And yeah, AES ECB to decrypt, so no IV was used, which I as stated implicitly
+assumed. Can't recall if the task hinted to that or not, maybe it did?
 </p>
 </div>
 </div>
