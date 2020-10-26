@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-10-26 ma. 09:53 -->
+<!-- 2020-10-26 ma. 10:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Hack.lu 2020</title>
@@ -124,19 +124,17 @@ It felt too easy and/or uninspired and/or unoriginal.
 </p>
 
 <p>
-I am probably going to sound <i>incredibly</i> negative here. It wasn't that bad, but
-it definitely wasn't a 100-point CTF. The tasks I looked at felt like they
-belonged more in the 50-70 range.
+I am also going to sound <i>incredibly</i> negative. It wasn't that bad, but it
+definitely wasn't a 100-point CTF, and that's the stance I'm critiquing from.
+The tasks I looked at felt like they belonged in the 50-70 range.
 </p>
 
 <p>
 <a href="#orge258b14">crypto:Pwnhub Collection</a> which was (unnecessarily) gated behind rev would probably be
 my pick for "best" crypto-task, because it actively combines two related
 techniques in a sensible way. <a href="#org0632a18">crypto:Conquering Premium Access</a> had a copy-pastable
-solution through Google, which was not fun to discover. <a href="#org0e50e07">Bad Primes</a> was somewhat
-trivial<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>&#x2013;which is fine, but it could have been a sub-problem in another task for
-example.
-<a href="#orgacda9eb">misc:BabyJS</a> was cute but that's about it. And so on. More info about them below.
+solution through Google, which was not fun to discover. <a href="#org0e50e07">crypto:Bad Primes</a> was somewhat
+trivial<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. <a href="#orgacda9eb">misc:BabyJS</a> was cute but that's about it. And so on. More info about them below.
 </p>
 </div>
 </div>
@@ -186,7 +184,7 @@ Other reasoning lines probably exist too, but this was the one I took.
 <p>
 Next step we iteratively multiply with any <i>e</i>-th root of unity (= \(r^{(p-1)/e}\)
 for any primitive element \(r\)) to cycle through the rest of the roots,
-reconstructing the number in \(\pmod{p\cdot q}\) with CRT to check if it is the
+reconstructing the number in under mod \(p\cdot q\) with CRT to check if it is the
 flag.
 </p>
 </div>
@@ -196,7 +194,7 @@ flag.
 <h2 id="orgacda9eb">misc:BabyJS</h2>
 <div class="outline-text-2" id="text-orgacda9eb">
 <p>
-A misc task that was misclassified as web. It's an exposition on the various ways
+A misc task that was misclassified as web(?). It's an exposition on the various ways
 JavaScript tries very hard to be an awful programming language<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>. It's
 still not as awful as PHP, but we can't all be the champ.
 </p>
@@ -504,14 +502,15 @@ Repeat for each byte. Print it, ship it, done.
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-one could say it tries to teach you some math&#x2013;but it's the sort of stuff
-with a trivial Sage/Google escape hatch. The trademark of low-effort task that
-gets ground up by the "point mill" into bland paste, rather than offering
-fun/engaging problem solving.
+which is fine, but it could have been a sub-problem in another task for
+example. One could also say it tries to teach you some math&#x2013;but it's the sort
+of stuff with a trivial Sage/Google escape hatch. The trademark of low-effort
+tasks that get ground up by the "point mill" into bland paste, rather than
+offering any fun/engaging problem solving.
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
-Right off the bat: <code>python2</code>. Shudder. This has nothing to do with the
+Also: this was my first impression: <code>#!/usr/bin/env python2</code>. <code>:shudder:</code> This has nothing to do with the
 task itself, but it always makes my heart sink and I lose a bit of faith in the
 problem author and the world in general.
 </p></div></div>
