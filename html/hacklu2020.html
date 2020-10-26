@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-10-26 ma. 09:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hack.lu 2020</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<style>pre.src{background:#1f1f10;color:white;}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Hack.lu 2020</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1f90071">General Comments</a></li>
+<li><a href="#org6c2a344">crypto:Bad Primes</a></li>
+<li><a href="#orgacda9eb">misc:BabyJS</a></li>
+<li><a href="#org0632a18">crypto:Conquering Premium Access</a></li>
+<li><a href="#org75c05bf">misc:P*rn Protocol</a></li>
+<li><a href="#orge258b14">crypto:Pwnhub Collection</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Team:</b> <code>mode13h</code>
+</p>
+
+<p>
+<b>Author:</b> <code>tope#9134@Discord</code>
+</p>
+
+<div id="outline-container-org1f90071" class="outline-2">
+<h2 id="org1f90071">General Comments</h2>
+<div class="outline-text-2" id="text-org1f90071">
+<p>
+An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
+a much higher rating on <code>CTFTime</code>.
+</p>
+
+<p>
+<b>DISCLAIMER:</b> I'm judging with very biased goggles here; I'm sure web/rev/pwn
+were all kinds of excellent and top notch woo-hoo, but misc and crypto was very
+disappointing and demotivating for this rating bracket and I tapped out early.
+It felt too easy and/or uninspired and/or unoriginal.
+</p>
+
+<p>
+I am probably going to sound <i>incredibly</i> negative here. It wasn't that bad, but
+it definitely wasn't a 100-point CTF. The tasks I looked at felt like they
+belonged more in the 50-70 range.
+</p>
+
+<p>
+<a href="#orge258b14">crypto:Pwnhub Collection</a> which was (unnecessarily) gated behind rev would probably be
+my pick for "best" crypto-task, because it actively combines two related
+techniques in a sensible way. <a href="#org0632a18">crypto:Conquering Premium Access</a> had a copy-pastable
+solution through Google, which was not fun to discover. <a href="#org0e50e07">Bad Primes</a> was somewhat
+trivial<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>&#x2013;which is fine, but it could have been a sub-problem in another task for
+example.
+<a href="#orgacda9eb">misc:BabyJS</a> was cute but that's about it. And so on. More info about them below.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6c2a344" class="outline-2">
+<h2 id="org6c2a344"><a id="org0e50e07"></a>crypto:Bad Primes<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-org6c2a344">
+<p>
+You're given \(c = flag^e \pmod{p\cdot q}\) with all numbers known except \(flag\).
+The caveat is that \(e | p-1\) so there's no \(d = e^{-1} \pmod{p-1}\) for
+recovering the flag directly. (Finding the flag \(\pmod q\) works trivially, so we
+ignore that part.)
+</p>
+
+<p>
+So finding the <i>e</i>-th root of \(c \pmod p\) is the interesting part. You can do it
+in two different ways:
+</p>
+
+<p>
+The I-don't-want-to-learn-anything Way (also known as
+I'm-a-professional-I-don't-have-time-for-this): press the <code>[Skip This Step]</code>
+button and do <code>GF(p)(c).nth_root(e)</code> in Sage.
+</p>
+
+<p>
+The Problem Child Way:
+</p>
+
+<p>
+So we want a number \(x\) such that \(x^e = c \pmod p\) with \(p-1 = e\cdot s\) and
+\(gcd(s,e) = 1\).
+</p>
+
+<p>
+The a-ha comes after exploring the hunch that \(s\) is important here. Look at \(j
+= e^{-1} \pmod s\). This means means \(j\cdot e = 1 + k\cdot s\) for some \(k\). In
+fact, it means that \(j\cdot e\cdot e = e + k\cdot (p-1)\). A-ha! So now \((c^j)^e
+= c^{e \cdot j} = c^{k\cdot s + 1} = x^{e\cdot (k\cdot s + 1)} = x^{k\cdot
+(p-1) + e} = x^e \pmod p\). Voila! \(c^j\) is a root.
+</p>
+
+<p>
+Other reasoning lines probably exist too, but this was the one I took.
+</p>
+
+<p>
+Next step we iteratively multiply with any <i>e</i>-th root of unity (= \(r^{(p-1)/e}\)
+for any primitive element \(r\)) to cycle through the rest of the roots,
+reconstructing the number in \(\pmod{p\cdot q}\) with CRT to check if it is the
+flag.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgacda9eb" class="outline-2">
+<h2 id="orgacda9eb">misc:BabyJS</h2>
+<div class="outline-text-2" id="text-orgacda9eb">
+<p>
+A misc task that was misclassified as web. It's an exposition on the various ways
+JavaScript tries very hard to be an awful programming language<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>. It's
+still not as awful as PHP, but we can't all be the champ.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript">is<span style="color: #bdbdb3;">(</span>a, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+is<span style="color: #bdbdb3;">(</span>b, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'1.1'</span>, a === b<span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'1.2'</span>, <span style="color: #6a7550;">1337</span> / a !== <span style="color: #6a7550;">1337</span> / b<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+<code>[0.0, -0.0]</code> works because the division gives <code>[+Infinity, -Infinity]</code>. A
+pimple, no big deal. Floats are tricky anyway.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript">isnt<span style="color: #bdbdb3;">(</span>c, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+isnt<span style="color: #bdbdb3;">(</span>d, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #fb8512;">cast</span> = <span style="color: #bdbdb3;">(</span>f, ...a<span style="color: #bdbdb3;">)</span> =&gt; a.map<span style="color: #bdbdb3;">(</span>f<span style="color: #bdbdb3;">)</span>;
+<span style="color: #bdbdb3;">[</span>c, d<span style="color: #bdbdb3;">]</span> = cast<span style="color: #bdbdb3;">(</span>Number, c, d<span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'2.1'</span>, c !== d<span style="color: #bdbdb3;">)</span>;
+<span style="color: #bdbdb3;">[</span>c, d<span style="color: #bdbdb3;">]</span> = cast<span style="color: #bdbdb3;">(</span>String, c, d<span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'2.2'</span>, c === d<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Probably a billion solutions here. I did <code>[{}, "[Object object]"]</code>. What's that
+weird rash&#x2026;
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">let</span> <span style="color: #bdbdb3;">{</span> e <span style="color: #bdbdb3;">}</span> = json;
+is<span style="color: #bdbdb3;">(</span>e, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #fb8512;">isCorrect</span> = e++&lt;e--&amp;&amp;!++e&lt;!--e&amp;&amp;--e&gt;e++;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'3'</span>, isCorrect<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Up to boils now. Actual boils. <code>&lt;!--</code> is a comment. \(e=-1\) works.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> f <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>f, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'4'</span>, f == !f<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+<code>f=[]</code> works, I don't know why and I don't want to know. I fear that knowing
+certain things actually make you less knowledgeable.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> g <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>g, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #6abd50;">// </span><span style="color: #6aaf50;">what you see:</span>
+<span style="color: #7d7c61; font-weight: bold;">function</span> <span style="color: #9b55c3;">check</span><span style="color: #bdbdb3;">(</span><span style="color: #fb8512;">x</span><span style="color: #bdbdb3;">)</span> <span style="color: #bdbdb3;">{</span>
+    <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #6a9550;">{</span>
+        value: x * x
+    <span style="color: #6a9550;">}</span>;
+<span style="color: #bdbdb3;">}</span>
+<span style="color: #6abd50;">// </span><span style="color: #6aaf50;">what the tokenizer sees:</span>
+<span style="color: #7d7c61; font-weight: bold;">function</span>
+        check
+             <span style="color: #bdbdb3;">(</span>
+              x
+               <span style="color: #bdbdb3;">)</span>
+                <span style="color: #bdbdb3;">{</span>
+                 <span style="color: #7d7c61; font-weight: bold;">return</span>
+                       <span style="color: #6a9550;">{</span>
+                        value
+                             :
+                              x
+                               *
+                                x
+                                 <span style="color: #6a9550;">}</span>
+                                  ;
+                                   <span style="color: #bdbdb3;">}</span>
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'5'</span>, g == check<span style="color: #6a9550;">(</span>g<span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+This one was a little cute, like a magician's clever misdirection. The original
+<code>check()</code> is replaced by this <code>check(x) { return; ... }</code> function. Why? Haha!
+<a href="https://news.ycombinator.com/item?id=3842713">https://news.ycombinator.com/item?id=3842713</a> Red eyes, compulsive depilation,
+psychosis.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> h <span style="color: #bdbdb3;">}</span> = json;
+is<span style="color: #bdbdb3;">(</span>h, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #7d7c61; font-weight: bold;">try</span> <span style="color: #bdbdb3;">{</span>
+    JSON.parse<span style="color: #6a9550;">(</span>String<span style="color: #baba36;">(</span>h<span style="color: #baba36;">)</span><span style="color: #6a9550;">)</span>;
+    no<span style="color: #6a9550;">(</span><span style="color: #CC5542;">'6'</span><span style="color: #6a9550;">)</span>;
+<span style="color: #bdbdb3;">}</span> <span style="color: #7d7c61; font-weight: bold;">catch</span><span style="color: #bdbdb3;">(</span>e<span style="color: #bdbdb3;">){}</span>
+passed<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'6'</span><span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Something like <code>1e1000</code> is converted to the string <code>"Infinity"</code>. Makes sense,
+n'est-ce pas?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> i <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>i, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'7'</span>, i <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #6a9550;">[</span>,,,...<span style="color: #CC5542;">'"'</span>,,,Symbol.<span style="color: #7d7c61; font-weight: bold;">for</span><span style="color: #baba36;">(</span><span style="color: #CC5542;">"'"</span><span style="color: #baba36;">)</span>,,,<span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+This unending dream. <code>3</code> is in the array because array index 3 is defined? I
+don't know the logic. Any language which tries to pretend lists and maps are
+somehow isomorphic data structures or algebras is insane. These languages were
+invented by insane people.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #fb8512;">js</span> = eval<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">`(${clean})`</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'8'</span>, Object.keys<span style="color: #6a9550;">(</span>json<span style="color: #6a9550;">)</span>.length !== Object.keys<span style="color: #6a9550;">(</span>js<span style="color: #6a9550;">)</span>.length<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Put <code>__proto__</code> in the object will get hidden by the eval, because <code>:jazzhands-OO:</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> y, z <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>y, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+isnt<span style="color: #bdbdb3;">(</span>z, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+y<span style="color: #bdbdb3;">[</span>y<span style="color: #bdbdb3;">][</span>y<span style="color: #bdbdb3;">](</span>z<span style="color: #bdbdb3;">)()(</span>FLAG<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+When I looked over the task I figured I could pass all the other checks, but
+this one seemed a bit need-to-actually-stop-and-think. It had me puzzled for a
+while, I don't really know JavaScript all that well, so I'm probably a bit cocky
+for criticizing it. (I had to ask Google if JavaScript has apply-overriding and
+stuff like that.) I also didn't realize that <i>everything</i> has a <code>.constructor</code>.
+But eventually I discovered it just by playing around in <code>nodejs</code> and from that
+a-ha the pieces fell into place.
+</p>
+
+<p>
+<code>y = "constructor"</code> so <code>y[y]</code> becomes a function, i.e. <code>y.constructor</code>, and <code>y[y][y]</code> becomes the
+function constructor, which takes its body as a string argument (?!) to be
+eval'd. So <code>"z = return console.log;"</code> for example.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0632a18" class="outline-2">
+<h2 id="org0632a18">crypto:Conquering Premium Access</h2>
+<div class="outline-text-2" id="text-org0632a18">
+<p>
+AES is used to encrypt the flag. You're handed the ciphertext and power traces of the
+same AES implementation encrypting 10,000 known 16-byte plaintexts with the same
+key/IV as it did the flag.
+</p>
+
+<p>
+The task hints about "T-tables", "aligned" and that masking isn't employed. But
+the task also said "thank you to professor so-and-so for the data" and links to
+a university course, which is the biggest clue in my eyes. From that I figured
+it's probably very "textbook" and intended to be solved with least effort.
+</p>
+
+<p>
+So, textbook reading material:
+<a href="https://www.tandfonline.com/doi/full/10.1080/23742917.2016.1231523">https://www.tandfonline.com/doi/full/10.1080/23742917.2016.1231523</a>
+</p>
+
+<p>
+Indeed, almost disappointingly so. Finding a correlation based on the
+1-bits-equals-more-power assumption turned out to work directly. You can ignore
+the rounds, ignore the hints<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>, ignore everything, because there's so much
+data and it's so artificially clean. Find the <code>keyiv = key ^ iv</code> such that the
+weight of <code>sbox[keyiv^plaintext]</code> has the highest correlation with (overall)
+power consumption. <code>sbox[keyiv^plaintext]</code> is what the state gets set to in the
+first round (in CBC mode), before <code>ShiftRows</code> etc. (Note that <code>ShiftRows</code>
+doesn't change the weight.) You can simply use the full traces, and don't have
+to target any point in time at all.
+</p>
+
+<p>
+See also:
+<a href="https://teamrocketist.github.io/2018/11/14/Crypto-SquareCtf-2018-C4-leaky-power/">https://teamrocketist.github.io/2018/11/14/Crypto-SquareCtf-2018-C4-leaky-power/</a>
+which I also came across and seems to copy a lot of text/material from the above
+link, but is a much more thorough write-up than anything I can produce.
+Copy-pasting that code should just work out of the box, though it is awful and
+slow so I ended up rewriting it to pretend I wasn't a fraud.
+</p>
+
+<p>
+AES ECB to decrypt, so no IV was used, which I guess I implicitly assumed. Can't
+recall if the task hinted to that or not, maybe it did.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org75c05bf" class="outline-2">
+<h2 id="org75c05bf">misc:P*rn Protocol</h2>
+<div class="outline-text-2" id="text-org75c05bf">
+<p>
+A PDF described a very simple data protocol. Implement the protocol, request
+login, log in with the given username and password, and get the flag.
+</p>
+
+<p>
+Uhh?
+</p>
+
+<p>
+This felt more like a "socket programming for beginners" tutorial than anything
+else. Why was this even part of the task set?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge258b14" class="outline-2">
+<h2 id="orge258b14">crypto:Pwnhub Collection</h2>
+<div class="outline-text-2" id="text-orge258b14">
+<p>
+Labelled as hard crypto but really just easy-ish crypto gated behind ASAN rev.
+<code>poiko</code> reversed it for me because I'm a newbie, so can't really say much about
+the rev part.
+</p>
+
+<p>
+So from what <code>poiko</code> told me, the server does something roughly equivalent of
+the following pseudocode:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #6abd50;"># </span><span style="color: #6aaf50;">coll = list of pairs (category, link)</span>
+<span style="color: #fb8512;">coll</span> = <span style="color: #bdbdb3;">[</span>t.strip<span style="color: #6a9550;">()</span>.split<span style="color: #6a9550;">(</span><span style="color: #CC5542;">' '</span><span style="color: #6a9550;">)</span> <span style="color: #7d7c61; font-weight: bold;">for</span> t <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">open</span><span style="color: #6a9550;">(</span><span style="color: #CC5542;">'collection'</span><span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">]</span>
+coll.append<span style="color: #bdbdb3;">(</span> <span style="color: #6a9550;">(</span><span style="color: #bdbdb3; font-weight: bold;">input</span><span style="color: #baba36;">()</span>, <span style="color: #bdbdb3; font-weight: bold;">input</span><span style="color: #baba36;">()</span><span style="color: #6a9550;">)</span> <span style="color: #bdbdb3;">)</span>
+
+<span style="color: #fb8512;">txt</span> = <span style="color: #CC5542;">' '</span>.join<span style="color: #bdbdb3;">(</span>x + <span style="color: #CC5542;">'{'</span> + y + <span style="color: #CC5542;">'}'</span> <span style="color: #7d7c61; font-weight: bold;">for</span> x,y <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">sorted</span><span style="color: #6a9550;">(</span>coll, key=<span style="color: #7d7c61; font-weight: bold;">lambda</span> x:x<span style="color: #baba36;">[</span><span style="color: #6a7550;">0</span><span style="color: #baba36;">]</span><span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">NB: sorted only on category element</span>
+
+<span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span>aes_cbc<span style="color: #6a9550;">(</span>fixed_key, fixed_iv, txt<span style="color: #6a9550;">)</span>.hexdigest<span style="color: #6a9550;">()</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+So there's a string like <code>"blah{bleh} foo{bar} qux{crux}"</code> where we can add an
+element that gets sorted in.
+</p>
+
+<p>
+Finding the "categories" (the strings outside the curly braces) can be done very
+efficiently with a binary search. Start with a string like <code>byte(127)*n</code> that
+gets sorted last, observe the ciphertext output. Then for each byte keep a
+<code>high,low</code> that you bisect and observe if we were flipped to another position in
+the string (an earlier ciphertext block will change). This finds all the
+categories very quickly.
+</p>
+
+<p>
+They turned out to be <code>crypto flag misc</code> etc. (Which was something <code>poiko</code>
+already guessed from doing the rev part, but I just double-checked.) Next step
+is discovering the stuff inside the curly braces. Because I was being dumb, it
+took me longer than it should have to realize it's the even-more-textbook method
+of byte-by-byte brute forcing.
+</p>
+
+<p>
+Input a category that gets sorted before <code>flag</code> with a long arbitrary link that
+aligns things like so:
+</p>
+
+<pre class="example">
+# |---aes block---||---aes block---||---aes block---|
+# xxxx f{aaaaaaaaaaaaaaaaaaaa} flag{xxxxxxxxxxxxxxxxx
+</pre>
+
+<p>
+Now pop off one <code>a</code> so the first <code>x</code> gets shifted in and note what that block
+becomes in the output. Then discover the byte by cycling through various
+encryptions of <code>link = "aaaa...aaaa} flag{X"</code> with <code>X</code> unknown. I.e. the string become:
+</p>
+
+<pre class="example">
+# |---aes block---||---aes block---||---aes block---|
+# xxxx f{aaaaaaaaaaaaaaaaaaa} flag{X} flag{xxxxxxxxxx
+</pre>
+
+<p>
+Repeat for each byte. Print it, ship it, done.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+one could say it tries to teach you some math&#x2013;but it's the sort of stuff
+with a trivial Sage/Google escape hatch. The trademark of low-effort task that
+gets ground up by the "point mill" into bland paste, rather than offering
+fun/engaging problem solving.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Right off the bat: <code>python2</code>. Shudder. This has nothing to do with the
+task itself, but it always makes my heart sink and I lose a bit of faith in the
+problem author and the world in general.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+The question "why <i>is</i> JavaScript?" is ostensibly answered with "because
+fuck you, because we're engineers and we get the job done, that's why." But the
+question "why is JavaScript <i>the way it is</i>?" can only be answered with a shrug
+and an embarrassed silence. Indeed, why is any scatological piece of art the way
+it is.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+OK, actually the fact that it uses T-tables probably helps, as
+high-weight input will likely lead to high-weight output from the lookups there?
+I don't know, I've never done any power-analysis before.
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
