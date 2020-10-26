@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-10-26 ma. 10:01 -->
+<!-- 2020-10-26 ma. 10:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Hack.lu 2020</title>
@@ -285,7 +285,7 @@ assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'5'</s
 <p>
 This one was a little cute, like a magician's clever misdirection. The original
 <code>check()</code> is replaced by this <code>check(x) { return; ... }</code> function. Why? Haha!
-<a href="https://news.ycombinator.com/item?id=3842713">https://news.ycombinator.com/item?id=3842713</a> Red eyes, compulsive depilation,
+<a href="https://news.ycombinator.com/item?id=3842713">https://news.ycombinator.com/item?id=3842713</a> Blood-shot eyes, trichotillomania,
 psychosis.
 </p>
 
@@ -339,12 +339,11 @@ y<span style="color: #bdbdb3;">[</span>y<span style="color: #bdbdb3;">][</span>y
 
 <p>
 When I looked over the task I figured I could pass all the other checks, but
-this one seemed a bit need-to-actually-stop-and-think. It had me puzzled for a
-while, I don't really know JavaScript all that well, so I'm probably a bit cocky
-for criticizing it. (I had to ask Google if JavaScript has apply-overriding and
-stuff like that.) I also didn't realize that <i>everything</i> has a <code>.constructor</code>.
-But eventually I discovered it just by playing around in <code>nodejs</code> and from that
-a-ha the pieces fell into place.
+this one seemed a bit need-to-actually-stop-and-think, "huh?" It had me puzzled
+for a while, I don't really know JavaScript all that well. (I had to ask Google
+if JavaScript has apply-overriding and stuff like that.) I also didn't realize
+that <i>everything</i> has a <code>.constructor</code>. But eventually I discovered it just by
+playing around in <code>nodejs</code> and from that a-ha the pieces fell into place.
 </p>
 
 <p>
@@ -359,9 +358,9 @@ eval'd. So <code>"z = return console.log;"</code> for example.
 <h2 id="org0632a18">crypto:Conquering Premium Access</h2>
 <div class="outline-text-2" id="text-org0632a18">
 <p>
-AES is used to encrypt the flag. You're handed the ciphertext and power traces of the
-same AES implementation encrypting 10,000 known 16-byte plaintexts with the same
-key/IV as it did the flag.
+AES is used to encrypt the flag. You're handed the ciphertext and "power traces"
+(voltage measurement?) of some hardware using AES to encrypt 10,000 known
+16-byte plaintexts with the same key/IV as it did the flag.
 </p>
 
 <p>
@@ -377,7 +376,7 @@ So, textbook reading material:
 </p>
 
 <p>
-Indeed, almost disappointingly so. Finding a correlation based on the
+Indeed: almost disappointingly so. Finding a correlation based on the
 1-bits-equals-more-power assumption turned out to work directly. You can ignore
 the rounds, ignore the hints<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>, ignore everything, because there's so much
 data and it's so artificially clean. Find the <code>keyiv = key ^ iv</code> such that the
@@ -394,7 +393,8 @@ See also:
 which I also came across and seems to copy a lot of text/material from the above
 link, but is a much more thorough write-up than anything I can produce.
 Copy-pasting that code should just work out of the box, though it is awful and
-slow so I ended up rewriting it to pretend I wasn't a fraud.
+slow so I ended up rewriting it and doing most of my playing in REPL to pretend
+I wasn't a fraud and try to learn something in spite of everything.
 </p>
 
 <p>
