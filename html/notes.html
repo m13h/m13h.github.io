@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-03 ti. 22:22 -->
+<!-- 2020-11-03 ti. 22:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>notes from crypto/misc/mathy CTF tasks</title>
@@ -93,7 +93,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#org7362f78">N1CTF2020</a>
 <ul>
-<li><a href="#orgf7a06c8">General Comments</a></li>
+<li><a href="#org279cddb">General Comments</a></li>
 <li><a href="#org9fcaba4">crypto:VSS</a></li>
 <li><a href="#org5e500ad">crypto:FlagBot</a></li>
 <li><a href="#org95f754e">crypto:curve</a></li>
@@ -103,7 +103,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#org58785a6">Hack.lu 2020</a>
 <ul>
-<li><a href="#org591a78b">General Comments</a></li>
+<li><a href="#orgf07e185">General Comments</a></li>
 <li><a href="#org49642c1">crypto:Bad Primes</a></li>
 <li><a href="#org7dbf046">misc:BabyJS</a></li>
 <li><a href="#orgae52da4">crypto:Conquering Premium Access</a></li>
@@ -113,7 +113,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#orgda61fb2">CyberSecurityRumble 2020</a>
 <ul>
-<li><a href="#org8579f2b">General Comments</a></li>
+<li><a href="#orgd64b505">General Comments</a></li>
 <li><a href="#orga7106cd">crypto:Pady McPadface</a></li>
 <li><a href="#org56d96a8">crypto:dlog</a></li>
 <li><a href="#orgf5eca19">crypto:ezdsa</a></li>
@@ -138,9 +138,9 @@ for the JavaScript code in this tag.
 <h2 id="org7362f78">N1CTF2020</h2>
 <div class="outline-text-2" id="text-org7362f78">
 </div>
-<div id="outline-container-orgf7a06c8" class="outline-3">
-<h3 id="orgf7a06c8">General Comments</h3>
-<div class="outline-text-3" id="text-orgf7a06c8">
+<div id="outline-container-org279cddb" class="outline-3">
+<h3 id="org279cddb">General Comments</h3>
+<div class="outline-text-3" id="text-org279cddb">
 <p>
 An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
 difficulty level. Objectively the task set alone deserves a ~100 rating on
@@ -493,9 +493,9 @@ I'll leave it here to be sad and alone. :(
 <h2 id="org58785a6">Hack.lu 2020</h2>
 <div class="outline-text-2" id="text-org58785a6">
 </div>
-<div id="outline-container-org591a78b" class="outline-3">
-<h3 id="org591a78b">General Comments</h3>
-<div class="outline-text-3" id="text-org591a78b">
+<div id="outline-container-orgf07e185" class="outline-3">
+<h3 id="orgf07e185">General Comments</h3>
+<div class="outline-text-3" id="text-orgf07e185">
 <p>
 An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
 a much higher rating on <code>CTFTime</code>.
@@ -901,9 +901,9 @@ Repeat for each byte. Print it, ship it, done.
 <h2 id="orgda61fb2">CyberSecurityRumble 2020</h2>
 <div class="outline-text-2" id="text-orgda61fb2">
 </div>
-<div id="outline-container-org8579f2b" class="outline-3">
-<h3 id="org8579f2b">General Comments</h3>
-<div class="outline-text-3" id="text-org8579f2b">
+<div id="outline-container-orgd64b505" class="outline-3">
+<h3 id="orgd64b505">General Comments</h3>
+<div class="outline-text-3" id="text-orgd64b505">
 <p>
 Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
 so forth. The stuff I looked at seemed alright, though I got entangled in some
@@ -1293,8 +1293,8 @@ Okay, relax. Start testing some basic stuff.
 
 <p>
 I figured out it had normal CRC behavior at least. It was, as they say,
-affine-ish. Working with polynomials over \(GF_2\), <code>CRC(x + y) = CRC(x) +
-CRC(y) + K_{b}</code> where <code>K_{b}</code> is a constant that depends on the <i>byte-lengths</i> of
+affine-ish. Working with polynomials over \(\mathbb{Z}_2\), \(CRC(x + y) = CRC(x) +
+CRC(y) + K_{b}\) where \(K_{b}\) is a constant that depends on the <i>byte-lengths</i> of
 <code>x</code> and <code>y</code> (technically on their xor difference?). You'd expect this to work for
 any HMAC based on a CRC too. This allows you to (easily) log in as admin (but on
 the admin page I just found people doing "test post pls ignore" and being
@@ -1313,9 +1313,9 @@ After a while I suspected there was no HMAC and maybe just a straight up unknown
 CRC, which frustrated me even more because if so, then this should be easy, no?
 What if something else is different? I spammed random stuff trying to figure out
 the modulus for the CRC from the constants I was getting out, double-checked my
-math, got completely lost. I even wondered if you were supposed to birthday-hammer
-user-create to find a duplicate checksum, and maybe that would finally reveal
-what was going on, got completely lost&#x2026;
+math&#x2026; I even wondered if you were supposed to birthday-hammer user-create to
+find a duplicate checksum, and maybe that would finally reveal what was going
+on, got completely lost&#x2026;
 </p>
 
 <p>
@@ -1325,9 +1325,10 @@ trying to do. I believe all you need is in the relationship. You can get all the
 constant <code>K</code> terms you need by making three users that xor to zero for any given
 length. For an unknown CRC, for three constants \(K_i\), \(K_{i+1}\) and \(K_{i+2}\)
 (that you'd get from <code>("0","q","A")</code> for example, since they xor to 0), then you
-can find the modulus as a factor of \(x^8 K_{i+2} + (x^8+1) K_{i+1} + K_{i}\) (I
-think?), then the relationship between the various \(K_i\) as \(K_n =
-\frac{x^n-1}{(x-1) x^{n+1}} \pmod M\), and you have everything you need.
+can find the modulus as a factor of \(x^8 K_{i+2} + (x^8+1) K_{i+1} + K_{i}\)
+(does that work? Now I'm not sure, I'm copying a note&#x2026;), then the relationship
+between the various \(K_i\) as \(K_n = K_0 \frac{x^n-1}{(x-1) x^{n+1}} \pmod M\),
+and you should have everything you need.
 </p>
 
 <p>
