@@ -1,0 +1,1422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-11-03 ti. 19:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>notes from crypto/misc/mathy CTF tasks</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<style>pre.src{background:#1f1f10;color:white;}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">notes from crypto/misc/mathy CTF tasks</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7362f78">N1CTF2020</a>
+<ul>
+<li><a href="#orga473518">General Comments</a></li>
+<li><a href="#org9fcaba4">crypto:VSS</a></li>
+<li><a href="#org5e500ad">crypto:FlagBot</a></li>
+<li><a href="#org95f754e">crypto:curve</a></li>
+<li><a href="#org1a92230">crypto:easy RSA?</a></li>
+<li><a href="#orgdd7f0da">crypto:babyProof</a></li>
+</ul>
+</li>
+<li><a href="#org58785a6">Hack.lu 2020</a>
+<ul>
+<li><a href="#org63268d7">General Comments</a></li>
+<li><a href="#org49642c1">crypto:Bad Primes</a></li>
+<li><a href="#org7dbf046">misc:BabyJS</a></li>
+<li><a href="#orgae52da4">crypto:Conquering Premium Access</a></li>
+<li><a href="#org2a32a53">misc:P*rn Protocol</a></li>
+<li><a href="#org01a65d9">crypto:Pwnhub Collection</a></li>
+</ul>
+</li>
+<li><a href="#orgda61fb2">CyberSecurityRumble 2020</a>
+<ul>
+<li><a href="#orge040df6">General Comments</a></li>
+<li><a href="#orga7106cd">crypto:Pady McPadface</a></li>
+<li><a href="#org56d96a8">crypto:dlog</a></li>
+<li><a href="#orgf5eca19">crypto:ezdsa</a></li>
+<li><a href="#org08d63e8">misc:Pylindrome</a></li>
+<li><a href="#org7705481">baby:Hashfun</a></li>
+<li><a href="#org7db463e">crypto:dtls</a></li>
+<li><a href="#org7250690">web:Yanote</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<b>Team:</b> <code>mode13h</code>
+</p>
+
+<p>
+<b>Author:</b> <code>tope#9134@Discord</code>
+</p>
+
+<div id="outline-container-org7362f78" class="outline-2">
+<h2 id="org7362f78">N1CTF2020</h2>
+<div class="outline-text-2" id="text-org7362f78">
+</div>
+<div id="outline-container-orga473518" class="outline-3">
+<h3 id="orga473518">General Comments</h3>
+<div class="outline-text-3" id="text-orga473518">
+<p>
+An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
+difficulty level. Objectively the task set alone deserves a ~100 rating on
+CTFTime<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</p>
+
+<p>
+I did the crypto tasks and will outline solves for those below. I won't post
+full problems or detailed expositions, it's more just notes that should allow
+anyone who attempted the problems to solve them. I also glanced at some of the
+"easier" tasks in misc and web, but even the entry-level tasks in those
+categories was beyond me.
+</p>
+
+<p>
+<i>Personal downside #1</i>: very biased toward web, rev, and pwn, which I am pretty
+clueless about, though those are the "true" staples of CTF. I realize this is
+more like a pure upside for most people.
+</p>
+
+<p>
+On the end of the first day there were only three crypto tasks released yet more
+than fifteen(!?) web, pwn, and rev tasks out. I sat around twiddling my thumbs a
+bit, feeling pretty useless.
+</p>
+
+<p>
+The only misc-like task I saw involved PHP, which is more of a mental plague
+than a programming language<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. I played around with it a bit, but finally
+just went to bed feeling a little bit dumber and somewhat frustrated because I
+thought all tasks had been released and that I'd be useless for the rest of the
+CTF.
+</p>
+
+<p>
+<i>Personal downside #2</i>: Two more crypto were released just after I'd gone to
+sleep on day two, so I only had a few hours for them when I woke up. Although
+the new tasks were a nice surprise, the timing was very unfortunate for me.
+</p>
+
+<p>
+<i>Plea for organizers in general: please consider having all tasks out by the
+mid-way point of the CTF.</i> If not, then communicate your planned task release
+schedule so it's possible to better manage our time?
+</p>
+
+<p>
+We ended up placing 13th<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9fcaba4" class="outline-3">
+<h3 id="org9fcaba4">crypto:VSS</h3>
+<div class="outline-text-3" id="text-org9fcaba4">
+<p>
+You're given some code which generates a QR-code image of the flag and uses that
+image to create two new randomized images which&#x2013;when combined&#x2013;would
+reconstruct the original (albeit transposed? I am guessing, I didn't actually
+run the code). You also receive <i>one</i> of the images generated. It struck me as a
+little cryptic.
+</p>
+
+<p>
+I ignored the whole visual threshold part of the task and noted it uses Python's
+random module to generate the pixels in the output images. That's a lot of
+random data, and the QR-code image it's based on has a lot of known fixed
+output. After double-checking that the QR-image had enough known pixels (you get
+to reverse one bit of state per pixel) and where it was (it would be hell if it
+wasn't contiguous), it reduces to a "standard" reverse-the-RNG-state task.
+</p>
+
+<p>
+For the reversing Python's MT the <i>easy</i> way you need \(32 \cdot 672\) contiguous
+bits of output. That is if you don't have to worry about missing state. You need
+to undo the tempering that MT does to its output words:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">untemper</span><span style="color: #bdbdb3;">(</span>x<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span>x &gt;&gt; <span style="color: #6a7550;">18</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span>x &lt;&lt; <span style="color: #6a7550;">15</span><span style="color: #bdbdb3;">)</span> &amp; <span style="color: #6a7550;">0xefc60000</span>
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">7</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x9d2c5680</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">14</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x94284000</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">21</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x14200000</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>x &lt;&lt; <span style="color: #6a7550;">28</span><span style="color: #6a9550;">)</span> &amp; <span style="color: #6a7550;">0x10000000</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">x</span> ^= <span style="color: #bdbdb3;">(</span>x &gt;&gt; <span style="color: #6a7550;">11</span><span style="color: #bdbdb3;">)</span> ^ <span style="color: #bdbdb3;">(</span>x &gt;&gt; <span style="color: #6a7550;">22</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">return</span> x
+</pre>
+</div>
+
+<p>
+You combine words <code>i</code>, <code>i+1</code>, and <code>i+M</code> to get word <code>i+N</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">tmp</span> = w<span style="color: #bdbdb3;">[</span>i<span style="color: #bdbdb3;">][</span><span style="color: #6a7550;">31</span><span style="color: #bdbdb3;">]</span> ^ w<span style="color: #bdbdb3;">[</span>i+<span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">][</span>:<span style="color: #6a7550;">31</span><span style="color: #bdbdb3;">]</span>  <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">using slice notation to select bits</span>
+<span style="color: #fb8512;">w</span><span style="color: #bdbdb3;">[</span>i+N<span style="color: #bdbdb3;">]</span> = tmp&gt;&gt;<span style="color: #6a7550;">1</span> ^ w<span style="color: #bdbdb3;">[</span>i+M<span style="color: #bdbdb3;">]</span> ^ <span style="color: #bdbdb3;">(</span>A <span style="color: #7d7c61; font-weight: bold;">if</span> tmp<span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span> <span style="color: #7d7c61; font-weight: bold;">else</span> <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+<code>M</code>, <code>N</code>, <code>A</code> are constants from <code>_randommodule.c</code> in CPython source code. Then
+you reapply the tempering (see aforementioned <code>.c</code> source) and it should match
+Python's output. That's the basic idea.
+</p>
+
+<p>
+It was a task which is very easy to realize the solution but rather painful to
+implement. I struggled with infinite little indexing bugs. The headache I got
+from trying to directly indexing into <code>bin(random.getrandbits(...))</code> was not
+worth it. (Bits within words run from bit \(2^{31}\) to \(1\), but the words are in
+little-endian order.) I even had bugs in the final solution as some randomness
+was leaking through, but fortunately QR-codes are highly redundant, so I didn't
+care. Then again I probably did things needlessly complicated by
+reverse-generating the original QR-code instead of simply generating the
+"companion" image to the one shared.
+</p>
+
+<p>
+Apart from headaches it gave me with my own bugs, it's actually a fairly clever
+task, because there aren't any obvious "hints" that points you in the right
+direction, so it might take a while to notice. I was pretty lucky.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5e500ad" class="outline-3">
+<h3 id="org5e500ad">crypto:FlagBot</h3>
+<div class="outline-text-3" id="text-org5e500ad">
+<p>
+Several random 256-bit elliptic curves are generated and used to do a standard
+key exchange to AES-encrypt the flag. The curves are all asserted to be
+non-smooth and resistant to MOV attack. You get the public output of the
+exchanges as well as the encrypted messages. It's a very nice and clean task
+with a likewise straightforward implementation. It was a pure blessing after the
+indexical spaghetti that was VSS.
+</p>
+
+<p>
+The key to realize is that the secret is reused (for both client and server).
+The generated random curves have a lot of small random subgroups, so you can
+solve the discrete log in those subgroups (multiply the generator and public
+keys by \((p-1)/q\) to put it in the subgroup of size \(q\)), get constraints like
+\(secret = x_i \pmod{q_i}\), and then do Chinese Remainder when you have enough. A
+partial Pohlig-Hellman, if you will.
+</p>
+
+<p>
+I think I did most of this task in REPL, but the pseudo-code sketch would be:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">crt_r</span>, <span style="color: #fb8512;">crt_s</span> = <span style="color: #bdbdb3;">[]</span>, <span style="color: #bdbdb3;">[]</span>
+<span style="color: #7d7c61; font-weight: bold;">for</span> ec,pk_r,pk_s <span style="color: #7d7c61; font-weight: bold;">in</span> data:
+  <span style="color: #fb8512;">order</span> = ec.order<span style="color: #bdbdb3;">()</span>
+  <span style="color: #7d7c61; font-weight: bold;">for</span> f <span style="color: #7d7c61; font-weight: bold;">in</span> small_factors<span style="color: #bdbdb3;">(</span>order<span style="color: #bdbdb3;">)</span>:
+    crt_r.append<span style="color: #bdbdb3;">(</span> <span style="color: #6a9550;">(</span>babystepgiantstep<span style="color: #baba36;">(</span>f, pk_r*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span>, g*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span><span style="color: #baba36;">)</span>, f<span style="color: #6a9550;">)</span> <span style="color: #bdbdb3;">)</span>
+    crt_s.append<span style="color: #bdbdb3;">(</span> <span style="color: #6a9550;">(</span>babystepgiantstep<span style="color: #baba36;">(</span>f, pk_s*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span>, g*<span style="color: #9b55c3;">(</span>order/f<span style="color: #9b55c3;">)</span><span style="color: #baba36;">)</span>, f<span style="color: #6a9550;">)</span> <span style="color: #bdbdb3;">)</span>
+
+<span style="color: #fb8512;">r</span>,<span style="color: #fb8512;">s</span> = crt<span style="color: #bdbdb3;">(</span>*crt_r<span style="color: #bdbdb3;">)[</span><span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>, crt<span style="color: #bdbdb3;">(</span>*crt_s<span style="color: #bdbdb3;">)[</span><span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org95f754e" class="outline-3">
+<h3 id="org95f754e">crypto:curve</h3>
+<div class="outline-text-3" id="text-org95f754e">
+<p>
+In this task (against a live server) you're asked for elliptic curve parameters
+\((p, a, b)\) and two points \((G_1, G_2)\) and then have to solve 30 rounds of
+distinguishing \(G_1 \cdot r \cdot s\) from \(G_1 \cdot x\) when given \(G_1 \cdot r\)
+and \(G_2 \cdot s\) (for random secret integers \(r, s, x\)). It will throw an
+exception if you give it a singular curve or points not on the curve.
+</p>
+
+<p>
+At first glance I thought this was too similar to <code>FlagBot</code>, because there are
+no checks against the points being in a small subgroup. I knew you could also
+use trace 1 curves on which the much-copy-pasted Smart attack works, but I only
+have that code in some Sage docker; I wanted to use my own comfortable code and
+homemade Python libraries. Besides, <i>I got this</i>: I thought it would just be a
+matter of trivially putting them into small subgroups and solving the CRT again.
+A bit too easy, maybe&#x2026;
+</p>
+
+<p>
+Yeah, after a while I realized my oops: it required a very <i>large</i> prime modulus
+\(p\) and calls <code>E.order()</code> on the curve &#x2013; <i>and</i> there's a timer on the program.
+The <code>E.order()</code> call takes well over a minute, sometimes several minutes, and so
+there's no time to do the loop. I wasted some time trying to find random curves for
+which <code>E.order()</code> was smooth or took less time but&#x2026;
+</p>
+
+<p>
+Finally I relented and tested <code>E.order()</code> on a curve with \(|E_p| = p\). It was
+instant, of course, so&#x2026; <i>sigh</i> Copy-pasted Sage code it is, then.
+</p>
+
+<p>
+Now the problem was to generate curves with trace 1, which I didn't know how to
+do, but <code>poiko</code> talked of a DEFCON task which had involved generating such
+curves and gave me a paper: <a href="http://www.monnerat.info/publications/anomalous.pdf">http://www.monnerat.info/publications/anomalous.pdf</a>
+</p>
+
+<p>
+From the paper I figured I wanted curves under primes \(p = 11 m (m+1) + 3\) with
+\((a,b)\) which gives j-invariant equal to \(-2^{15}\), I quickly found plenty such
+curves. Then copy-paste <code>Smart_Attack()</code> and blah, blah, the usual stuff. (I
+really despise copy-pasting.) A bit unrewarding due to my stubbornness, but I
+have to admit it was a good task in the end, even if the "hidden" constraint of
+"the given curve must also have a fast <code>E.order()</code>" was a bit devious<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1a92230" class="outline-3">
+<h3 id="org1a92230">crypto:easy RSA?</h3>
+<div class="outline-text-3" id="text-org1a92230">
+<p>
+A fun task which had two stages.
+</p>
+
+<p>
+It generates some RSA-modulus \(n = p*q\) and encrypts a large vector with lots of
+numbers. These numbers are the vector (dot) products between the flag and random
+numbers, offset by some small error, and then modulo a small prime. You are
+given the random numbers used for free, but the errors are secret.
+</p>
+
+<p>
+The primes are generated in a truly bizarre way:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">mark</span> = <span style="color: #6a7550;">3</span>**<span style="color: #6a7550;">66</span>
+<span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">get_random_prime</span><span style="color: #bdbdb3;">()</span>:
+  <span style="color: #fb8512;">total</span> = <span style="color: #6a7550;">0</span>
+  <span style="color: #7d7c61; font-weight: bold;">for</span> i <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">5</span><span style="color: #bdbdb3;">)</span>:
+    <span style="color: #fb8512;">total</span> += mark**i * getRandomNBitInteger<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">32</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">fac</span> = <span style="color: #bdbdb3; font-weight: bold;">str</span><span style="color: #bdbdb3;">(</span>factor<span style="color: #6a9550;">(</span>total<span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>.split<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">" * "</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #bdbdb3; font-weight: bold;">int</span><span style="color: #bdbdb3;">(</span>fac<span style="color: #6a9550;">[</span>-<span style="color: #6a7550;">1</span><span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+It generates a number that has "small" digits in base-\(3^{66}\) and returns the
+largest prime in the factorization of this number. That's one of the oddest ways
+to generate primes I've seen.
+</p>
+
+<p>
+But (the "a-ha" moment) it means that \(n*x\) also has "small" digits in
+base-\(3^{66}\) for some \(x\) which is itself also "small" (compared to \(n\)).
+</p>
+
+<p>
+I used a lattice like
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #bdbdb3;">[</span>   n * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>   <span style="color: #6a7550;">1</span> * HH, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">1</span> * HH, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">2</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">3</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">4</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">5</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">6</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">7</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+<span style="color: #bdbdb3;">[</span>B**<span style="color: #6a7550;">8</span> * HH, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">0</span>, HL, <span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span>,
+</pre>
+</div>
+
+<p>
+to find \(x\). There might be better ways, but it worked. Now to factor. Trivially
+you can find the first and last digits of the primes. There's probably some more
+clever way to do the whole thing, but I just did the dumb thing and used the
+base-\(B\) digits of \(n*x\) as coefficients for a polynomial over \(\mathbb{Z}_p\)
+for some large \(p\) and factored that. That gave me two numbers back (when
+multiplied so the least/most significant digits match), each of which shared one
+of the big primes with \(n\). This was all a bit rushed because it took me too
+long to discover the "trick" of finding \(n \cdot x\) and I just did everything in
+the REPL at this point, using my own utility libraries and NTL wrapper.
+</p>
+
+<p>
+So now I had \(n=p*q\) and could decrypt the vector to get a big system of linear
+relations with "small errors" modulo some small prime. The lattice is life, the
+lattice is love. Maybe there's a more clever way to solve this as well, but did
+I mention I was a little pressed for time at this point? The system in its
+entirely was too big for my poor, slow LLL, but a small random subset of
+equations worked just fine (every equation involved the entire flag).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdd7f0da" class="outline-3">
+<h3 id="orgdd7f0da">crypto:babyProof</h3>
+<div class="outline-text-3" id="text-orgdd7f0da">
+<p>
+I "solved" this task but was a little too late. I had already realized the
+solution by the last hour or two, but underestimated how many datasets I needed
+and wasted some time with self-doubt, double-checking, and massaging
+uncooperative lattices. When the competition ended I went to eat and by the time
+I got back there was enough data and I got the (bittersweet) flag easily.
+</p>
+
+<p>
+Like <code>FlagBot</code> it's a deceptively clean and simple task, where you don't realize
+the problem until that sweet "a-ha!" moment. The server uses generated DSA
+constants (a (huge) prime \(p\), a generator \(g\) for a large prime (\(q\)) subgroup
+of \(\mathbb{Z}_p\)) to prove that it knows \(x\) in \(y=g^x \pmod p\) by giving you
+\(y\), \(t=y^v \pmod p\) (for some secret ephemeral key \(v\)) and \(r = v - c \cdot x
+ \pmod q\) with \(c\) being a SHA256 constant the recepient can derive from \((g, y,
+ t)\). It looks respectable and above the board at first glance&#x2026;
+</p>
+
+<p>
+But basically you need to forget everything I just said and ignore the whole
+business with \(p\) and discrete logs. With \(r\) you're given a system of
+inequalities like \(c_i \cdot flag + r_i < flag \pmod{q_i}\), because the ephemeral
+key is erroneously generated to be less than \(x\) which was asserted to be 247
+bits in the code (while \(q\) is 256 bits), so each equation ought to reveal a
+little bit more about \(x\). It is clearly another lattice problem.
+</p>
+
+<p>
+I'm not sure if there are any better or more clever ways to set up the lattice,
+but what worked for me in the end was the most obvious and straightforward:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #bdbdb3;">[</span><span style="color: #6a9550;">[</span><span style="color: #6a7550;">1</span>,     <span style="color: #6a7550;">0</span>, c0, c1, ...,  cn<span style="color: #6a9550;">]</span>,
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>, <span style="color: #6a7550;">2</span>^<span style="color: #6a7550;">248</span>, r0, r2, ...,  rn<span style="color: #6a9550;">]</span>,
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,     <span style="color: #6a7550;">0</span>, q0,  <span style="color: #6a7550;">0</span>, ...,   <span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span>
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,     <span style="color: #6a7550;">0</span>,  <span style="color: #6a7550;">0</span>, q1, ...,   <span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span>
+ <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,     <span style="color: #6a7550;">0</span>,  <span style="color: #6a7550;">0</span>,  <span style="color: #6a7550;">0</span>, ...,  qn<span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">]</span>
+</pre>
+</div>
+
+<p>
+<code>b'n1ctf{S0me_kn0wl3dg3_is_leak3d}'</code> Since I can no longer enter it on the site,
+I'll leave it here to be sad and alone. :(
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org58785a6" class="outline-2">
+<h2 id="org58785a6">Hack.lu 2020</h2>
+<div class="outline-text-2" id="text-org58785a6">
+</div>
+<div id="outline-container-org63268d7" class="outline-3">
+<h3 id="org63268d7">General Comments</h3>
+<div class="outline-text-3" id="text-org63268d7">
+<p>
+An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
+a much higher rating on <code>CTFTime</code>.
+</p>
+
+<p>
+<b>DISCLAIMER:</b> I'm judging with very biased goggles here; I'm sure web/rev/pwn
+were all kinds of excellent and top notch woo-hoo, but misc and crypto was very
+disappointing and demotivating for this rating bracket and I tapped out early.
+It felt too easy and/or uninspired and/or unoriginal.
+</p>
+
+<p>
+I am also going to sound <i>incredibly</i> negative. It wasn't that bad, but it
+definitely wasn't a 100-point CTF, and that's the stance I'm critiquing from.
+The tasks I looked at felt like they belonged in the 50-70 range.
+</p>
+
+<p>
+<a href="#org01a65d9">crypto:Pwnhub Collection</a> which was (unnecessarily) gated behind rev would probably be
+my pick for "best" crypto-task, because it actively combines two related
+techniques in a sensible way. <a href="#orgae52da4">crypto:Conquering Premium Access</a> had a copy-pastable
+solution through Google, which was not fun to discover. <a href="#orgb59aaea">crypto:Bad Primes</a> was somewhat
+trivial<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>. <a href="#org7dbf046">misc:BabyJS</a> was cute but that's about it. More info about them
+below. (As usual I will just outline the solves, these are just notes that should allow
+anyone who attempted or failed the problems to solve them.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org49642c1" class="outline-3">
+<h3 id="org49642c1"><a id="orgb59aaea"></a>crypto:Bad Primes<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></h3>
+<div class="outline-text-3" id="text-org49642c1">
+<p>
+You're given \(c = flag^e \pmod{p\cdot q}\) with all numbers known except \(flag\).
+The caveat is that \(e | p-1\) so there's no \(d = e^{-1} \pmod{p-1}\) for
+recovering the flag directly. (Finding the flag \(\pmod q\) works trivially, so we
+ignore that part.)
+</p>
+
+<p>
+So finding the <i>e</i>-th root of \(c \pmod p\) is the interesting part. You can do it
+in two different ways:
+</p>
+
+<p>
+The I-don't-want-to-learn-anything Way (also known as
+I'm-a-professional-I-don't-have-time-for-this): press the <code>[Skip This Step]</code>
+button and do <code>GF(p)(c).nth_root(e)</code> in Sage.
+</p>
+
+<p>
+The Problem Child Way:
+</p>
+
+<p>
+So we want a number \(x\) such that \(x^e = c \pmod p\) with \(p-1 = e\cdot s\) and
+\(gcd(s,e) = 1\).
+</p>
+
+<p>
+The a-ha comes after exploring the hunch that \(s\) is important here. Look at \(j
+ = e^{-1} \pmod s\). This means means \(j\cdot e = 1 + k\cdot s\) for some \(k\). In
+fact, it means that \(j\cdot e\cdot e = e + k\cdot (p-1)\). A-ha! So now \((c^j)^e
+ = c^{e \cdot j} = c^{k\cdot s + 1} = x^{e\cdot (k\cdot s + 1)} = x^{k\cdot
+ (p-1) + e} = x^e \pmod p\). Voila! \(c^j\) is a root.
+</p>
+
+<p>
+Other reasoning lines probably exist too, but this was the one I took.
+</p>
+
+<p>
+Next step we iteratively multiply with any <i>e</i>-th root of unity (= \(r^{(p-1)/e}\)
+for any primitive element \(r\)) to cycle through the rest of the roots,
+reconstructing the number in under mod \(p\cdot q\) with CRT to check if it is the
+flag.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7dbf046" class="outline-3">
+<h3 id="org7dbf046">misc:BabyJS</h3>
+<div class="outline-text-3" id="text-org7dbf046">
+<p>
+A misc task that was misclassified as web(?). It's an exposition on the various ways
+JavaScript tries very hard to be an awful programming language<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>. It's
+still not as awful as PHP, but we can't all be the champ.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript">is<span style="color: #bdbdb3;">(</span>a, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+is<span style="color: #bdbdb3;">(</span>b, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'1.1'</span>, a === b<span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'1.2'</span>, <span style="color: #6a7550;">1337</span> / a !== <span style="color: #6a7550;">1337</span> / b<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+<code>[0.0, -0.0]</code> works because the division gives <code>[+Infinity, -Infinity]</code>. A
+pimple, no big deal. Floats are tricky anyway.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript">isnt<span style="color: #bdbdb3;">(</span>c, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+isnt<span style="color: #bdbdb3;">(</span>d, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #fb8512;">cast</span> = <span style="color: #bdbdb3;">(</span>f, ...a<span style="color: #bdbdb3;">)</span> =&gt; a.map<span style="color: #bdbdb3;">(</span>f<span style="color: #bdbdb3;">)</span>;
+<span style="color: #bdbdb3;">[</span>c, d<span style="color: #bdbdb3;">]</span> = cast<span style="color: #bdbdb3;">(</span>Number, c, d<span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'2.1'</span>, c !== d<span style="color: #bdbdb3;">)</span>;
+<span style="color: #bdbdb3;">[</span>c, d<span style="color: #bdbdb3;">]</span> = cast<span style="color: #bdbdb3;">(</span>String, c, d<span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'2.2'</span>, c === d<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Probably a billion solutions here. I did <code>[{}, "[Object object]"]</code>. What's that
+weird rash&#x2026;
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">let</span> <span style="color: #bdbdb3;">{</span> e <span style="color: #bdbdb3;">}</span> = json;
+is<span style="color: #bdbdb3;">(</span>e, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #fb8512;">isCorrect</span> = e++&lt;e--&amp;&amp;!++e&lt;!--e&amp;&amp;--e&gt;e++;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'3'</span>, isCorrect<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Up to boils now. Actual boils. <code>&lt;!--</code> is a comment. \(e=-1\) works.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> f <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>f, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'4'</span>, f == !f<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+<code>f=[]</code> works, I don't know why and I don't want to know. I fear that knowing
+certain things actually make you less knowledgeable.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> g <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>g, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #6abd50;">// </span><span style="color: #6aaf50;">what you see:</span>
+<span style="color: #7d7c61; font-weight: bold;">function</span> <span style="color: #9b55c3;">check</span><span style="color: #bdbdb3;">(</span><span style="color: #fb8512;">x</span><span style="color: #bdbdb3;">)</span> <span style="color: #bdbdb3;">{</span>
+    <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #6a9550;">{</span>
+        value: x * x
+    <span style="color: #6a9550;">}</span>;
+<span style="color: #bdbdb3;">}</span>
+<span style="color: #6abd50;">// </span><span style="color: #6aaf50;">what the tokenizer sees:</span>
+<span style="color: #7d7c61; font-weight: bold;">function</span>
+        check
+             <span style="color: #bdbdb3;">(</span>
+              x
+               <span style="color: #bdbdb3;">)</span>
+                <span style="color: #bdbdb3;">{</span>
+                 <span style="color: #7d7c61; font-weight: bold;">return</span>
+                       <span style="color: #6a9550;">{</span>
+                        value
+                             :
+                              x
+                               *
+                                x
+                                 <span style="color: #6a9550;">}</span>
+                                  ;
+                                   <span style="color: #bdbdb3;">}</span>
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'5'</span>, g == check<span style="color: #6a9550;">(</span>g<span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+This one was a little cute, like a magician's clever misdirection. The original
+<code>check()</code> is replaced by this <code>check(x) { return; ... }</code> function. So <code>null</code>
+works. Why does it return undefined? Haha!
+<a href="https://news.ycombinator.com/item?id=3842713">https://news.ycombinator.com/item?id=3842713</a>
+</p>
+
+<p>
+Blood-shot eyes, trichotillomania, psychosis.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> h <span style="color: #bdbdb3;">}</span> = json;
+is<span style="color: #bdbdb3;">(</span>h, <span style="color: #CC5542;">'number'</span><span style="color: #bdbdb3;">)</span>;
+<span style="color: #7d7c61; font-weight: bold;">try</span> <span style="color: #bdbdb3;">{</span>
+    JSON.parse<span style="color: #6a9550;">(</span>String<span style="color: #baba36;">(</span>h<span style="color: #baba36;">)</span><span style="color: #6a9550;">)</span>;
+    no<span style="color: #6a9550;">(</span><span style="color: #CC5542;">'6'</span><span style="color: #6a9550;">)</span>;
+<span style="color: #bdbdb3;">}</span> <span style="color: #7d7c61; font-weight: bold;">catch</span><span style="color: #bdbdb3;">(</span>e<span style="color: #bdbdb3;">){}</span>
+passed<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'6'</span><span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Something like <code>1e1000</code> is converted to the string <code>"Infinity"</code>. Makes sense,
+n'est-ce pas?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> i <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>i, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'7'</span>, i <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #6a9550;">[</span>,,,...<span style="color: #CC5542;">'"'</span>,,,Symbol.<span style="color: #7d7c61; font-weight: bold;">for</span><span style="color: #baba36;">(</span><span style="color: #CC5542;">"'"</span><span style="color: #baba36;">)</span>,,,<span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+This unending dream. <code>3</code> is in the array because array index 3 is defined? I
+don't know the logic. Any language which tries to pretend lists and maps are
+somehow isomorphic data structures or algebras is insane. These languages were
+invented by insane people.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #fb8512;">js</span> = eval<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">`(${clean})`</span><span style="color: #bdbdb3;">)</span>;
+assert<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'8'</span>, Object.keys<span style="color: #6a9550;">(</span>json<span style="color: #6a9550;">)</span>.length !== Object.keys<span style="color: #6a9550;">(</span>js<span style="color: #6a9550;">)</span>.length<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+Put <code>__proto__</code> in the object and it will get hidden by the eval, because <code>:jazzhands-OO:</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #7d7c61; font-weight: bold;">const</span> <span style="color: #bdbdb3;">{</span> y, z <span style="color: #bdbdb3;">}</span> = json;
+isnt<span style="color: #bdbdb3;">(</span>y, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+isnt<span style="color: #bdbdb3;">(</span>z, <span style="color: #CC5542;">'undefined'</span><span style="color: #bdbdb3;">)</span>;
+y<span style="color: #bdbdb3;">[</span>y<span style="color: #bdbdb3;">][</span>y<span style="color: #bdbdb3;">](</span>z<span style="color: #bdbdb3;">)()(</span>FLAG<span style="color: #bdbdb3;">)</span>;
+</pre>
+</div>
+
+<p>
+When I looked over the task I figured I could pass all the other checks, but
+this one seemed a bit need-to-actually-stop-and-think, "huh?" It had me puzzled
+for a while, I don't really know JavaScript all that well. (I had to ask Google
+if JavaScript has apply-overriding and stuff like that.) I also didn't realize
+that <i>everything</i> has a <code>.constructor</code>. But eventually I discovered it just by
+playing around in <code>nodejs</code> and from that a-ha the pieces fell into place.
+</p>
+
+<p>
+<code>y = "constructor"</code> so <code>y[y]</code> becomes a function, i.e. <code>y.constructor</code>, and <code>y[y][y]</code> becomes the
+function constructor, which takes its body as a string argument (?!) to be
+eval'd. So <code>z = "return console.log;"</code> for example.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgae52da4" class="outline-3">
+<h3 id="orgae52da4">crypto:Conquering Premium Access</h3>
+<div class="outline-text-3" id="text-orgae52da4">
+<p>
+AES is used to encrypt the flag. You're handed the ciphertext and "power traces"
+(voltage measurement?) of some hardware using AES to encrypt 10,000 known
+16-byte plaintexts with the same key/IV as it did the flag.
+</p>
+
+<p>
+The task hints about "T-tables", "aligned" and that masking isn't employed. But
+the task also said "thank you to professor so-and-so for the data" and links to
+a university course, which is the biggest clue in my eyes. From that I figured
+it's probably very "textbook" and intended to be solved with least effort.
+</p>
+
+<p>
+So, textbook reading material:
+<a href="https://www.tandfonline.com/doi/full/10.1080/23742917.2016.1231523">https://www.tandfonline.com/doi/full/10.1080/23742917.2016.1231523</a>
+</p>
+
+<p>
+Indeed: almost disappointingly so. Finding a correlation based on the
+1-bits-equals-more-power assumption turned out to work directly. You can ignore
+the rounds, ignore the hints<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup>, ignore everything, because there's so much
+data and it's so artificially clean. Find the <code>key</code> (and <code>iv</code>) such that the
+weight of <code>sbox[key^iv^plaintext]</code> has the highest correlation with (overall)
+power consumption. <code>sbox[key^iv^plaintext]</code> is what the state gets set to in the
+first round (in CBC mode), before <code>ShiftRows</code> etc. (Note that <code>ShiftRows</code>
+doesn't change the weight.) Technically I ignored IV too because I simply forgot
+about it, but that was fine too. You can simply use the full traces, and don't
+have to target any point in time at all.
+</p>
+
+<p>
+See also:
+<a href="https://teamrocketist.github.io/2018/11/14/Crypto-SquareCtf-2018-C4-leaky-power/">https://teamrocketist.github.io/2018/11/14/Crypto-SquareCtf-2018-C4-leaky-power/</a>
+which I also came across and seems to copy a lot of text/material from the above
+link, but is a much more thorough write-up than anything I can produce.
+</p>
+
+<p>
+Notice how it's also a verrrry similar problem? Yep: copy-pasting that code
+should just work out of the box here too, though it is awful and slow so I ended
+up rewriting it and doing most of my playing in REPL to pretend I wasn't a
+fraud, trying to learn something in spite of everything.
+</p>
+
+<p>
+And yeah, AES ECB to decrypt, so no IV was used, which I as stated implicitly
+assumed. Can't recall if the task hinted to that or not, maybe it did?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2a32a53" class="outline-3">
+<h3 id="org2a32a53">misc:P*rn Protocol</h3>
+<div class="outline-text-3" id="text-org2a32a53">
+<p>
+A PDF described a very simple data protocol. Implement the protocol, request
+login, log in with the given username and password, and get the flag.
+</p>
+
+<p>
+Uhh?
+</p>
+
+<p>
+This felt more like a "socket programming for beginners" tutorial than anything
+else. Why was this even part of the task set?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org01a65d9" class="outline-3">
+<h3 id="org01a65d9">crypto:Pwnhub Collection</h3>
+<div class="outline-text-3" id="text-org01a65d9">
+<p>
+Labelled as hard crypto but really just easy-ish crypto gated behind ASAN rev.
+<code>poiko</code> reversed it for me because I'm a newbie, so can't really say much about
+the rev part.
+</p>
+
+<p>
+So from what <code>poiko</code> told me, the server does something roughly equivalent of
+the following pseudocode:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #6abd50;"># </span><span style="color: #6aaf50;">coll = list of pairs (category, link)</span>
+<span style="color: #fb8512;">coll</span> = <span style="color: #bdbdb3;">[</span>t.strip<span style="color: #6a9550;">()</span>.split<span style="color: #6a9550;">(</span><span style="color: #CC5542;">' '</span><span style="color: #6a9550;">)</span> <span style="color: #7d7c61; font-weight: bold;">for</span> t <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">open</span><span style="color: #6a9550;">(</span><span style="color: #CC5542;">'collection'</span><span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">]</span>
+coll.append<span style="color: #bdbdb3;">(</span> <span style="color: #6a9550;">(</span><span style="color: #bdbdb3; font-weight: bold;">input</span><span style="color: #baba36;">()</span>, <span style="color: #bdbdb3; font-weight: bold;">input</span><span style="color: #baba36;">()</span><span style="color: #6a9550;">)</span> <span style="color: #bdbdb3;">)</span>
+
+<span style="color: #fb8512;">txt</span> = <span style="color: #CC5542;">' '</span>.join<span style="color: #bdbdb3;">(</span>x + <span style="color: #CC5542;">'{'</span> + y + <span style="color: #CC5542;">'}'</span> <span style="color: #7d7c61; font-weight: bold;">for</span> x,y <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">sorted</span><span style="color: #6a9550;">(</span>coll, key=<span style="color: #7d7c61; font-weight: bold;">lambda</span> x:x<span style="color: #baba36;">[</span><span style="color: #6a7550;">0</span><span style="color: #baba36;">]</span><span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">NB: sorted only on category element</span>
+
+<span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span>aes_cbc<span style="color: #6a9550;">(</span>fixed_key, fixed_iv, txt<span style="color: #6a9550;">)</span>.hexdigest<span style="color: #6a9550;">()</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+So there's a string like <code>"blah{bleh} foo{bar} qux{crux}"</code> where we can add an
+element that gets sorted in.
+</p>
+
+<p>
+Finding the "categories" (the strings outside the curly braces) can be done very
+efficiently with a binary search. Start with a string like <code>byte(127)*n</code> that
+gets sorted last, observe the ciphertext output. Then for each byte keep a
+<code>high,low</code> that you bisect and observe if we were flipped to another position in
+the string (an earlier ciphertext block will change). This finds all the
+categories very quickly.
+</p>
+
+<p>
+They turned out to be <code>crypto flag misc</code> etc. (Which was something <code>poiko</code>
+already guessed from doing the rev part, but I just double-checked.) Next step
+is discovering the stuff inside the curly braces. Because I was being dumb, it
+took me longer than it should have to realize it's the even-more-textbook method
+of byte-by-byte brute forcing.
+</p>
+
+<p>
+Input a category that gets sorted before <code>flag</code> with a long arbitrary link that
+aligns things like so:
+</p>
+
+<pre class="example">
+# |---aes block---||---aes block---||---aes block---|
+# xxxx f{aaaaaaaaaaaaaaaaaaaa} flag{xxxxxxxxxxxxxxxxx
+</pre>
+
+<p>
+Now pop off one <code>a</code> so the first <code>x</code> gets shifted in and note what that block
+becomes in the output. Then discover the byte by cycling through various
+encryptions of <code>link = "aaaa...aaaa} flag{X"</code> with <code>X</code> unknown. I.e. the string become:
+</p>
+
+<pre class="example">
+# |---aes block---||---aes block---||---aes block---|
+# xxxx f{aaaaaaaaaaaaaaaaaaa} flag{X} flag{xxxxxxxxxx
+</pre>
+
+<p>
+Repeat for each byte. Print it, ship it, done.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgda61fb2" class="outline-2">
+<h2 id="orgda61fb2">CyberSecurityRumble 2020</h2>
+<div class="outline-text-2" id="text-orgda61fb2">
+</div>
+<div id="outline-container-orge040df6" class="outline-3">
+<h3 id="orge040df6">General Comments</h3>
+<div class="outline-text-3" id="text-orge040df6">
+<p>
+Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
+so forth.
+</p>
+
+<p>
+There wasn't an <i>abundance</i> of crypto or puzzle/math-y misc tasks, but then I
+don't really come to expect that much, so it felt like <i>enough</i>. One feels that
+crypto/math is the awkward little sister that's there only because the
+organizers' mother forced them to bring her along. Everyone is talking about
+real world stuff, hacking the Gibson, phreaking the phone lines, doing bug
+bounties, whatever it is that real hackermen do, while she's just sitting there
+arranging her fries to count out the Stirling numbers. I should probably just be
+happy she's invited at all. If CTFs were to reflect real world industry, I
+suspect it'd be 30 web-tasks and 2 revs.
+</p>
+
+<p>
+I solved most of the easy crypto on the first evening, then did <a href="#org7db463e">crypto:dtls</a> the
+following morning, but the two remaining tasks were labelled web. Ugh. I looked
+at the task named <code>blow</code> and just thought "fuck no." Some kind of hellish
+JWS/JWT JavaScript monstrosity that they kept adding hints to because it got no
+solves. From the hints alone I surmise that it has some trivial solution in
+crypto terms, but it was probably a pain in the ass (aka the "web" part) to even
+get started or progress to where it's relevant? So I worked on <a href="#org7250690">web:Yanote</a>
+instead but failed that task miserably. So I just went off to nurse my imposter
+syndrome in the corner.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga7106cd" class="outline-3">
+<h3 id="orga7106cd">crypto:Pady McPadface</h3>
+<div class="outline-text-3" id="text-orga7106cd">
+<p>
+A live server that knows the flag traverses it bit by bit and gives \((r^2 +
+bit)^e \pmod n\) for a fixed RSA modulus \(n\) using the standard \(e = 65537\). \(r\)
+is an ephemeral random number a few bits less than \(\sqrt{n}\) so \(r^2 < n\).
+</p>
+
+<p>
+So basically I wanted to discover if the ciphertexts were quadratic residues or
+not under the given (composite) modulus. I knew what to look up, and it turned
+out to be pretty easy, but I was actually surprised to learn the Jacobi symbol
+is easily calculable without knowing the factorization of \(n\). Huh! (It's also
+surprising that this has never come up before.) I'm glad to have learnt it, it
+does seem like a neat trick.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">trailing_zeros</span><span style="color: #bdbdb3;">(</span>a<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #bdbdb3;">(</span>a ^ a-<span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">)</span>.bit_length<span style="color: #bdbdb3;">()</span> - <span style="color: #6a7550;">1</span>
+
+<span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">jacobi</span><span style="color: #bdbdb3;">(</span>a,n<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #7d7c61; font-weight: bold;">assert</span> n &amp; <span style="color: #6a7550;">1</span> <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">n must be odd</span>
+  <span style="color: #fb8512;">sign</span> = <span style="color: #6a7550;">1</span>
+
+  <span style="color: #fb8512;">a</span> = a % n
+  <span style="color: #7d7c61; font-weight: bold;">while</span> a &gt; <span style="color: #6a7550;">0</span>:
+    <span style="color: #fb8512;">r</span> = trailing_zeros<span style="color: #bdbdb3;">(</span>a<span style="color: #bdbdb3;">)</span>
+
+    <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">2 divides an odd number of times into a, then flip the sign if n is not</span>
+    <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">on the form 8k&#177;1</span>
+    <span style="color: #7d7c61; font-weight: bold;">if</span> n % <span style="color: #6a7550;">8</span> <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">3</span>,<span style="color: #6a7550;">5</span><span style="color: #bdbdb3;">)</span> <span style="color: #7d7c61; font-weight: bold;">and</span> r &amp; <span style="color: #6a7550;">1</span>:
+      <span style="color: #fb8512;">sign</span> = -sign
+
+    <span style="color: #fb8512;">a</span>,<span style="color: #fb8512;">n</span> = n, a &gt;&gt; r
+    <span style="color: #7d7c61; font-weight: bold;">if</span> a % <span style="color: #6a7550;">4</span> == <span style="color: #6a7550;">3</span> <span style="color: #7d7c61; font-weight: bold;">and</span> n % <span style="color: #6a7550;">4</span> == <span style="color: #6a7550;">3</span>:
+      <span style="color: #fb8512;">sign</span> = -sign
+    <span style="color: #fb8512;">a</span> = a % n
+
+  <span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span>a,n,r<span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">if</span> n != <span style="color: #6a7550;">1</span>:
+    <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">a divides into n</span>
+    <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #6a7550;">0</span>
+
+  <span style="color: #7d7c61; font-weight: bold;">return</span> sign
+</pre>
+</div>
+
+<p>
+So then it was a matter of connecting to the server and getting several
+ciphertext instances and calculating their Jacobi symbols
+\(\left(\frac{c}{n}\right)\). If you find an instance where it is -1 then you know
+the number is not a quadratic residue, so \(bit\) must be 1 in that position.
+After some collected data you set the others to 0 and get the flag.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org56d96a8" class="outline-3">
+<h3 id="org56d96a8">crypto:dlog</h3>
+<div class="outline-text-3" id="text-org56d96a8">
+<p>
+The task implements some basic code for working with the secp256k1 elliptic
+curve (\(y^2 = x^3 + 7\)). The ECC implementation is "home-made" with code mostly
+taken from Wikipedia. It asks for a point, multiplies it with a random secret
+number and asks you to recover this secret. No check is done on whether or not
+the point you give is actually on the secp256k1 curve though, so it's a classic
+invalid curve attack.
+</p>
+
+<p>
+Basically you can set the \(b\) parameter in \(y^2 = x^3 + b\) to whatever you want.
+(If you give the point \((s,t)\) it will use the curve \(y^2 = x^3 + (t^2-s^3)\).)
+I've solved some task before using a singular curve but couldn't remember how
+the mapping worked off the top of my head and didn't find my old code for it, so
+instead I idly looked for other \(b\) parameters where I could solve the discrete
+log with Pohlig-Hellman as I had the tools for that more readily available. I
+think there's 7 (?) different Frobenius traces among these curves, corresponding
+to different orders of the resulting elliptic curve, but each had a very large
+factor (133-135 bits) so this turned out to be a dead end.
+</p>
+
+<p>
+I went back to pen and paper to see if I could manually work out the singular
+mapping, partly as self-punishment for forgetting. Given one of the simplest
+non-trivial points, \((1,1)\), the server will use the singular non-elliptic curve
+\(y^2 = x^3\). The point-doubling formula then does the following: \(x \mapsto
+\left(\frac{3x^2}{2y}\right)^2 - 2x = \frac{1}{4}x\) and similarly \(y \mapsto \frac{1}{8}y\).
+Hm! That gave me the needed deja vu: indeed it seems that \(\frac{(n *
+(1,1))_x}{(n * (1,1))_y} = n\), so it worked out nicely, and I didn't have to
+wade through the full algebra. So yeah, just feed it <code>(1,1)</code> and then do \(\frac{x}{y}
+\pmod p\) to get the secret.
+</p>
+
+<p>
+It's probably supposed to be a pretty trivial task, but I made it overly
+complicated by investigating other the other curves.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf5eca19" class="outline-3">
+<h3 id="orgf5eca19">crypto:ezdsa</h3>
+<div class="outline-text-3" id="text-orgf5eca19">
+<p>
+A server is signing messages using the Python <code>ecdsa</code> library. I don't remember
+the exact details but I think you were supposed to forge a signature.
+Immediately there's was a glaring red flag with a <code>entropy=sony_rand</code> parameter
+where <code>sony_rand</code> was a function that returned random bytes using Python's
+<code>random</code> module. <code>ecdsa</code> uses this for generating the ephemeral \(k\) in its DSA
+signature generation.
+</p>
+
+<p>
+At first I thought this was going to be a very challenging task, because even
+though the randomness of <code>getrandbits</code> isn't of cryptographic quality, it's very
+hard to actually mirror it unless given at least some white (fully revealed)
+output. I know it's seeded in Python from PID and two different clock functions,
+so it might be bruteable, but it's hard to predict how far into the stream the
+server is and so on and so forth; it seemed very daunting to brute all that. I
+wondered if you could get startup time or restart the server, or maybe the
+Mersenne Twister output had some cool linear relationship I wasn't aware of&#x2026;
+</p>
+
+<p>
+I was just being dumb. I didn't notice it was a forking TCP server&#x2026; It will
+clone the state and basically just re-use the same ephemeral \(k\) every single
+time. This becomes immediately obvious when you set to actually collect some
+signatures and see the \(r\) being repeated. I got pretty lucky that it was so
+obvious once you start collecting data, if not it'd be screwed.
+</p>
+
+<p>
+So from two signatures \((r, \frac{H_1 + r x}{k})\) and \((r, \frac{H_2 + r x}{k})\)
+where you can calculate the hashes \(H_1, H_2\), recovering the private multiplier
+\(x\) is trivial and you can sign anything. I think I just set
+<code>sk.privkey.secret_multiplier = x</code> and used <code>ecdsa</code> to do it in REPL.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org08d63e8" class="outline-3">
+<h3 id="org08d63e8">misc:Pylindrome</h3>
+<div class="outline-text-3" id="text-org08d63e8">
+<p>
+A server will run any Python code that's a valid palindrome (<code>x == x[::-1]</code>) in
+a Python subprocess (of a user that can't read the flag file), but then <code>exec</code>
+the <code>stdout</code> from that process (in the process that can read the flag file).
+There's a limited attempt at preventing the task from becoming trivial: it will
+remove any of the substrings <code>"#", '"""', "'''"</code> from the input. The removal
+happens only once, <i>in order</i>. So, the a-ha: you can actually use <code>"""</code> by
+giving something like <code>"'''""</code>. The server will remove the single quotes and
+keep the double ones.
+</p>
+
+<p>
+Unfortunately I don't have the actual solution at hand since I can't find it in
+my REPL history, but the basic idea was to just use a simple payload like
+<code>print("__import__('os').system('sh')")</code> and then figure out how to make that
+into a palindrome. I think I settled on something like
+<code>""";";""";&lt;code&gt;;""";&lt;reverse of code&gt;;""";";"""</code>. Notice how <code>""";";"""</code> is
+interpreted to be the string <code>';";'</code> when evaluated normally, but also provides
+an end for the triple-quote: <code>..."""; ";" ""</code>.
+</p>
+
+<p>
+(Another idea would be to use some trickery involving the escape character
+<code>r"\"</code> which could potentially escape/unescape strings depending on order, but I
+didn't think of that at the time.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7705481" class="outline-3">
+<h3 id="org7705481">baby:Hashfun</h3>
+<div class="outline-text-3" id="text-org7705481">
+<p>
+Trivial welcome-task I had missed until <code>poiko</code> reminded me. It basically does
+<code>print(flag ^ flag[4:])</code> (if one were able to do that in Python). You know
+<code>flag</code> starts with <code>CSR{</code> which gives you the next four bytes, and those gives
+the next four, and so on.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7db463e" class="outline-3">
+<h3 id="org7db463e">crypto:dtls</h3>
+<div class="outline-text-3" id="text-org7db463e">
+<p>
+The task gives you a pcap file and this shell script:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6abd50;"># </span><span style="color: #6aaf50;">/usr/lib/libc.so.6|head -n 1</span>
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">GNU C Library (GNU libc) stable release version 2.31.</span>
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">clone</span>
+git clone https://github.com/eclipse/tinydtls.git dtls
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">build</span>
+<span style="color: #bdbdb3; font-weight: bold;">cd</span> dtls &amp;&amp; autoconf &amp;&amp; autoheader &amp;&amp; ./configure &amp;&amp; make &amp;&amp; <span style="color: #bdbdb3; font-weight: bold;">cd</span> ..
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">listen</span>
+tcpdump -i lo  port <span style="color: #6a7550;">31337</span> -w dump.pcap &amp;
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">Wait for tcpdump...</span>
+sleep <span style="color: #6a7550;">2</span>
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">serve</span>
+dtls/tests/dtls-server -p <span style="color: #6a7550;">31337</span> &amp;
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">send flag</span>
+cat flag.txt|dtls/tests/dtls-client <span style="color: #6a7550;">127.0.0.1</span> -p <span style="color: #6a7550;">31337</span>
+</pre>
+</div>
+
+<p>
+I got the repo and looked around. I know it implements basic TLS over UDP, but
+ignored all that. The first thing I searched for was RNG. It doesn't use
+cryptographic source of random numbers but instead will just use <code>srand()</code> and
+<code>rand()</code> from <code>libc</code> (as hinted to in the script above). That's a problem in
+and by itself.
+</p>
+
+<p>
+But it also turns out that the code is buggy, for example it initializes the RNG
+with <code>dtls_prng_init((unsigned long)*buf)</code>, where <code>buf</code> was read to from
+<code>/dev/urandom</code>. It's probably <i>intending</i> to use a <code>long</code> for the seed, but guess
+what? <code>buf</code> is a <code>char</code> array, so it's actually just using a single byte for the
+seed to generate all those important crypto bytes.
+</p>
+
+<p>
+Now, how to actually attack it. I knew I didn't want to actually interact
+with TLS, because TLS is web and web is a hell run by committees, so
+instead I did the following:
+</p>
+
+<ul class="org-ul">
+<li>Make it print out the random bytes it generates. Run the script and compare
+it with the given pcap to figure out where those numbers go and what they
+should actually be.</li>
+<li>Trivially brute the seed.</li>
+<li>Modify the library to load its seed from an environment variable so I could
+run the client and server with fixed seeds.</li>
+<li>Force its internal time function to return 0, as I can see from the pcap
+that's what it used there. (It actually tries to use integer seconds since the
+start of the program, thus 0 since the transfer happens immediately.)</li>
+</ul>
+
+<p>
+I ran the script again and compared my pcap with the one given. It's generating
+and using the same numbers, uses the same cookie, etc. So then I simply copied
+the final encrypted packet from the pcap file and put it into the source code
+with an ugly hack like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #7d7c61; font-weight: bold;">static</span> <span style="color: #528fd1;">char</span> <span style="color: #fb8512;">bufzzz</span><span style="color: #bdbdb3;">[]</span> = <span style="color: #CC5542;">"...stuff..."</span>;
+
+<span style="color: #7d7c61; font-weight: bold;">static</span> <span style="color: #528fd1;">int</span>
+<span style="color: #9b55c3;">decrypt_verify</span><span style="color: #bdbdb3;">(</span><span style="color: #528fd1;">dtls_peer_t</span> *<span style="color: #fb8512;">peer</span>, <span style="color: #528fd1;">uint8</span> *<span style="color: #fb8512;">packet</span>, <span style="color: #528fd1;">size_t</span> <span style="color: #fb8512;">length</span>,
+         <span style="color: #528fd1;">uint8</span> **<span style="color: #fb8512;">cleartext</span><span style="color: #bdbdb3;">)</span>
+<span style="color: #bdbdb3;">{</span>
+  <span style="color: #7d7c61; font-weight: bold;">if</span> <span style="color: #6a9550;">(</span>packet<span style="color: #baba36;">[</span><span style="color: #6a7550;">0</span><span style="color: #baba36;">]</span> == <span style="color: #6a7550;">0x17</span><span style="color: #6a9550;">)</span> <span style="color: #6a9550;">{</span>
+    printf<span style="color: #baba36;">(</span><span style="color: #CC5542;">"pulling the old switcharoo\n"</span><span style="color: #baba36;">)</span>;
+    packet = bufzzz;
+    length = <span style="color: #6a7550;">84</span>;
+  <span style="color: #6a9550;">}</span>
+
+  <span style="color: #6abd50;">// </span><span style="color: #6aaf50;">...</span>
+</pre>
+</div>
+
+<p>
+For some reason (that I don't care about) this causes TinyDTLS' own debug
+printing of the message to get messed up, so I also had to print the cleartext
+myself at the end of the function. Out comes the flag. No TLS needed (thank
+God).
+</p>
+
+<p>
+This was a pretty cool task. It was practical and "real-world" but without
+feeling contrived and without there being JavaScript or any web frameworks
+involved. It was possibly the "cleanest" real-world-y task I've seen. Well done
+to the task author.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7250690" class="outline-3">
+<h3 id="org7250690">web:Yanote</h3>
+<div class="outline-text-3" id="text-org7250690">
+<p>
+I didn't solve this one. I failed it. Not only did I fail it technically, but I
+failed it <i>mentally</i>, which is probably worse. But I worked on it for a while so
+I'm still going to write about it. It triggered all sorts of feelings of
+inadequacy and failure that you wouldn't believe.
+</p>
+
+<p>
+All because of this "web" tag.
+</p>
+
+<p>
+The "web" tag usually means "use educated guesses for any blackbox behavior" but
+to me it usually reads as "realize that nobody agrees with what you think is
+reasonable." It reads "smell that? Take a deep whiff, that's the smell of
+learned helplessness, baby."
+</p>
+
+<p>
+Clue: the server says "invalid CRC-HMAC" if you give it an invalid cookie.
+</p>
+
+<p>
+Ignore the pedantic fact that it would normally be called <code>HMAC-&lt;name&gt;</code> and
+"CRC" is very non-specific, kind of like just saying "HASH."
+</p>
+
+<p>
+However CRCs are more fun than hashes in that they're easier to play around with
+computationally. So for a second I dared to dream about some sort of semi-fun
+task of trying to figure out the modulus and key and all the other constants of
+some unknown <code>HMAC(key, ipad, opad, H=CRC(modulus, a, b))</code> given an <code>oracle(x) =
+HMAC(key, A+x+B)</code>. That would have been pretty nice actually.
+</p>
+
+<p>
+So my approach was all wrong. Because I started to hear this "looOOooOOoOool"
+coming from a dark corner of my mind: the "web" tag coming back to haunt me. So
+maybe none of that cool stuff. Maybe it's just&#x2026;straight up CRC-32&#x2026;? Well,
+yes and no.
+</p>
+
+<p>
+See, I hate this. Instead of "figuring something out" you have to guess what
+<i>they</i> mean about what that something is. Since it's "web" and in web they tend
+to not be too particular about things, HMAC might mean something else.
+Potentially it could be a homegrown custom HMAC, potentially it could be
+something else entirely. It's not even given that it does <code>HMAC(&lt;key&gt;,
+&lt;pickle-data&gt;)</code>. For all you know it could do <code>F(&lt;key&gt;, &lt;username&gt; + ":" +
+&lt;permission&gt;)</code> or whatever. Hell, maybe it's not even a CRC! Maybe it's just
+<code>adler32(&lt;data&gt; + &lt;secret&gt;)</code>&#x2026;
+</p>
+
+<p>
+Okay, relax. Start testing some basic stuff.
+</p>
+
+<p>
+I figured out it had normal CRC behavior at least. It was, as they say,
+affine-ish. Working with polynomials over \(GF_2\), <code>CRC(x + y) = CRC(x) +
+CRC(y) + K_{b}</code> where <code>K_{b}</code> is a constant that depends on the <i>byte-lengths</i> of
+<code>x</code> and <code>y</code> (technically on their xor difference?). You'd expect this to work for
+any HMAC based on a CRC too. This allows you to (easily) log in as admin (but on
+the admin page I just found people doing "test post pls ignore" and being
+generally "????????").
+</p>
+
+<p>
+But when I actually tried to "solve" the blackbox function completely, I kept
+getting wrong constants everywhere. And I didn't know what was wrong, didn't
+know if it's because I had bugs in the old code I was using (some <code>GF2[X]</code>
+implementation from way back), or had some wrong assumption.
+</p>
+
+<p>
+After a while I suspected there was no HMAC and maybe just a straight up unknown
+CRC, which frustrated me even more because if so, then this should be easy, no?
+What if something else is different? I spammed random stuff trying to figure out
+the modulus for the CRC from the constants I was getting out, double-checked my
+math, got completely lost. I even wondered if you were supposed to birthday-hammer
+user-create to find a duplicate checksum, and maybe that would finally reveal
+what was going on, got completely lost&#x2026;
+</p>
+
+<p>
+Getting full control over the cookie <i>is</i> trickier, but in my more clear-headed
+state I think it's possible without solving the black-box function as I was
+trying to do. I believe all you need is in the relationship. You can get all the
+constant <code>K</code> terms you need by making three users that xor to zero for any given
+length. For an unknown CRC, for three constants \(K_i\), \(K_{i+1}\) and \(K_{i+2}\)
+(that you'd get from <code>("0","q","A")</code> for example, since they xor to 0), then you
+can find the modulus as a factor of \(x^8 K_{i+2} + (x^8+1) K_{i+1} + K_{i}\) (I
+think?), then the relationship between the various \(K_i\) as \(K_n =
+\frac{x^n-1}{(x-1) x^{n+1}} \pmod M\), and you have everything you need.
+</p>
+
+<p>
+Then you make usernames that xor together to be your pickle payload (the server
+accepted non-printables in username) and change the byte for the username length
+(this last part is a pen-and-paper mess, so it's not something I'd actually try
+unless I was sure). The stuff after the byte <code>#48 (".")</code> in the pickle data is
+ignored, so it's fine if the cookie ends with garbage. This was probably the
+intended solution, though it's a bug-prone approach, a bit painful to implement.
+</p>
+
+<p>
+However I basically just got so frustrated with not getting the math to work out
+(I mean, I couldn't even figure out the damn <i>modulus</i>!<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup>) and debugging my
+own code that I gave up. I have an issue with committing to guesses unless I
+have a reasonable idea it will work. <i>Failure-sensitive</i>.
+</p>
+
+<p>
+Dirty confession: I even debased myself and tried to brute force a 32-bit key
+against HMAC-CRC32 using the usual constants, but it didn't work. After that I
+signed off and went for a long walk to hang out with the ducks by the river (not
+a metaphor&#x2013;there are actual ducks).
+</p>
+
+<p>
+<i>Addendum:</i> it was plain CRC-32, and the "HMAC" just a salt being added to the
+data bytestring. Prefix or postfix salt? Length of salt? Well, it's web, so the
+answer is: "guess."
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Given appropriate adjustment of over-rated CTFs that feature stego and
+guess-tasks.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+I firmly believe the inventors of PHP ought to be retroactively
+punished for having made the world a worse place. Every time I had to read a PHP
+doc page and look at the comments by PHP users I could feel myself losing IQ
+points as if breathing in neurotoxic mold.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+We're only a two-man team, so naturally we don't stand a chance for a
+competitive placement, but it was a lot of fun with good, challenging tasks.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+Maybe I'm only critical because I'm embarrassed it fooled me!
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+which is fine, but it could have been a sub-problem in another task for
+example. One could also say it tries to teach you some math&#x2013;but it's the sort
+of stuff with a trivial Sage/Google escape hatch. The trademark of low-effort
+tasks that get ground up by the "point mill" into bland paste, rather than
+offering any fun/engaging problem solving.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+Also: this was my first impression: <code>#!/usr/bin/env python2</code>. <code>:shudder:</code> This has nothing to do with the
+task itself, but it always makes my heart sink and I lose a bit of faith in the
+problem author and the world in general.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
+The question "why <i>is</i> JavaScript?" is ostensibly answered with "because
+fuck you, because we're engineers and we get the job done, that's why." But the
+question "why is JavaScript <i>the way it is</i>?" can only be answered with a shrug
+and an embarrassed silence. Indeed, why is any scatological piece of art the way
+it is.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
+OK, actually the fact that it uses T-tables probably helps, as
+high-weight input will likely lead to high-weight output from the lookups there?
+I don't know, I've never done any power-analysis before.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
+I was assuming the wrong byte length of course, because it wasn't HMAC,
+nor was it plain CRC(x), but it was salted. And I hadn't figured out the
+byte-length independent approach.
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
