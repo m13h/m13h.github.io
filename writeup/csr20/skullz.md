@@ -24,7 +24,7 @@ $("button").on( "click", notify );
 
 Ok, so we are looking for a function called 'breakTheSkull', which is probably inside index.wasm. There is also an `index.js` that you can look through to confirm it.
 
-To disassemble / decompile index.wasm I used [wabt](https://github.com/WebAssembly/wabt). It contains both a decompiler to a C-like language, and a disassembler outputting a WAT file. I ended up using both.
+To disassemble / decompile index.wasm I used [WABT](https://github.com/WebAssembly/wabt). It contains both a decompiler to a C-like language, and a disassembler outputting a WAT file. I ended up using both.
 
 Looking at the output from wasm-decompile, we see that there is a lot of code, around 18000 lines. We find the breakTheSkull function:
 
