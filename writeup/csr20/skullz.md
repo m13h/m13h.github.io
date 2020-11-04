@@ -15,8 +15,8 @@ I noticed that when the page loads there is a GET request for a file "index.wasm
 var f = Module.cwrap('breakTheSkull', 'string', ['string']);
 
 function notify() {
-var input = $("#inputPassword").val();
-alert(f(input));
+  var input = $("#inputPassword").val();
+  alert(f(input));
 }
 
 $("button").on( "click", notify );
