@@ -68,7 +68,7 @@ Since I couldn't find the values of the elem table in the decompiled output, I l
 
 So it calculates sha1 of the input, XORs it with a 20 byte constant found at offset 1088 in the data section. The data sections of the wasm program is given by several byte arrays found in the decompiled/disassembled outputs:
 
-```
+```javascript
 data d_bbbbbbbbbbbbbbbbsaltplk3UQgi(offset: 1024) = 
   "bbbbbbbbbbbbbbbb\00salt\00%p\0a\00\00\00\00\00\00\00\9fl\df#\f4k:3*\ad"
   "\e3;+\ea\0cU\9b\13Q\f7\00\00\00\00\00\00\00\00\00\00\00\00g\c6isQ\ffJ\ec"
@@ -76,17 +76,26 @@ data d_bbbbbbbbbbbbbbbbsaltplk3UQgi(offset: 1024) =
   etc
 ```
 
-The XOR key is then at offset 1088 - 1024 = 64 in this array. This result is compared against another 20 byte constant, and outputs the "Incorrect hash" message if it doesn't match.
+The XOR key is then at offset 1088 - 1024 = 64 in this array. This result is compared against another 20 byte constant, and outputs the "Incorrect hash" message if it doesn't match. From this we can recover the hash of the correct secret.
 
-Further, we see the original sha1 of the input along with the "bbbbbbbbbbbbbbbb" constant used as input to two functions that looks like the init and encrypt functions of a symmetric cipher. The suspected ciphertext used as input to the second function can be found in the data array. Looking closer at these functions you can recognize the AES key scheduler with 10 rounds, we also see the AES sbox constants.
+Further, we see the hashed secret along with the "bbbbbbbbbbbbbbbb" constant used as input to a function that looks like the key scheduler function of a symmetric cipher (called `f_na`), followed by a function which takes what looks like a ciphertext as input (called `f_ta`). The suspected ciphertext can be found in the second data array at offset 1968 - 1952 = 16:
 
-Since the ciphertext is 51 bytes long, it's natural to assume a streaming mode is used, which is confirmed by a closer look at the encryption function. I tried different ones and OFB mode decrypts the first block correctly:
+```javascript
+data d_10009zKAV_XItg3P(offset: 1952) = 
+  "10.0.0.9\00\00\00\00\00\00\00\00\fc\a7\9c\e0\0c\8a\bazK\fbA\06\19\e8V_"
+  "X\c8\fe\89\b9I^}\ef\ee\b1\f9\0f:\10\f3,\9c\e7\ac\f5\99$\c5t\c5\b1\a3;["
+  "g(\fd\1f\b0\003\00\00\00\00\00\00\00\00\00\00\00\80\00\00\00\00\00\00\00"
+```
+
+Looking closer at the first function I recognized it as a 10-round AES key scheduler, we also see the AES sbox constants being used.
+
+The ciphertext is 51 bytes long, so it's natural to assume a streaming mode is used, which is confirmed by a closer look at the encryption function. I tried different modes and OFB mode decrypts the first block correctly:
 
 ```
 b'CSR{Linux ...bec6\xa7\x98SV\x81yV\x1fq\xf4\x18\x9e\x03F\xfdh-\xf4\xbb*\x84\xdeE\xa8\xe25i\x98\xbeZn\xa2\xda*'
 ```
 
-At this point I forwarded it to my team mate fsh/tope; he realized that it was a variant of CTR mode using "bbbbbbbbbbbbbbbb" as a nonce/counter. The below code then decrypts the flag.
+At this point I forwarded it to my team mate fsh/tope; he realized that it was a variant of CTR mode using "bbbbbbbbbbbbbbbb" as the initial nonce/counter. The below code then decrypts the flag.
 
 ```python
 from Crypto.Cipher import AES
