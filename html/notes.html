@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-03 ti. 22:32 -->
+<!-- 2020-11-09 ma. 08:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>notes from crypto/misc/mathy CTF tasks</title>
+<title>Notes from CTF tasks (math/programming-related)</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
@@ -86,14 +86,15 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">notes from crypto/misc/mathy CTF tasks</h1>
+<h1 class="title">Notes from CTF tasks (math/programming-related)</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
+<li><a href="#orgafd68fa">About</a></li>
 <li><a href="#org7362f78">N1CTF2020</a>
 <ul>
-<li><a href="#org279cddb">General Comments</a></li>
+<li><a href="#org43ac76c">General Comments</a></li>
 <li><a href="#org9fcaba4">crypto:VSS</a></li>
 <li><a href="#org5e500ad">crypto:FlagBot</a></li>
 <li><a href="#org95f754e">crypto:curve</a></li>
@@ -103,7 +104,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#org58785a6">Hack.lu 2020</a>
 <ul>
-<li><a href="#orgf07e185">General Comments</a></li>
+<li><a href="#org93834fa">General Comments</a></li>
 <li><a href="#org49642c1">crypto:Bad Primes</a></li>
 <li><a href="#org7dbf046">misc:BabyJS</a></li>
 <li><a href="#orgae52da4">crypto:Conquering Premium Access</a></li>
@@ -113,7 +114,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#orgda61fb2">CyberSecurityRumble 2020</a>
 <ul>
-<li><a href="#orgd64b505">General Comments</a></li>
+<li><a href="#org654d43c">General Comments</a></li>
 <li><a href="#orga7106cd">crypto:Pady McPadface</a></li>
 <li><a href="#org56d96a8">crypto:dlog</a></li>
 <li><a href="#orgf5eca19">crypto:ezdsa</a></li>
@@ -126,33 +127,62 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
+
+<div id="outline-container-orgafd68fa" class="outline-2">
+<h2 id="orgafd68fa">About</h2>
+<div class="outline-text-2" id="text-orgafd68fa">
 <p>
-<b>Team:</b> <code>mode13h</code>
+<b>Who:</b> <code>tope</code> of <code>mode13h</code> (two-man team from Norway)
 </p>
 
 <p>
-<b>Author:</b> <code>tope#9134@Discord</code>
+<b>Contact:</b> <code>tope#9134@Discord</code> (I am friendly to the point of being flirtatious,
+so feel free to message me)
 </p>
+
+<p>
+<b>Audience:</b> I am writing these notes to some imagined fellow CTFer who looked at
+the same tasks that I did, but missed some critical step for the solve, or
+perhaps someone who did solve them and just wants to compare notes. I'll rarely
+re-post the full problem as given in the CTF, nor do very detailed expositions.
+For the time being this isn't intended as a pedagogical resource. The target
+audience ("you") are not complete beginners, <i>some</i> facility with math is
+assumed.
+</p>
+
+<p>
+<b>Content:</b> My favorite tasks are of the "puzzle"<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> variety. In CTFs these
+would normally be found under misc and crypto. My safe space is the intersection
+between programming and mathematics.
+</p>
+
+<p>
+<b>Motivation:</b> I am fascinated by the generalities behind puzzles&#x2013;i.e. their
+mathematical expression&#x2013;and I love solving problems with programming.
+Fascination gives off a glow, and this glow-energy is what I'd like to call
+motivation. The competitive element of CTFs has little bearing, and I tend to
+avoid CTFs with uninteresting problems.
+</p>
+</div>
+</div>
 
 <div id="outline-container-org7362f78" class="outline-2">
 <h2 id="org7362f78">N1CTF2020</h2>
 <div class="outline-text-2" id="text-org7362f78">
 </div>
-<div id="outline-container-org279cddb" class="outline-3">
-<h3 id="org279cddb">General Comments</h3>
-<div class="outline-text-3" id="text-org279cddb">
+<div id="outline-container-org43ac76c" class="outline-3">
+<h3 id="org43ac76c">General Comments</h3>
+<div class="outline-text-3" id="text-org43ac76c">
 <p>
 An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
 difficulty level. Objectively the task set alone deserves a ~100 rating on
-CTFTime<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+CTFTime<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
 </p>
 
 <p>
-I did the crypto tasks and will outline solves for those below. I won't post
-full problems or detailed expositions, it's more just notes that should allow
-anyone who attempted the problems to solve them. I also glanced at some of the
+I did the crypto tasks and will outline solves for those below. I also glanced at some of the
 "easier" tasks in misc and web, but even the entry-level tasks in those
-categories was beyond me.
+categories were beyond me.
 </p>
 
 <p>
@@ -169,7 +199,7 @@ bit, feeling pretty useless.
 
 <p>
 The only misc-like task I saw involved PHP, which is more of a mental plague
-than a programming language<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. I played around with it a bit, but finally
+than a programming language<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>. I played around with it a bit, but finally
 just went to bed feeling a little bit dumber and somewhat frustrated because I
 thought all tasks had been released and that I'd be useless for the rest of the
 CTF.
@@ -188,7 +218,7 @@ schedule so it's possible to better manage our time?
 </p>
 
 <p>
-We ended up placing 13th<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+We ended up placing 13th<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>.
 </p>
 </div>
 </div>
@@ -350,7 +380,7 @@ From the paper I figured I wanted curves under primes \(p = 11 m (m+1) + 3\) wit
 curves. Then copy-paste <code>Smart_Attack()</code> and blah, blah, the usual stuff. (I
 really despise copy-pasting.) A bit unrewarding due to my stubbornness, but I
 have to admit it was a good task in the end, even if the "hidden" constraint of
-"the given curve must also have a fast <code>E.order()</code>" was a bit devious<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>.
+"the given curve must also have a fast <code>E.order()</code>" was a bit devious<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>.
 </p>
 </div>
 </div>
@@ -391,7 +421,7 @@ to generate primes I've seen.
 </p>
 
 <p>
-But (the "a-ha" moment) it means that \(n*x\) also has "small" digits in
+But (the "a-ha" moment) it means that \(n\cdot x\) also has "small" digits in
 base-\(3^{66}\) for some \(x\) which is itself also "small" (compared to \(n\)).
 </p>
 
@@ -417,7 +447,7 @@ I used a lattice like
 to find \(x\). There might be better ways, but it worked. Now to factor. Trivially
 you can find the first and last digits of the primes. There's probably some more
 clever way to do the whole thing, but I just did the dumb thing and used the
-base-\(B\) digits of \(n*x\) as coefficients for a polynomial over \(\mathbb{Z}_p\)
+base-\(B\) digits of \(n\cdot x\) as coefficients for a polynomial over \(\mathbb{Z}_p\)
 for some large \(p\) and factored that. That gave me two numbers back (when
 multiplied so the least/most significant digits match), each of which shared one
 of the big primes with \(n\). This was all a bit rushed because it took me too
@@ -426,7 +456,7 @@ the REPL at this point, using my own utility libraries and NTL wrapper.
 </p>
 
 <p>
-So now I had \(n=p*q\) and could decrypt the vector to get a big system of linear
+So now I had \(n = p \cdot q\) and could decrypt the vector to get a big system of linear
 relations with "small errors" modulo some small prime. The lattice is life, the
 lattice is love. Maybe there's a more clever way to solve this as well, but did
 I mention I was a little pressed for time at this point? The system in its
@@ -488,14 +518,13 @@ I'll leave it here to be sad and alone. :(
 </div>
 </div>
 
-
 <div id="outline-container-org58785a6" class="outline-2">
 <h2 id="org58785a6">Hack.lu 2020</h2>
 <div class="outline-text-2" id="text-org58785a6">
 </div>
-<div id="outline-container-orgf07e185" class="outline-3">
-<h3 id="orgf07e185">General Comments</h3>
-<div class="outline-text-3" id="text-orgf07e185">
+<div id="outline-container-org93834fa" class="outline-3">
+<h3 id="org93834fa">General Comments</h3>
+<div class="outline-text-3" id="text-org93834fa">
 <p>
 An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
 a much higher rating on <code>CTFTime</code>.
@@ -519,7 +548,7 @@ The tasks I looked at felt like they belonged in the 50-70 range.
 my pick for "best" crypto-task, because it actively combines two related
 techniques in a sensible way. <a href="#orgae52da4">crypto:Conquering Premium Access</a> had a copy-pastable
 solution through Google, which was not fun to discover. <a href="#orgb59aaea">crypto:Bad Primes</a> was somewhat
-trivial<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>. <a href="#org7dbf046">misc:BabyJS</a> was cute but that's about it. More info about them
+trivial<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>. <a href="#org7dbf046">misc:BabyJS</a> was cute but that's about it. More info about them
 below. (As usual I will just outline the solves, these are just notes that should allow
 anyone who attempted or failed the problems to solve them.)
 </p>
@@ -527,7 +556,7 @@ anyone who attempted or failed the problems to solve them.)
 </div>
 
 <div id="outline-container-org49642c1" class="outline-3">
-<h3 id="org49642c1"><a id="orgb59aaea"></a>crypto:Bad Primes<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></h3>
+<h3 id="org49642c1"><a id="orgb59aaea"></a>crypto:Bad Primes<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></h3>
 <div class="outline-text-3" id="text-org49642c1">
 <p>
 You're given \(c = flag^e \pmod{p\cdot q}\) with all numbers known except \(flag\).
@@ -582,7 +611,7 @@ flag.
 <div class="outline-text-3" id="text-org7dbf046">
 <p>
 A misc task that was misclassified as web(?). It's an exposition on the various ways
-JavaScript tries very hard to be an awful programming language<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>. It's
+JavaScript tries very hard to be an awful programming language<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup>. It's
 still not as awful as PHP, but we can't all be the champ.
 </p>
 
@@ -769,7 +798,7 @@ So, textbook reading material:
 <p>
 Indeed: almost disappointingly so. Finding a correlation based on the
 1-bits-equals-more-power assumption turned out to work directly. You can ignore
-the rounds, ignore the hints<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup>, ignore everything, because there's so much
+the rounds, ignore the hints<sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup>, ignore everything, because there's so much
 data and it's so artificially clean. Find the <code>key</code> (and <code>iv</code>) such that the
 weight of <code>sbox[key^iv^plaintext]</code> has the highest correlation with (overall)
 power consumption. <code>sbox[key^iv^plaintext]</code> is what the state gets set to in the
@@ -879,17 +908,21 @@ aligns things like so:
 
 <p>
 Now pop off one <code>a</code> so the first <code>x</code> gets shifted in and note what that block
-becomes in the output. Then discover the byte by cycling through various
-encryptions of <code>link = "aaaa...aaaa} flag{X"</code> with <code>X</code> unknown. I.e. the string become:
+becomes in the output. Then discover the byte by cycling through and check the
+output of encrypting with <code>link = "aaaa...aaaa} flag{" + b</code> for unknown byte
+<code>b</code>. I.e. the string that's encrypted becomes:
 </p>
 
 <pre class="example">
 # |---aes block---||---aes block---||---aes block---|
-# xxxx f{aaaaaaaaaaaaaaaaaaa} flag{X} flag{xxxxxxxxxx
+# xxxx f{aaaaaaaaaaaaaaaaaaa} flag{*} flag{xxxxxxxxxx
+# with '*' being the variable byte.
 </pre>
 
 <p>
-Repeat for each byte. Print it, ship it, done.
+Once there's a match you add the byte to what you know is there already (<code>"}
+ flag{"</code>) and repeat for the next byte, until the entire link has been
+discovered. Print it, ship it, done.
 </p>
 </div>
 </div>
@@ -901,9 +934,9 @@ Repeat for each byte. Print it, ship it, done.
 <h2 id="orgda61fb2">CyberSecurityRumble 2020</h2>
 <div class="outline-text-2" id="text-orgda61fb2">
 </div>
-<div id="outline-container-orgd64b505" class="outline-3">
-<h3 id="orgd64b505">General Comments</h3>
-<div class="outline-text-3" id="text-orgd64b505">
+<div id="outline-container-org654d43c" class="outline-3">
+<h3 id="org654d43c">General Comments</h3>
+<div class="outline-text-3" id="text-org654d43c">
 <p>
 Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
 so forth. The stuff I looked at seemed alright, though I got entangled in some
@@ -916,7 +949,7 @@ the last day).
 </p>
 
 <p>
-There wasn't an <i>abundance</i> of crypto or puzzle/math-y misc tasks, but then I
+There wasn't an <i>abundance</i> of crypto or mathematical misc tasks, but then I
 don't really come to expect that much, it felt like there was <i>enough</i>. I kinda
 think of crypto/math as the awkward little sister that's there only because the
 organizers' mother forced them to bring her along. The cool kids are talking
@@ -931,8 +964,8 @@ suspect it'd be like 30 web-tasks and 2 revs.
 I solved most of the easy crypto on the first evening, then did <a href="#org7db463e">crypto:dtls</a> the
 following morning, but the two remaining tasks were labelled web. Ugh. I looked
 at the task named <code>blow</code> and just thought "fuck no." Some kind of hellish
-JWS/JWT JavaScript monstrosity that they kept adding hints to because it got no
-solves. From the hints alone I surmise that it has some trivial solution in
+JWS/JWT JavaScript task they kept adding hints to because it got no
+solves. From the hints alone I surmised that it has some trivial solution in
 crypto terms, but it was probably a pain in the ass (aka the "web" part) to even
 get started or progress to where it's relevant? So I worked on <a href="#org7250690">web:Yanote</a>
 instead, but failed that task miserably and eventually went off to nurse my
@@ -947,7 +980,7 @@ imposter syndrome in the corner.
 <p>
 A live server that knows the flag traverses it bit by bit and gives \((r^2 +
 bit)^e \pmod n\) for a fixed RSA modulus \(n\) using the standard \(e = 65537\). \(r\)
-is an ephemeral random number a few bits less than \(\sqrt{n}\) so \(r^2 < n\).
+is an ephemeral random number a few bits than \(log_2 \sqrt{n}\) so \(r^2 < n\).
 </p>
 
 <p>
@@ -961,7 +994,7 @@ does seem like a neat trick.
 
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">trailing_zeros</span><span style="color: #bdbdb3;">(</span>a<span style="color: #bdbdb3;">)</span>:
-  <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #bdbdb3;">(</span>a ^ a-<span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">)</span>.bit_length<span style="color: #bdbdb3;">()</span> - <span style="color: #6a7550;">1</span>
+  <span style="color: #7d7c61; font-weight: bold;">return</span> <span style="color: #bdbdb3;">(</span>a ^ a - <span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">)</span>.bit_length<span style="color: #bdbdb3;">()</span> - <span style="color: #6a7550;">1</span>
 
 <span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">jacobi</span><span style="color: #bdbdb3;">(</span>a,n<span style="color: #bdbdb3;">)</span>:
   <span style="color: #7d7c61; font-weight: bold;">assert</span> n &amp; <span style="color: #6a7550;">1</span> <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">n must be odd</span>
@@ -1327,25 +1360,27 @@ length. For an unknown CRC, for three constants \(K_i\), \(K_{i+1}\) and \(K_{i+
 (that you'd get from <code>("0","q","A")</code> for example, since they xor to 0), then you
 can find the modulus as a factor of \(x^8 K_{i+2} + (x^8+1) K_{i+1} + K_{i}\)
 (does that work? Now I'm not sure, I'm copying a note&#x2026;), then the relationship
-between the various \(K_i\) as \(K_n = K_0 \frac{x^n-1}{(x-1) x^{n+1}} \pmod M\),
-and you should have everything you need.
+between the various \(K_i\) as \(K_n = K_0 \frac{x^n-1}{(x-1) x^{n-1}} \pmod M\)
+(TODO: math might be wrong), and you should have everything you need.
 </p>
 
 <p>
 Then you make usernames that xor together to be your pickle payload (the server
 accepted non-printables in username) and change the byte for the username length
 (this last part is a pen-and-paper mess, so it's not something I'd actually try
-unless I was sure). The stuff after the byte <code>#48 (".")</code> in the pickle data is
+unless I was sure). The stuff after the byte <code>0x2e (".")</code> in the pickle data is
 ignored, so it's fine if the cookie ends with garbage. This was probably the
-intended solution, though it's a bug-prone approach, maybe a bit painful to implement.
+intended solution, though it's a bug-prone approach, maybe a bit painful to
+implement.
 </p>
 
 <p>
 However I basically just got so frustrated with not getting the math to work out
-(I mean, I couldn't even figure out the damn <i>modulus</i>!<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup>) and debugging my
+(I mean, I couldn't even figure out the damn <i>modulus</i>!<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup>) and debugging my
 own code that I gave up. I have an issue with committing to guesses unless I
 have a reasonable idea it will work. <i>Failure-sensitive</i>. Besides, engaging with
-guessy stuff feels dirty.
+guessy stuff feels dirty unless you vibe some level of mental harmony with the
+task author (which I didn't).
 </p>
 
 <p>
@@ -1358,7 +1393,8 @@ the ducks by the river (not a metaphor&#x2013;there are actual ducks).
 <p>
 <i>Addendum:</i> it was plain CRC-32, and the "HMAC" just a salt being added to the
 data bytestring. Prefix or postfix salt? Length of salt? Well, it's web, so the
-answer is: "guess."
+answer could be to just guess and try it, and if that doesn't work, guess
+something else.
 </p>
 </div>
 </div>
@@ -1368,27 +1404,45 @@ answer is: "guess."
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+by "puzzles" I mean problems that have a <i>natural</i> translation into
+mathematics and reveal there a certain simplicity and elegance in generalized
+form. It stands in marked contrast to "riddles"<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, which tend to resist
+mathematical patterns, and are usually dependent on culture, language, or
+specific trivia.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+I am pretty bad at escape-room CTFs where you hold up the message under a
+full moon to reveal a bunch of points that turn out to align with certain zodiac
+signs in the sky, and then after translating the zodiacs into numbers using the
+provided plastic spy-codex, you get a number which turns out to be the Dewey
+decimal index where you can find the book that was used for the book cipher.
+(See <a href="https://masrt200.github.io/hacker-blog/hacktober-ctf">example</a>.) That kind of Sherlock Holmes stuff is completely orthogonal with
+the kind of puzzles I enjoy.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
 Given appropriate adjustment of over-rated CTFs that feature stego and
 guess-tasks.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
 I firmly believe the inventors of PHP ought to be retroactively
 punished for having made the world a worse place. Every time I had to read a PHP
 doc page and look at the comments by PHP users I could feel myself losing IQ
 points as if breathing in neurotoxic mold.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
 We're only a two-man team, so naturally we don't stand a chance for a
 competitive placement, but it was a lot of fun with good, challenging tasks.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
 Maybe I'm only critical because I'm embarrassed it fooled me!
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
 which is fine, but it could have been a sub-problem in another task for
 example. One could also say it tries to teach you some math&#x2013;but it's the sort
 of stuff with a trivial Sage/Google escape hatch. The trademark of low-effort
@@ -1396,13 +1450,13 @@ tasks that get ground up by the "point mill" into bland paste, rather than
 offering any fun/engaging problem solving.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
 Also: this was my first impression: <code>#!/usr/bin/env python2</code>. <code>:shudder:</code> This has nothing to do with the
 task itself, but it always makes my heart sink and I lose a bit of faith in the
 problem author and the world in general.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
 The question "why <i>is</i> JavaScript?" is ostensibly answered with "because
 fuck you, because we're engineers and we get the job done, that's why." But the
 question "why is JavaScript <i>the way it is</i>?" can only be answered with a shrug
@@ -1410,13 +1464,13 @@ and an embarrassed silence. Indeed, why is any scatological piece of art the way
 it is.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara"><p class="footpara">
 OK, actually the fact that it uses T-tables probably helps, as
 high-weight input will likely lead to high-weight output from the lookups there?
 I don't know, I've never done any power-analysis before.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara"><p class="footpara">
 I was assuming the wrong byte length of course, because it wasn't HMAC,
 nor was it plain CRC(x), but it was salted. And I hadn't figured out the
 byte-length independent approach.
