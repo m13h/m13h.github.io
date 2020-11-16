@@ -3,11 +3,183 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-09 ma. 08:57 -->
+<!-- 2020-11-16 ma. 11:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Notes from CTF tasks (math/programming-related)</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="franksh" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -91,46 +263,62 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgafd68fa">About</a></li>
-<li><a href="#org7362f78">N1CTF2020</a>
+<li><a href="#org4a5ec17">About</a></li>
+<li><a href="#orga29648a">N1CTF2020</a>
 <ul>
-<li><a href="#org43ac76c">General Comments</a></li>
-<li><a href="#org9fcaba4">crypto:VSS</a></li>
-<li><a href="#org5e500ad">crypto:FlagBot</a></li>
-<li><a href="#org95f754e">crypto:curve</a></li>
-<li><a href="#org1a92230">crypto:easy RSA?</a></li>
-<li><a href="#orgdd7f0da">crypto:babyProof</a></li>
+<li><a href="#org164d264">General Comments</a></li>
+<li><a href="#org4748b17">crypto:VSS</a></li>
+<li><a href="#org9c085dc">crypto:FlagBot</a></li>
+<li><a href="#org38b8ed9">crypto:curve</a></li>
+<li><a href="#org5f5158c">crypto:easy RSA?</a></li>
+<li><a href="#org9744b57">crypto:babyProof</a></li>
 </ul>
 </li>
-<li><a href="#org58785a6">Hack.lu 2020</a>
+<li><a href="#orgca95166">Hack.lu 2020</a>
 <ul>
-<li><a href="#org93834fa">General Comments</a></li>
-<li><a href="#org49642c1">crypto:Bad Primes</a></li>
-<li><a href="#org7dbf046">misc:BabyJS</a></li>
-<li><a href="#orgae52da4">crypto:Conquering Premium Access</a></li>
-<li><a href="#org2a32a53">misc:P*rn Protocol</a></li>
-<li><a href="#org01a65d9">crypto:Pwnhub Collection</a></li>
+<li><a href="#orge5f23fc">General Comments</a></li>
+<li><a href="#orgf0228cb">crypto:Bad Primes</a></li>
+<li><a href="#org6de9b29">misc:BabyJS</a></li>
+<li><a href="#org04ab205">crypto:Conquering Premium Access</a></li>
+<li><a href="#org89eaf2b">misc:P*rn Protocol</a></li>
+<li><a href="#org01f41cd">crypto:Pwnhub Collection</a></li>
 </ul>
 </li>
-<li><a href="#orgda61fb2">CyberSecurityRumble 2020</a>
+<li><a href="#orgcd851c6">CyberSecurityRumble 2020</a>
 <ul>
-<li><a href="#org654d43c">General Comments</a></li>
-<li><a href="#orga7106cd">crypto:Pady McPadface</a></li>
-<li><a href="#org56d96a8">crypto:dlog</a></li>
-<li><a href="#orgf5eca19">crypto:ezdsa</a></li>
-<li><a href="#org08d63e8">misc:Pylindrome</a></li>
-<li><a href="#org7705481">baby:Hashfun</a></li>
-<li><a href="#org7db463e">crypto:dtls</a></li>
-<li><a href="#org7250690">web:Yanote</a></li>
+<li><a href="#org997356d">General Comments</a></li>
+<li><a href="#org2023a3d">crypto:Pady McPadface</a></li>
+<li><a href="#org921c43e">crypto:dlog</a></li>
+<li><a href="#org6341570">crypto:ezdsa</a></li>
+<li><a href="#orga4e13c9">misc:Pylindrome</a></li>
+<li><a href="#org2614d67">baby:Hashfun</a></li>
+<li><a href="#orgb023fb6">crypto:dtls</a></li>
+<li><a href="#org32f0d87">web:Yanote</a></li>
+</ul>
+</li>
+<li><a href="#org2466d88">BalsnCTF 2020</a>
+<ul>
+<li><a href="#balsn2020">General Comments</a></li>
+<li><a href="#org5285b32">Happy Farm</a>
+<ul>
+<li><a href="#orgd072804">Task 1: AES CBC</a></li>
+<li><a href="#org79f10b0">Task 2: RSA and Euler hacks</a></li>
+<li><a href="#org672dcfb">Task 3: Borked RCA</a></li>
+</ul>
+</li>
+<li><a href="#org68f9025">The Last Bitcoin</a></li>
+<li><a href="#org4231ac6">The Danger of Google's Omnipotence</a></li>
+<li><a href="#orgd28210c">aeshash &amp; IEAIE &amp; Patience I</a></li>
+<li><a href="#org138ec7b">babyrev</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgafd68fa" class="outline-2">
-<h2 id="orgafd68fa">About</h2>
-<div class="outline-text-2" id="text-orgafd68fa">
+<div id="outline-container-org4a5ec17" class="outline-2">
+<h2 id="org4a5ec17">About</h2>
+<div class="outline-text-2" id="text-org4a5ec17">
 <p>
 <b>Who:</b> <code>tope</code> of <code>mode13h</code> (two-man team from Norway)
 </p>
@@ -166,13 +354,13 @@ avoid CTFs with uninteresting problems.
 </div>
 </div>
 
-<div id="outline-container-org7362f78" class="outline-2">
-<h2 id="org7362f78">N1CTF2020</h2>
-<div class="outline-text-2" id="text-org7362f78">
+<div id="outline-container-orga29648a" class="outline-2">
+<h2 id="orga29648a">N1CTF2020</h2>
+<div class="outline-text-2" id="text-orga29648a">
 </div>
-<div id="outline-container-org43ac76c" class="outline-3">
-<h3 id="org43ac76c">General Comments</h3>
-<div class="outline-text-3" id="text-org43ac76c">
+<div id="outline-container-org164d264" class="outline-3">
+<h3 id="org164d264">General Comments</h3>
+<div class="outline-text-3" id="text-org164d264">
 <p>
 An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
 difficulty level. Objectively the task set alone deserves a ~100 rating on
@@ -223,9 +411,9 @@ We ended up placing 13th<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></s
 </div>
 </div>
 
-<div id="outline-container-org9fcaba4" class="outline-3">
-<h3 id="org9fcaba4">crypto:VSS</h3>
-<div class="outline-text-3" id="text-org9fcaba4">
+<div id="outline-container-org4748b17" class="outline-3">
+<h3 id="org4748b17">crypto:VSS</h3>
+<div class="outline-text-3" id="text-org4748b17">
 <p>
 You're given some code which generates a QR-code image of the flag and uses that
 image to create two new randomized images which&#x2013;when combined&#x2013;would
@@ -295,9 +483,9 @@ direction, so it might take a while to notice. I was pretty lucky.
 </div>
 </div>
 
-<div id="outline-container-org5e500ad" class="outline-3">
-<h3 id="org5e500ad">crypto:FlagBot</h3>
-<div class="outline-text-3" id="text-org5e500ad">
+<div id="outline-container-org9c085dc" class="outline-3">
+<h3 id="org9c085dc">crypto:FlagBot</h3>
+<div class="outline-text-3" id="text-org9c085dc">
 <p>
 Several random 256-bit elliptic curves are generated and used to do a standard
 key exchange to AES-encrypt the flag. The curves are all asserted to be
@@ -334,9 +522,9 @@ I think I did most of this task in REPL, but the pseudo-code sketch would be:
 </div>
 </div>
 
-<div id="outline-container-org95f754e" class="outline-3">
-<h3 id="org95f754e">crypto:curve</h3>
-<div class="outline-text-3" id="text-org95f754e">
+<div id="outline-container-org38b8ed9" class="outline-3">
+<h3 id="org38b8ed9">crypto:curve</h3>
+<div class="outline-text-3" id="text-org38b8ed9">
 <p>
 In this task (against a live server) you're asked for elliptic curve parameters
 \((p, a, b)\) and two points \((G_1, G_2)\) and then have to solve 30 rounds of
@@ -385,9 +573,9 @@ have to admit it was a good task in the end, even if the "hidden" constraint of
 </div>
 </div>
 
-<div id="outline-container-org1a92230" class="outline-3">
-<h3 id="org1a92230">crypto:easy RSA?</h3>
-<div class="outline-text-3" id="text-org1a92230">
+<div id="outline-container-org5f5158c" class="outline-3">
+<h3 id="org5f5158c">crypto:easy RSA?</h3>
+<div class="outline-text-3" id="text-org5f5158c">
 <p>
 A fun task which had two stages.
 </p>
@@ -466,9 +654,9 @@ equations worked just fine (every equation involved the entire flag).
 </div>
 </div>
 
-<div id="outline-container-orgdd7f0da" class="outline-3">
-<h3 id="orgdd7f0da">crypto:babyProof</h3>
-<div class="outline-text-3" id="text-orgdd7f0da">
+<div id="outline-container-org9744b57" class="outline-3">
+<h3 id="org9744b57">crypto:babyProof</h3>
+<div class="outline-text-3" id="text-org9744b57">
 <p>
 I "solved" this task but was a little too late. I had already realized the
 solution by the last hour or two, but underestimated how many datasets I needed
@@ -518,13 +706,13 @@ I'll leave it here to be sad and alone. :(
 </div>
 </div>
 
-<div id="outline-container-org58785a6" class="outline-2">
-<h2 id="org58785a6">Hack.lu 2020</h2>
-<div class="outline-text-2" id="text-org58785a6">
+<div id="outline-container-orgca95166" class="outline-2">
+<h2 id="orgca95166">Hack.lu 2020</h2>
+<div class="outline-text-2" id="text-orgca95166">
 </div>
-<div id="outline-container-org93834fa" class="outline-3">
-<h3 id="org93834fa">General Comments</h3>
-<div class="outline-text-3" id="text-org93834fa">
+<div id="outline-container-orge5f23fc" class="outline-3">
+<h3 id="orge5f23fc">General Comments</h3>
+<div class="outline-text-3" id="text-orge5f23fc">
 <p>
 An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
 a much higher rating on <code>CTFTime</code>.
@@ -544,20 +732,20 @@ The tasks I looked at felt like they belonged in the 50-70 range.
 </p>
 
 <p>
-<a href="#org01a65d9">crypto:Pwnhub Collection</a> which was (unnecessarily) gated behind rev would probably be
+<a href="#org01f41cd">crypto:Pwnhub Collection</a> which was (unnecessarily) gated behind rev would probably be
 my pick for "best" crypto-task, because it actively combines two related
-techniques in a sensible way. <a href="#orgae52da4">crypto:Conquering Premium Access</a> had a copy-pastable
-solution through Google, which was not fun to discover. <a href="#orgb59aaea">crypto:Bad Primes</a> was somewhat
-trivial<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>. <a href="#org7dbf046">misc:BabyJS</a> was cute but that's about it. More info about them
+techniques in a sensible way. <a href="#org04ab205">crypto:Conquering Premium Access</a> had a copy-pastable
+solution through Google, which was not fun to discover. <a href="#org2ee69c1">crypto:Bad Primes</a> was somewhat
+trivial<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>. <a href="#org6de9b29">misc:BabyJS</a> was cute but that's about it. More info about them
 below. (As usual I will just outline the solves, these are just notes that should allow
 anyone who attempted or failed the problems to solve them.)
 </p>
 </div>
 </div>
 
-<div id="outline-container-org49642c1" class="outline-3">
-<h3 id="org49642c1"><a id="orgb59aaea"></a>crypto:Bad Primes<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></h3>
-<div class="outline-text-3" id="text-org49642c1">
+<div id="outline-container-orgf0228cb" class="outline-3">
+<h3 id="orgf0228cb"><a id="org2ee69c1"></a>crypto:Bad Primes<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></h3>
+<div class="outline-text-3" id="text-orgf0228cb">
 <p>
 You're given \(c = flag^e \pmod{p\cdot q}\) with all numbers known except \(flag\).
 The caveat is that \(e | p-1\) so there's no \(d = e^{-1} \pmod{p-1}\) for
@@ -606,9 +794,9 @@ flag.
 </div>
 </div>
 
-<div id="outline-container-org7dbf046" class="outline-3">
-<h3 id="org7dbf046">misc:BabyJS</h3>
-<div class="outline-text-3" id="text-org7dbf046">
+<div id="outline-container-org6de9b29" class="outline-3">
+<h3 id="org6de9b29">misc:BabyJS</h3>
+<div class="outline-text-3" id="text-org6de9b29">
 <p>
 A misc task that was misclassified as web(?). It's an exposition on the various ways
 JavaScript tries very hard to be an awful programming language<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup>. It's
@@ -774,9 +962,9 @@ eval'd. So <code>z = "return console.log;"</code> for example.
 </div>
 </div>
 
-<div id="outline-container-orgae52da4" class="outline-3">
-<h3 id="orgae52da4">crypto:Conquering Premium Access</h3>
-<div class="outline-text-3" id="text-orgae52da4">
+<div id="outline-container-org04ab205" class="outline-3">
+<h3 id="org04ab205">crypto:Conquering Premium Access</h3>
+<div class="outline-text-3" id="text-org04ab205">
 <p>
 AES is used to encrypt the flag. You're handed the ciphertext and "power traces"
 (voltage measurement?) of some hardware using AES to encrypt 10,000 known
@@ -829,9 +1017,9 @@ assumed. Can't recall if the task hinted to that or not, maybe it did?
 </div>
 </div>
 
-<div id="outline-container-org2a32a53" class="outline-3">
-<h3 id="org2a32a53">misc:P*rn Protocol</h3>
-<div class="outline-text-3" id="text-org2a32a53">
+<div id="outline-container-org89eaf2b" class="outline-3">
+<h3 id="org89eaf2b">misc:P*rn Protocol</h3>
+<div class="outline-text-3" id="text-org89eaf2b">
 <p>
 A PDF described a very simple data protocol. Implement the protocol, request
 login, log in with the given username and password, and get the flag.
@@ -848,9 +1036,9 @@ else. Why was this even part of the task set?
 </div>
 </div>
 
-<div id="outline-container-org01a65d9" class="outline-3">
-<h3 id="org01a65d9">crypto:Pwnhub Collection</h3>
-<div class="outline-text-3" id="text-org01a65d9">
+<div id="outline-container-org01f41cd" class="outline-3">
+<h3 id="org01f41cd">crypto:Pwnhub Collection</h3>
+<div class="outline-text-3" id="text-org01f41cd">
 <p>
 Labelled as hard crypto but really just easy-ish crypto gated behind ASAN rev.
 <code>poiko</code> reversed it for me because I'm a newbie, so can't really say much about
@@ -930,13 +1118,13 @@ discovered. Print it, ship it, done.
 
 
 
-<div id="outline-container-orgda61fb2" class="outline-2">
-<h2 id="orgda61fb2">CyberSecurityRumble 2020</h2>
-<div class="outline-text-2" id="text-orgda61fb2">
+<div id="outline-container-orgcd851c6" class="outline-2">
+<h2 id="orgcd851c6">CyberSecurityRumble 2020</h2>
+<div class="outline-text-2" id="text-orgcd851c6">
 </div>
-<div id="outline-container-org654d43c" class="outline-3">
-<h3 id="org654d43c">General Comments</h3>
-<div class="outline-text-3" id="text-org654d43c">
+<div id="outline-container-org997356d" class="outline-3">
+<h3 id="org997356d">General Comments</h3>
+<div class="outline-text-3" id="text-org997356d">
 <p>
 Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
 so forth. The stuff I looked at seemed alright, though I got entangled in some
@@ -961,22 +1149,22 @@ suspect it'd be like 30 web-tasks and 2 revs.
 </p>
 
 <p>
-I solved most of the easy crypto on the first evening, then did <a href="#org7db463e">crypto:dtls</a> the
+I solved most of the easy crypto on the first evening, then did <a href="#orgb023fb6">crypto:dtls</a> the
 following morning, but the two remaining tasks were labelled web. Ugh. I looked
 at the task named <code>blow</code> and just thought "fuck no." Some kind of hellish
 JWS/JWT JavaScript task they kept adding hints to because it got no
 solves. From the hints alone I surmised that it has some trivial solution in
 crypto terms, but it was probably a pain in the ass (aka the "web" part) to even
-get started or progress to where it's relevant? So I worked on <a href="#org7250690">web:Yanote</a>
+get started or progress to where it's relevant? So I worked on <a href="#org32f0d87">web:Yanote</a>
 instead, but failed that task miserably and eventually went off to nurse my
 imposter syndrome in the corner.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga7106cd" class="outline-3">
-<h3 id="orga7106cd">crypto:Pady McPadface</h3>
-<div class="outline-text-3" id="text-orga7106cd">
+<div id="outline-container-org2023a3d" class="outline-3">
+<h3 id="org2023a3d">crypto:Pady McPadface</h3>
+<div class="outline-text-3" id="text-org2023a3d">
 <p>
 A live server that knows the flag traverses it bit by bit and gives \((r^2 +
 bit)^e \pmod n\) for a fixed RSA modulus \(n\) using the standard \(e = 65537\). \(r\)
@@ -1032,9 +1220,9 @@ After some collected data you set the others to 0 and get the flag.
 </div>
 </div>
 
-<div id="outline-container-org56d96a8" class="outline-3">
-<h3 id="org56d96a8">crypto:dlog</h3>
-<div class="outline-text-3" id="text-org56d96a8">
+<div id="outline-container-org921c43e" class="outline-3">
+<h3 id="org921c43e">crypto:dlog</h3>
+<div class="outline-text-3" id="text-org921c43e">
 <p>
 The task implements some basic code for working with the secp256k1 elliptic
 curve (\(y^2 = x^3 + 7\)). The ECC implementation is "home-made" with code mostly
@@ -1075,9 +1263,9 @@ complicated by investigating all the curve-stuff.
 </div>
 </div>
 
-<div id="outline-container-orgf5eca19" class="outline-3">
-<h3 id="orgf5eca19">crypto:ezdsa</h3>
-<div class="outline-text-3" id="text-orgf5eca19">
+<div id="outline-container-org6341570" class="outline-3">
+<h3 id="org6341570">crypto:ezdsa</h3>
+<div class="outline-text-3" id="text-org6341570">
 <p>
 A server is signing messages using the Python <code>ecdsa</code> library. I don't remember
 the exact details but I think you were supposed to forge a signature.
@@ -1115,9 +1303,9 @@ where you can calculate the hashes \(H_1, H_2\), recovering the private multipli
 </div>
 </div>
 
-<div id="outline-container-org08d63e8" class="outline-3">
-<h3 id="org08d63e8">misc:Pylindrome</h3>
-<div class="outline-text-3" id="text-org08d63e8">
+<div id="outline-container-orga4e13c9" class="outline-3">
+<h3 id="orga4e13c9">misc:Pylindrome</h3>
+<div class="outline-text-3" id="text-orga4e13c9">
 <p>
 A server will run any Python code that's a valid palindrome (<code>x == x[::-1]</code>) in
 a Python subprocess (of a user that can't read the flag file), but then <code>exec</code>
@@ -1147,9 +1335,9 @@ didn't think of that at the time.)
 </div>
 </div>
 
-<div id="outline-container-org7705481" class="outline-3">
-<h3 id="org7705481">baby:Hashfun</h3>
-<div class="outline-text-3" id="text-org7705481">
+<div id="outline-container-org2614d67" class="outline-3">
+<h3 id="org2614d67">baby:Hashfun</h3>
+<div class="outline-text-3" id="text-org2614d67">
 <p>
 Trivial welcome-task I had missed until <code>poiko</code> reminded me. It basically does
 <code>print(flag ^ flag[4:])</code> (if one were able to do that in Python). You know
@@ -1159,9 +1347,9 @@ the next four, and so on.
 </div>
 </div>
 
-<div id="outline-container-org7db463e" class="outline-3">
-<h3 id="org7db463e">crypto:dtls</h3>
-<div class="outline-text-3" id="text-org7db463e">
+<div id="outline-container-orgb023fb6" class="outline-3">
+<h3 id="orgb023fb6">crypto:dtls</h3>
+<div class="outline-text-3" id="text-orgb023fb6">
 <p>
 The task gives you a pcap file and this shell script:
 </p>
@@ -1264,9 +1452,9 @@ to the task author.
 </div>
 </div>
 
-<div id="outline-container-org7250690" class="outline-3">
-<h3 id="org7250690">web:Yanote</h3>
-<div class="outline-text-3" id="text-org7250690">
+<div id="outline-container-org32f0d87" class="outline-3">
+<h3 id="org32f0d87">web:Yanote</h3>
+<div class="outline-text-3" id="text-org32f0d87">
 <p>
 I didn't solve this one. I failed it. Not only did I fail it technically, but I
 failed it <i>mentally</i>, which is probably worse. But I worked on it for a while so
@@ -1399,6 +1587,516 @@ something else.
 </div>
 </div>
 </div>
+
+
+<div id="outline-container-org2466d88" class="outline-2">
+<h2 id="org2466d88">BalsnCTF 2020</h2>
+<div class="outline-text-2" id="text-org2466d88">
+</div>
+<div id="outline-container-orge15c677" class="outline-3">
+<h3 id="balsn2020"><a id="orge15c677"></a>General Comments</h3>
+<div class="outline-text-3" id="text-balsn2020">
+<p>
+Another great CTF!
+</p>
+
+<p>
+But yet again I have some Debbie Downer comments.
+</p>
+
+<p>
+Disclaimer: this is clearly a top-tier CTF, close to ~100 points, so my main
+criticism below is more subjective and personal than objective.
+</p>
+
+<p>
+The difficulty of <i>certain</i> tasks seemed to come from them simply being the
+composition of several sub-tasks that <i>in some cases</i> weren't even related. I am
+not a fan of that at all. It's exhausting and it feels like a really cheap way
+to increase difficulty. <a href="#org5285b32">Happy Farm</a> is the obvious example<sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup>. Instead of
+having tasks T1, T2, T3 that are all fairly independent problems, they're
+composed or chained in some way to make a much more work-intensive task. This
+joined task can even appear more difficult than the most difficult in the
+set<sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup>, yet <i>it won't feel that rewarding</i>.
+</p>
+
+<p>
+That's just a strong personal preference, perhaps other people think it's cool
+and the bee's knees. I preferred <a href="#orga29648a">N1CTF2020</a> for example, which had a similar
+difficulty level, but where none of the tasks seemed "artificially" difficult by
+composition.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">import</span> random
+random.seed<span style="color: #bdbdb3;">(</span><span style="color: #bdbdb3; font-weight: bold;">int</span><span style="color: #6a9550;">(</span><span style="color: #bdbdb3; font-weight: bold;">input</span><span style="color: #baba36;">()</span><span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>
+
+<span style="color: #7d7c61; font-weight: bold;">assert</span> \
+b<span style="color: #CC5542;">"""As an extreme example, what if every category was just a single chained</span>
+<span style="color: #CC5542;">monster-task? No flag until you do them all. I personally am /much/ more</span>
+<span style="color: #CC5542;">comfortable on the other end of this spectrum, where it's a series of smaller</span>
+<span style="color: #CC5542;">bite-sized puzzles. Composing small but hard-ish puzzles isn't /that/ difficult.</span>
+<span style="color: #CC5542;">Here's one, for example."""</span> == random.getrandbits<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">8</span>*<span style="color: #6a7550;">328</span><span style="color: #bdbdb3;">)</span>.to_bytes<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">328</span>, <span style="color: #CC5542;">'big'</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+It seems another consequence is one ends up with less number of tasks total, so
+there's less to choose from or pick what order to do things in.
+</p>
+
+<p>
+A lot of the frustration behind the above rant comes from all the time I wasted
+on <code>Patience I</code>, which I only got a partial solution to, and the exhaustion that
+set in from solving the three-in-one task <a href="#org5285b32">Happy Farm</a>. As it were I felt really
+burned out and didn't do anything at all productive on Sunday, except to assist
+<code>poiko</code> with one of his solves. Well. I also discovered several mice in my
+apartment this weekend, which was&#x2026;not fun.
+</p>
+
+<p>
+Anyway, <code>aeshash</code> and <code>IEAIE</code> were both really cool, and I look forward to
+actually doing them outside of the CTF.
+</p>
+
+<p>
+We ended up placing 12th, so we just missed the mark for the coveted 13th
+position.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5285b32" class="outline-3">
+<h3 id="org5285b32">Happy Farm</h3>
+<div class="outline-text-3" id="text-org5285b32">
+<p>
+A layered crypto task. It's simply the concatenation of three totally different
+crypto tasks. Unlike some other such problems (I seem to remember some chained
+RSA problem from either a Dragon CTF or a DefCon qualifier?) the systems here
+aren't even related. In my opinion it really should have been given as three
+separate tasks, even if they were capped at a third of the points.
+</p>
+
+<p>
+But as it were, this took way too much time and exhausted most of my
+energy/hype.
+</p>
+</div>
+
+<div id="outline-container-orgd072804" class="outline-4">
+<h4 id="orgd072804">Task 1: AES CBC</h4>
+<div class="outline-text-4" id="text-orgd072804">
+<p>
+After spending some time reading the code (which is a hot mess) this task
+becomes pretty simple. All you need to know is how CBC mode works with AES.
+</p>
+
+<p>
+Your have an oracle you can query twice. You give it <code>(n, iv, data)</code> with
+<code>n=0..8999</code> and it gives back \(\mathtt{aescbc}_{k,iv}^n(data)\) for an unknown key
+\(k\). That is: AES is initialized in CBC mode with the unknown <code>k</code> and the given
+<code>iv</code>. It then iteratively encrypt <code>data</code> <code>n</code> times. The goal is to
+find \(\mathtt{aescbc}_{k,siv}^{9000}(sdata)\) for some known \((siv,sdata)\). You may
+not give it \(sdata\) to encrypt directly.
+</p>
+
+<p>
+So first you give it something like <code>(8999, siv[0]^sdata[0] || siv[1:], b'0' ||
+sdata[1:])</code>. The xor is just to make the data not match <code>sdata</code>, but it will be
+undone by the CBC mode. Then you give it <code>(1, response[-16:], response)</code> (last
+block is the IV for next block) and the result is the answer.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org79f10b0" class="outline-4">
+<h4 id="org79f10b0">Task 2: RSA and Euler hacks</h4>
+<div class="outline-text-4" id="text-org79f10b0">
+<p>
+The server sets \(e = 3\), \(s = (2^{1023})^e \pmod n\), and \(d = 1/3
+\pmod{\phi(n)}\). \(n\) is composed of two 512-bit primes. Note that modulus \(n\) is
+initially unknown. Note also that \(x^d \pmod n\) is "sort-of" like \(\sqrt[3]{x}
+\pmod n\).
+</p>
+
+<p>
+The serves gives you \(s\) and asks for an integer \(k \in [0,8999]\). It then gives
+you \(r = s^{d^k}\), which is "sort-of" like taking the cube root \(k\) times.
+</p>
+
+<p>
+Finally you can feed it a full pair \((x,j)\) and it will calculate \(y = x^{d^j}
+\pmod n\) but with some of the low-order bits hidden. This whole thing was a bit
+convoluted. There's ASCII drawings of onions that you use to figure out where
+the missing bits are and blah blah. You basically
+get \(y\) minus some "small" random number on the order of 2<sup>332</sup>-ish (if I
+recall correctly). And a final caveat: the \(j\) you give in this step has to be
+less than or equal to the \(k\) you gave initially.
+</p>
+
+<p>
+The goal is to find \(s^{d^{9000}} \pmod n\).
+</p>
+
+<p>
+First, to do anything, we need to find \(n\), which we can do with what I call
+Euler hacks. We know that \(n' = 2^{3\cdot 1023} - s\) contains \(n\) as a factor.
+This number is too big to try to factor out \(n\) directly, but we have another
+number that also has \(n\) as a factor. Because \(r\) is "sort-of" like iteratively
+taking the cube root of \(s\) (which was itself a cube, because \(e=3\)), if we
+repeatedly cube it back up and subtract the known remainder we'll get a factor
+of \(n\), for example in \(r^{3^{k-1}} - 2^{1023}\). This last number can't be
+calculated directly if the \(k\) is large, but we can do it under \(\pmod{n'}\)
+which will preserve the factor of \(n\). I suspect the caveat mentioned above with
+\(j \le k\) is simply there to force you to give a large initial \(k\) to make this
+step a little bit harder? Finally we take the <code>gcd</code> of these numbers and get <code>n</code>
+(possibly multiplied by some small factor).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">nk</span> = <span style="color: #6a7550;">2</span>**<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">3</span>*<span style="color: #6a7550;">3</span>*<span style="color: #6a7550;">11</span>*<span style="color: #6a7550;">31</span><span style="color: #bdbdb3;">)</span> - s
+<span style="color: #fb8512;">nj</span> = <span style="color: #bdbdb3; font-weight: bold;">pow</span><span style="color: #bdbdb3;">(</span>r, <span style="color: #6a7550;">3</span>**<span style="color: #6a7550;">8997</span>, nk<span style="color: #bdbdb3;">)</span> - <span style="color: #6a7550;">2</span>**<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">11</span>*<span style="color: #6a7550;">31</span><span style="color: #bdbdb3;">)</span> <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">I gave j=8999</span>
+<span style="color: #fb8512;">n</span> = gcd<span style="color: #bdbdb3;">(</span>nk, nj<span style="color: #bdbdb3;">)</span>
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">The exponents are factored becaue I thought maybe the fact that 1023</span>
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">contained a factor of 3 would be relevant, but it wasn't.</span>
+</pre>
+</div>
+
+<p>
+Anyway, with \(n\) known this reduces to a lattice/Coppersmith-type problem. In
+the second step I gave \(k=8999\) and got \(r = s^{d^{8999}} \pmod n\). In the last
+step I gave \(j=8999\) again but now using \(x=2^{1023}\) as the base number (i.e. a
+cube root of \(s\)), which gives me back \(y\) as an "approximation" of the target
+number \(s^{d^{9000}} \pmod n\).
+</p>
+
+<p>
+The mask for the unknown bits in this approximation is
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">mask</span> = <span style="color: #6a7550;">0xf00000000ffff0000ff00ffff00ffff00fffffffffffff000ffffffffffffffff00fffffffffffff0ff</span>
+</pre>
+</div>
+
+<p>
+Because \(y^3 = r \pmod n\) I can use this equation and Sage's <code>.small_roots()</code>. I
+didn't really think about doing anything else, I just wanted it to end. However,
+the missing bits are not contiguous: if treated as a contiguous block then it's
+maybe a little bit over what a standard out-of-the-box Howgrave-Coppersmith
+implementation can handle. I wanted to avoid introducing more variables for the
+bit pattern and I also didn't want to sit there and have to fiddle with magic
+parameters hoping to get lucky. But "brute forcing" the first hex
+character seemed to be enough. E.g. in <code>sage</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"small rootsin': "</span><span style="color: #bdbdb3;">)</span>
+<span style="color: #7d7c61; font-weight: bold;">for</span> i <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">16</span><span style="color: #bdbdb3;">)</span>:
+  <span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span>i, end=<span style="color: #CC5542;">' '</span>, flush=<span style="color: #6a7550;">True</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #fb8512;">rewt</span> = <span style="color: #bdbdb3;">(</span><span style="color: #6a9550;">(</span>c + i*<span style="color: #6a7550;">2</span>^<span style="color: #6a7550;">328</span> + x<span style="color: #6a9550;">)</span>^<span style="color: #6a7550;">3</span> - b<span style="color: #bdbdb3;">)</span>.small_roots<span style="color: #bdbdb3;">(</span>X=<span style="color: #6a7550;">2</span>**<span style="color: #6a7550;">300</span>, epsilon=<span style="color: #6a7550;">0</span>.<span style="color: #6a7550;">05</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">if</span> rewt:
+    <span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">'thank god... You may now have a snack'</span><span style="color: #bdbdb3;">)</span>
+    <span style="color: #7d7c61; font-weight: bold;">break</span>
+</pre>
+</div>
+
+<p>
+So <code>y + i*2^328 + rewt[0]</code> is the solution.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org672dcfb" class="outline-4">
+<h4 id="org672dcfb">Task 3: Borked RCA</h4>
+<div class="outline-text-4" id="text-org672dcfb">
+<p>
+Thankfully, this last layer was very easy. By now I was really sick of this
+whole task.
+</p>
+
+<p>
+Long story short, you can query an oracle four times, giving it a <code>k</code> each time
+(<code>k</code> has the usual constraints). It then does something like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">blah</span><span style="color: #bdbdb3;">(</span>secret, k<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #fb8512;">L</span>, <span style="color: #fb8512;">R</span> = secret<span style="color: #bdbdb3;">[</span>:<span style="color: #bdbdb3; font-weight: bold;">len</span><span style="color: #6a9550;">(</span>data<span style="color: #6a9550;">)</span>//<span style="color: #6a7550;">2</span><span style="color: #bdbdb3;">]</span>, secret<span style="color: #bdbdb3;">[</span><span style="color: #bdbdb3; font-weight: bold;">len</span><span style="color: #6a9550;">(</span>data<span style="color: #6a9550;">)</span>//<span style="color: #6a7550;">2</span>:<span style="color: #bdbdb3;">]</span>
+  <span style="color: #7d7c61; font-weight: bold;">for</span> _ <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span>k<span style="color: #bdbdb3;">)</span>:
+    <span style="color: #fb8512;">L</span>,<span style="color: #fb8512;">R</span> = R, bytes_xor<span style="color: #bdbdb3;">(</span>L, <span style="color: #7d7c61; font-weight: bold;">self</span>.rc4_encrypt<span style="color: #6a9550;">(</span>R<span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #7d7c61; font-weight: bold;">return</span> L+R
+</pre>
+</div>
+
+<p>
+And gives you the result. The goal is to find the result of <code>blah(secret,
+9000**3)</code>.
+</p>
+
+<p>
+<code>rc4_encrypt</code> is <i>supposed</i> to be a standard RC4 implementation initialized with
+an unknown key. (I.e. it generates <code>len(plaintext)</code> bytes of stream cipher
+output and xors it into the plaintext.) But if you're lucky like me, you notice
+this little nugget right away, before you've even parsed what the task is about:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">swap</span><span style="color: #bdbdb3;">(</span><span style="color: #7d7c61; font-weight: bold;">self</span>, a, b<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #fb8512;">a</span>, <span style="color: #fb8512;">b</span> = b, a
+</pre>
+</div>
+
+<p>
+I think I actually laughed when I saw this innocent little method. It's trying
+so hard not to be noticed. Aww, it's so cute.
+</p>
+
+<p>
+And but so. The RC4 implementation never really swaps elements around. Which means it
+will have a really short order. Let's look at it:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">i</span> = <span style="color: #bdbdb3;">(</span>i + <span style="color: #6a7550;">1</span><span style="color: #bdbdb3;">)</span> % <span style="color: #6a7550;">256</span>
+<span style="color: #fb8512;">j</span> = <span style="color: #bdbdb3;">(</span>j + s<span style="color: #6a9550;">[</span>i<span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span> % <span style="color: #6a7550;">256</span>
+<span style="color: #7d7c61; font-weight: bold;">self</span>.swap<span style="color: #bdbdb3;">(</span>s<span style="color: #6a9550;">[</span>i<span style="color: #6a9550;">]</span>, s<span style="color: #6a9550;">[</span>j<span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span> <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">lol!</span>
+output.append<span style="color: #bdbdb3;">(</span>s<span style="color: #6a9550;">[</span><span style="color: #baba36;">(</span>s<span style="color: #9b55c3;">[</span>i<span style="color: #9b55c3;">]</span> + s<span style="color: #9b55c3;">[</span>j<span style="color: #9b55c3;">]</span><span style="color: #baba36;">)</span> % <span style="color: #6a7550;">256</span><span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span>
+</pre>
+</div>
+
+<p>
+Every 256 iterations, the <code>i</code> will be 0 and <code>j</code> will be <code>sum(range(256))%256 ==
+128</code>. Meaning that every <i>512</i> iterations we'll have \(j=i=0\) and it will repeat.
+</p>
+
+<p>
+OK. So. It's trivial to find <code>secret</code>: just give it <code>k=0</code> and it won't encrypt
+it. I think <code>secret</code> was 240 bytes long, so to find the order of <code>blah</code> we just
+need to align things&#x2026;lcm with the order&#x2026;hm divide by 2&#x2026;blah blah boring
+details. Long story short, <code>blah(secret, 9000**3) == secret</code>. It's just what
+came out of the first oracle query. Almost a bit of an anti-climax, really.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org68f9025" class="outline-3">
+<h3 id="org68f9025">The Last Bitcoin</h3>
+<div class="outline-text-3" id="text-org68f9025">
+<p>
+Proof-of-work Python script that asks you to find a string <code>X</code> such that <code>sha256(random_token +
+X)</code> starts with 200 zero bits.
+</p>
+
+<p>
+That part is straightforward and clearly impossible.
+</p>
+
+<p>
+Then you notice that if you give it such a string it exits with error code 1
+indicating success. Python also exists with 1 if it gets an uncaught exception.
+And it will give such an exception if you give it non-ascii input. So I simply
+typed <code>æ</code> and got the flag.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4231ac6" class="outline-3">
+<h3 id="org4231ac6">The Danger of Google's Omnipotence</h3>
+<div class="outline-text-3" id="text-org4231ac6">
+<p>
+This is really ~poiko~s solve, he did the reverse, provided all the data, and so
+on, I just helped with the last part in figuring out how to reduce the magic
+operation to something tractable.
+</p>
+
+<p>
+The problem at bird's eye is, I was told, something like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb8512;">k</span> = <span style="color: #6a7550;">0xfad9c53c828be5dafc765d4a52a54168442b6f57569db5f320a45d0d0e39d92d04284087fe2e36da1375d55e6e4e9f746cf9d9916c791e0467dc0aedf77581d7e1ab342f99e49f4c684fd7424e806cc2fb1dd54c614487b6a3909dc469f76eb8df050f3928d4c371d8aace5c81fbb1e467b987ec5ae1f5ecd0b8ffe69369edc9</span>
+<span style="color: #fb8512;">flag</span> = &lt;some <span style="color: #6a7550;">2</span>^<span style="color: #6a7550;">16</span> array&gt; <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">secret</span>
+<span style="color: #fb8512;">A</span> = &lt;some <span style="color: #6a7550;">2</span>^<span style="color: #6a7550;">16</span> array&gt; <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">known</span>
+
+<span style="color: #fb8512;">B</span> = flag
+<span style="color: #7d7c61; font-weight: bold;">for</span> _ <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span>k<span style="color: #bdbdb3;">)</span>:
+  <span style="color: #fb8512;">B</span> = strange_matmul<span style="color: #bdbdb3;">(</span>B, A<span style="color: #bdbdb3;">)</span>
+
+<span style="color: #6abd50;"># </span><span style="color: #6aaf50;">B is output here</span>
+</pre>
+</div>
+
+<p>
+Reversing <code>strange_matmul</code> and figuring out what it does is the main problem,
+which <code>poiko</code> already did. But as a last step we'd need to strength-reduce
+<code>strange_matmul</code> to some actual math, like a real matrix multiplication for
+example, and then we have <code>B = flag * A^k</code> which can hopefully be inverted.
+</p>
+
+<p>
+<code>poiko</code> gave me sort-of pseudocode for <code>strange_matmul</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">def</span> <span style="color: #9b55c3;">strange_matmul</span><span style="color: #bdbdb3;">(</span>m, n<span style="color: #bdbdb3;">)</span>:
+    <span style="color: #fb8512;">out</span> = <span style="color: #bdbdb3;">[]</span>
+    <span style="color: #7d7c61; font-weight: bold;">for</span> i <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">256</span><span style="color: #bdbdb3;">)</span>:
+        <span style="color: #7d7c61; font-weight: bold;">for</span> j <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">256</span><span style="color: #bdbdb3;">)</span>:
+            <span style="color: #fb8512;">val</span> = <span style="color: #6a7550;">0</span>
+            <span style="color: #7d7c61; font-weight: bold;">for</span> k <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">256</span><span style="color: #bdbdb3;">)</span>:
+                <span style="color: #fb8512;">v1</span> = m<span style="color: #bdbdb3;">[</span>i*<span style="color: #6a7550;">256</span>+k<span style="color: #bdbdb3;">]</span>
+                <span style="color: #fb8512;">v2</span> = n<span style="color: #bdbdb3;">[</span>k*<span style="color: #6a7550;">256</span>+j<span style="color: #bdbdb3;">]</span>
+                <span style="color: #7d7c61; font-weight: bold;">if</span> v1 == <span style="color: #6a7550;">0</span> <span style="color: #7d7c61; font-weight: bold;">or</span> v2 == <span style="color: #6a7550;">0</span>:
+                    <span style="color: #7d7c61; font-weight: bold;">continue</span>
+                <span style="color: #fb8512;">val</span> = strange_add<span style="color: #bdbdb3;">(</span>val, a_inv<span style="color: #6a9550;">[</span><span style="color: #baba36;">(</span>a<span style="color: #9b55c3;">[</span>v1<span style="color: #9b55c3;">]</span> + a<span style="color: #9b55c3;">[</span>v2<span style="color: #9b55c3;">]</span><span style="color: #baba36;">)</span> % <span style="color: #6a7550;">7</span>**<span style="color: #6a7550;">3</span><span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">)</span>
+            out.append<span style="color: #bdbdb3;">(</span>val<span style="color: #bdbdb3;">)</span>
+    <span style="color: #7d7c61; font-weight: bold;">return</span> out
+</pre>
+</div>
+
+<p>
+Where <code>strange_add</code> adds the numbers as if they were in base-7 but without using
+carry, and <code>a</code> and <code>a_inv</code> were some lookup tables he also shared. I don't
+remember if they were in the code or something he constructed.
+</p>
+
+<p>
+Anyway, so it looks like a normal matrix multiplication, but the element-wise
+operations aren't carried out using normal arithmetic. So we both played around
+a little with <code>a</code> and <code>a_inv</code> and there were definite group-like properties. I
+even wrote a little utility class so I could do arithmetic with such numbers
+directly and play with them in the REPL. At first it "felt" like a commutative
+additive group, with <code>0</code> almost being the identity except for <code>0 + 0 = 1</code> which
+meant it wasn't really associative either, because \((x+0)+0 \ne x+(0+0)\). <code>a</code>
+was a permulation, but <code>a_inv</code> was not as <code>a_inv[0] == 1</code> when it seemed like it
+should have been 0. This makes sense from the above code where 0 is avoided.
+Anyway, from the <code>strange_add</code> I strongly suspected it was a mapping into the
+åker<sup><a id="fnr.14" class="footref" href="#fn.14">14</a></sup> \(\mathbb{F}_{7^3}\) where the numbers represented the coefficients of
+a qudratic polynomial over \(\mathbb{F}_{7}\). If so, what's the modulus?
+</p>
+
+<p>
+\(x^3\) in \(\mathbb{F}_{7}[X]/(x^3 + P)\) should become \(-P\) where \(deg P < 3\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; -fux<span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">7</span><span style="color: #bdbdb3;">)</span>**<span style="color: #6a7550;">3</span>
+<span style="color: #bdbdb3;">[</span><span style="color: #6a7550;">6</span> <span style="color: #6a7550;">0</span> <span style="color: #6a7550;">4</span><span style="color: #bdbdb3;">]</span>
+</pre>
+</div>
+
+<p>
+<code>fux</code> was my utility-class, and <code>fux(7)</code> should represent <code>x</code>, so the modulus is
+\(x^3 + 6 x^2 + 4\). (It turns out to also be the default one that <code>sage</code> gives
+when constructing <code>GF(7^3)</code>, so that's probably its origin.) With this intuition
+behind it the math seems to work out.
+</p>
+
+<p>
+So, we had 256x256 matrices over \(\mathbb{F}_{7^3}\), and calculating the inverse
+is straightforward but boring <code>sage</code> stuff. It would likely have taken many
+minutes though, but one thing I lucked out<sup><a id="fnr.15" class="footref" href="#fn.15">15</a></sup> on was I did
+<code>.multiplicative_order()</code> on <code>A^-1</code> which <code>sage</code> found quickly as 342. So I
+could shave several minutes off the calculation by doing <code>flagimg = B*(A^-1)^(k
+% 342)</code>.
+</p>
+
+<p>
+Anyway, <code>flagimg</code> was a 256x256 noisy image showing a readable flag.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd28210c" class="outline-3">
+<h3 id="orgd28210c">aeshash &amp; IEAIE &amp; Patience I</h3>
+<div class="outline-text-3" id="text-orgd28210c">
+<p>
+I feel these deserve an entry even though I failed all of them, but I did spend
+time on them. I probably didn't praise the first two tasks in this list enough.
+They are what I consider actually <i>good</i> crypto tasks of high difficulty (unlike
+<a href="#org5285b32">Happy Farm</a>). Especially <code>aeshash</code>! <code>aeshash</code>'s task author deserves some real
+kudos, that one is seemed like a beauty.
+</p>
+
+<p>
+For either task I had no prior experience and tooling, so I knew it'd be a lot
+of work for me. I made <code>poiko</code> waste some of his rev-time to make sure I got a
+<code>aeshash</code> into Python, which I felt sort of bad about&#x2026; Because I only really
+started to scratch the surface of them. And then for most of Sunday I didn't
+really have any energy left to continue. However they're the kind of tasks that
+makes me want to solve them in my leisure time, which is a real treat.
+</p>
+
+<p>
+<code>IEAIE</code> was some image encryption scheme using a logistic map and permuations.
+It was very sensitive to differential analysis. I did a few things, was able to
+reveal a bunch of key-state, but ran into some floating point rounding headaches
+in my offline tests. I hate floating point numbers, so I took a sanity break
+from it and never really got back. For once the relevant papers are given in the
+task description so it's not really a Google-the-Paper challenge.
+</p>
+
+<p>
+<code>aeshash</code> involved leaking state in a three-round pseudo-AES and then targeting
+a specific output. I have no idea about this one, which is all the more
+exciting. Despite me usually solving the crypto challenges I've never worked
+with crypto profesionally or academically, so I lack a ton of basic knowledge
+and experience, such as breaking weakened AES, which is probably like
+Crypto 101. But I figured it will be a good place to start learning.
+</p>
+
+<p>
+I also sunk a ton of time into <code>Patience I</code> doing proper OpenCV for the first
+time in my life&#x2026; God, this task sapped me. The composed text which I suspect
+is one third of the flag(?) was easy, I also found this strange Morse-ish
+sequence but was unable to guess what it really was, noted the spikes in the
+lighting but had no idea what they meant either. In the end I even started to
+fear the minute little camera shakes were also part of it. Please God. Maybe all
+of these things played together in some beautiful and harmonious way in the end,
+but really it just felt like three concatenated subtasks that just all had to do
+with video?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org138ec7b" class="outline-3">
+<h3 id="org138ec7b">babyrev</h3>
+<div class="outline-text-3" id="text-org138ec7b">
+<p>
+Again, <code>poiko</code> solved this one, but I helped out a tiny little bit at the end, so I
+feel comfortable writing what it was about.
+</p>
+
+<p>
+Apparently a <code>scala</code> program that seemed to construct an infinite stream by
+doing what I would write in Haskell as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #9b55c3;">w</span> <span style="color: #fb8512;">=</span> <span style="color: #bdbdb3;">[</span><span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span>,<span style="color: #6a7550;">1</span>,<span style="color: #6a7550;">2</span>,<span style="color: #6a7550;">3</span><span style="color: #6a9550;">]</span>, <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span>, <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span>, <span style="color: #6a9550;">[</span><span style="color: #6a7550;">0</span><span style="color: #6a9550;">]</span><span style="color: #bdbdb3;">]</span>
+<span style="color: #9b55c3;">stream</span> <span style="color: #fb8512;">=</span> <span style="color: #bdbdb3;">[</span><span style="color: #6a7550;">0</span><span style="color: #bdbdb3;">]</span> <span style="color: #528fd1;">:</span> map <span style="color: #bdbdb3;">(</span>concat <span style="color: #fb8512;">.</span> map <span style="color: #6a9550;">(</span>w <span style="color: #fb8512;">!!</span><span style="color: #6a9550;">)</span><span style="color: #bdbdb3;">)</span> stream
+</pre>
+</div>
+
+<p>
+It makes an infinite stream of lists like <code>[0] : [0,1,2,3] : [0,1,2,3,0,0,0] :
+[0,1,2,3,0,0,0,0,1,2,3,0,1,2,3,0,1,2,3] : ...</code>. It sums all the sublists in this
+stream and extracts index 60107 modulo \(2^{62}\). It converts this number to 4
+bytes which becomes an xor-key for flag data.
+</p>
+
+<p>
+Immediately I smelled a recurrence relation. Tried and true OEIS tells the
+truth: \(a_{n+2} = a_{n+1} + 3 a_{n}\), and so, starting from \(a_0 = 0\) and \(a_1 =
+6\) (for the sum of these lists) gives all that's needed. It can be calculated
+linearly in a list, or logarithmically by exponentiation on a 2x2 matrix.
+</p>
+</div>
+</div>
+</div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -1474,6 +2172,38 @@ I don't know, I've never done any power-analysis before.
 I was assuming the wrong byte length of course, because it wasn't HMAC,
 nor was it plain CRC(x), but it was salted. And I hadn't figured out the
 byte-length independent approach.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara"><p class="footpara">
+I suspect <code>Show your Patience and Intelligence I</code> is another one, but
+since I only partially solved it, I couldn't really say outright. See also
+<a href="https://github.com/BookGin/my-ctf-challenges/tree/master/balsn-ctf-2019/images-and-words">https://github.com/BookGin/my-ctf-challenges/tree/master/balsn-ctf-2019/images-and-words</a>
+from last year's BalsnCTF, which&#x2013;don't get me wrong&#x2013;is a really cool and
+mind-blowing task, but you need three fairly independent key insights to solve
+it. Although I guess in web this kind of stuff is more like the standard way of
+doing things?
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.13" class="footnum" href="#fnr.13">13</a></sup> <div class="footpara"><p class="footpara">
+because the domain knowledge required for the entire thing grows
+linearly with unrelated sub-tasks added. This is another reason why I don't like
+mixed challenges. Crypto behind web, misc behind rev, etc. It feels like a sort
+of "miserly" way of forcing the solve count to stay low even though the subtasks
+are themselves easy or unoriginal. Generalists and people with "broad"
+CTF-knowledge are already greatly rewarded and have a (fair!) advantage over
+more specialized noobs (like me), but this doubles down on that advantage on the
+task level.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.14" class="footnum" href="#fnr.14">14</a></sup> <div class="footpara"><p class="footpara">
+Norwegian for 'field'
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.15" class="footnum" href="#fnr.15">15</a></sup> <div class="footpara"><p class="footpara">
+I say I lucked out because my <code>sage</code> seems to hit a bug when I do
+<code>A.multiplicative_order()</code> directly. It just hangs and churns CPU for over a
+minute, so most likely I would have given up on this avenue. Who knows why
+<code>sage</code> does what it does sometimes. <code>:its_a_mystery:</code>
 </p></div></div>
 
 
