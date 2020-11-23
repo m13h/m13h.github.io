@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-23 ma. 03:58 -->
+<!-- 2020-11-23 ma. 11:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Notes from CTF tasks (math/programming-related)</title>
@@ -266,7 +266,7 @@ for the JavaScript code in this tag.
 <li><a href="#org4a5ec17">About</a></li>
 <li><a href="#orga29648a">N1CTF2020</a>
 <ul>
-<li><a href="#orgebae5b2">General Comments</a></li>
+<li><a href="#org7f61fc5">General Comments</a></li>
 <li><a href="#org4748b17">crypto:VSS</a></li>
 <li><a href="#org9c085dc">crypto:FlagBot</a></li>
 <li><a href="#org38b8ed9">crypto:curve</a></li>
@@ -276,7 +276,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#orgca95166">Hack.lu 2020</a>
 <ul>
-<li><a href="#org3cd3a69">General Comments</a></li>
+<li><a href="#org2f3d43f">General Comments</a></li>
 <li><a href="#orgf0228cb">crypto:Bad Primes</a></li>
 <li><a href="#org6de9b29">misc:BabyJS</a></li>
 <li><a href="#org04ab205">crypto:Conquering Premium Access</a></li>
@@ -286,7 +286,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#orgcd851c6">CyberSecurityRumble 2020</a>
 <ul>
-<li><a href="#org8afa962">General Comments</a></li>
+<li><a href="#orgc866158">General Comments</a></li>
 <li><a href="#org2023a3d">crypto:Pady McPadface</a></li>
 <li><a href="#org921c43e">crypto:dlog</a></li>
 <li><a href="#org6341570">crypto:ezdsa</a></li>
@@ -367,9 +367,9 @@ avoid CTFs with uninteresting problems.
 <h2 id="orga29648a">N1CTF2020</h2>
 <div class="outline-text-2" id="text-orga29648a">
 </div>
-<div id="outline-container-orgebae5b2" class="outline-3">
-<h3 id="orgebae5b2">General Comments</h3>
-<div class="outline-text-3" id="text-orgebae5b2">
+<div id="outline-container-org7f61fc5" class="outline-3">
+<h3 id="org7f61fc5">General Comments</h3>
+<div class="outline-text-3" id="text-org7f61fc5">
 <p>
 An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
 difficulty level. Objectively the task set alone deserves a ~100 rating on
@@ -719,9 +719,9 @@ I'll leave it here to be sad and alone. :(
 <h2 id="orgca95166">Hack.lu 2020</h2>
 <div class="outline-text-2" id="text-orgca95166">
 </div>
-<div id="outline-container-org3cd3a69" class="outline-3">
-<h3 id="org3cd3a69">General Comments</h3>
-<div class="outline-text-3" id="text-org3cd3a69">
+<div id="outline-container-org2f3d43f" class="outline-3">
+<h3 id="org2f3d43f">General Comments</h3>
+<div class="outline-text-3" id="text-org2f3d43f">
 <p>
 An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
 a much higher rating on <code>CTFTime</code>.
@@ -1131,9 +1131,9 @@ discovered. Print it, ship it, done.
 <h2 id="orgcd851c6">CyberSecurityRumble 2020</h2>
 <div class="outline-text-2" id="text-orgcd851c6">
 </div>
-<div id="outline-container-org8afa962" class="outline-3">
-<h3 id="org8afa962">General Comments</h3>
-<div class="outline-text-3" id="text-org8afa962">
+<div id="outline-container-orgc866158" class="outline-3">
+<h3 id="orgc866158">General Comments</h3>
+<div class="outline-text-3" id="text-orgc866158">
 <p>
 Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
 so forth. The stuff I looked at seemed alright, though I got entangled in some
@@ -1602,8 +1602,8 @@ something else.
 <h2 id="org2466d88">BalsnCTF 2020</h2>
 <div class="outline-text-2" id="text-org2466d88">
 </div>
-<div id="outline-container-org5e599b8" class="outline-3">
-<h3 id="balsn2020"><a id="org5e599b8"></a>General Comments</h3>
+<div id="outline-container-org07e5e23" class="outline-3">
+<h3 id="balsn2020"><a id="org07e5e23"></a>General Comments</h3>
 <div class="outline-text-3" id="text-balsn2020">
 <p>
 Another great CTF!
@@ -2056,12 +2056,13 @@ task description so it's not really a Google-the-Paper challenge.
 </p>
 
 <p>
-<code>aeshash</code> involved leaking state in a three-round pseudo-AES and then targeting
-a specific output. I have no idea about this one, which is all the more
-exciting. Despite me usually solving the crypto challenges I've never worked
-with crypto profesionally or academically, so I lack a ton of basic knowledge
-and experience, such as breaking weakened AES, which is probably like
-Crypto 101. But I figured it will be a good place to start learning.
+<code>aeshash</code> involved leaking state in a three-round pseudo-AES (each round using
+initial state as round-key) and then targeting a specific output. Literally: an
+AES hash. I have no idea about this one, which is all the more exciting. Despite
+me usually solving the crypto challenges I've never worked with crypto
+profesionally or academically, so I lack a ton of basic knowledge and
+experience, such as breaking weakened AES, which is probably like Crypto 101.
+But I figured it will be a good place to start learning.
 </p>
 
 <p>
@@ -2144,8 +2145,8 @@ linearly in a list, or logarithmically by exponentiation on a 2x2 matrix.
 <h2 id="org950d79a">DragonCTF 2020</h2>
 <div class="outline-text-2" id="text-org950d79a">
 </div>
-<div id="outline-container-org3c87e19" class="outline-3">
-<h3 id="dragon2020"><a id="org3c87e19"></a>General Comments</h3>
+<div id="outline-container-org79f910e" class="outline-3">
+<h3 id="dragon2020"><a id="org79f910e"></a>General Comments</h3>
 <div class="outline-text-3" id="text-dragon2020">
 <p>
 My expectations were a bit high, DragonCTF has had some of the best CTFs in the
@@ -2164,14 +2165,15 @@ more to be released, but alas.
 
 <p>
 For my own sake, <a href="#org5b5da77">Frying in motion</a> was an cool idea, tho a bit draining. <a href="#org2733f80">Bit Flip 1</a> was easy. <a href="#orgd34d048">Bit Flip 2 &amp; 3</a> were puzzling, but not the good kind of
-puzzling (motivating me to write code or learn about stuff outside of the CTF),
-just "I feel I just missing some (probably) trivial trick here, oh well."
+puzzling (which motivates me to write code or learn stuff outside of the CTF),
+but "I feel I just missing some (probably) trivial trick here, oh well next time
+I guess" puzzling.
 </p>
 
 <p>
-I ended up watching <i>Gilmore Girls</i> and <code>poiko</code> was reduced to doing Linux stuff
-and actual hacking. Imagine having to do actual hacking. What's that about?
-Sheesh.
+Sunday I ended up watching <i>Gilmore Girls</i> and <code>poiko</code> was reduced to doing
+Linux stuff and actual hacking. Imagine having to do actual hacking. What's that
+about? Sheesh.
 </p>
 
 <p>
@@ -2240,9 +2242,9 @@ existence?)
 
 <p>
 So <code>strfry()</code> just uses glibc's <code>random_r()</code> stuff, using a 32-byte state
-buffer (of which only 28 bytes are used), initialized with a 32-bit seed.
-(<code>random_bits()</code> actually gives less than 32-bits of actual bits but let's
-ignore that.)
+buffer (of which only 28 bytes are used), initialized with a 32-bit seed based
+on some CPU clock counter. (<code>random_bits()</code> actually gives less than 32-bits of
+actual bits but let's ignore that.)
 </p>
 
 <p>
@@ -2317,8 +2319,8 @@ I think in the end I had some idiotic thing like:
 </p>
 
 <p>
-\(( A^{70+n+7} \left[ seed \cdot 16807^i \pmod {2^{31}-1} \right] \pmod {2^{32}})_{7-j} \gg
- 1 = index_{j} \pmod {length - j}\)
+\(( A^{70+n+7} \left[ seed \cdot 16807^i \pmod {2^{31}-1} \right]_{i=0\ldots 6} \pmod {2^{32}})_{7-j} \gg
+ 1 = index_{j} \pmod {length - j} \pmod {\mathtt{random\_indexing\_errors}}\)
 </p>
 
 <p>
@@ -2474,14 +2476,17 @@ or
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #7d7c61; font-weight: bold;">for</span> _ <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">100000</span><span style="color: #bdbdb3;">)</span>:
+<pre class="src src-python">log<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"initializing"</span><span style="color: #bdbdb3;">)</span>
+<span style="color: #bdbdb3; font-weight: bold;">sum</span> = <span style="color: #fb8512;">i</span> = <span style="color: #6a7550;">0</span>
+<span style="color: #7d7c61; font-weight: bold;">for</span> _ <span style="color: #7d7c61; font-weight: bold;">in</span> <span style="color: #bdbdb3; font-weight: bold;">range</span><span style="color: #bdbdb3;">(</span><span style="color: #6a7550;">100000</span><span style="color: #bdbdb3;">)</span>:
   log<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"increasing the index"</span><span style="color: #bdbdb3;">)</span>
   <span style="color: #fb8512;">i</span> += <span style="color: #6a7550;">1</span>
-  log<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"summing..."</span><span style="color: #bdbdb3;">)</span>
-  <span style="color: #bdbdb3; font-weight: bold;">sum</span> += s<span style="color: #bdbdb3;">[</span>i<span style="color: #bdbdb3;">]</span>
+  log<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"accumulating sum..."</span><span style="color: #bdbdb3;">)</span>
+  <span style="color: #bdbdb3; font-weight: bold;">sum</span> += <span style="color: #6a7550;">17</span> * av<span style="color: #bdbdb3;">[</span>i<span style="color: #bdbdb3;">]</span>**<span style="color: #6a7550;">2</span> + V<span style="color: #bdbdb3;">[</span><span style="color: #6a7550;">2</span>*i + av<span style="color: #6a9550;">[</span>i<span style="color: #6a9550;">]</span>%<span style="color: #6a7550;">2</span><span style="color: #bdbdb3;">]</span>
 
 log<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"solving langlands"</span><span style="color: #bdbdb3;">)</span>
 solve_langlands<span style="color: #bdbdb3;">()</span>
+
 log<span style="color: #bdbdb3;">(</span><span style="color: #CC5542;">"printing sum"</span><span style="color: #bdbdb3;">)</span>
 <span style="color: #7d7c61; font-weight: bold;">print</span><span style="color: #bdbdb3;">(</span><span style="color: #bdbdb3; font-weight: bold;">sum</span><span style="color: #bdbdb3;">)</span>
 </pre>
@@ -2501,8 +2506,8 @@ syntax and usage for this dumb, pseudo-trivial theorem.
 </p>
 
 <p>
-In the end we both came up with proofs for the final theorem at nearly the same
-time. Mine was:
+In the end we both came up with different proofs for the final theorem at
+nearly the same time. Mine was:
 </p>
 
 <div class="org-src-container">
@@ -2520,7 +2525,7 @@ about Coq.
 </p>
 
 <p>
-<code>poiko</code>'s solution (20 seconds later) probably makes more sense(?):
+<code>poiko</code>'s solution might make more sense (I couldn't tell):
 </p>
 
 <div class="org-src-container">
@@ -2531,11 +2536,14 @@ about Coq.
 </div>
 
 <p>
-I'm having a hard time deciding whether this is a good task or not. On the one
-hand, motivating learning some higher-order type theory and theorem proving
-sounds great, but on the other hand it feels very arbitrary and polarizing,
-like just putting up a poem in Finnish: free points for anyone who speaks the
-language, the Google hammer for the rest.
+I'm having a hard time deciding whether this is a good task or not. I mean it
+made me despise Coq, that's not good; I'm usually all for ivory tower type
+theory stuff. On the one hand, motivating CTF players to learn some
+higher-order type theory and theorem proving sounds great, but on the other
+hand it feels very arbitrary and polarizing the way this task was put together,
+like putting up a poem in Finnish that tells you how to make the flag through
+puns&#x2013;free points for anyone who speaks the language, a frustrating Google
+hammer experience for the rest.
 </p>
 </div>
 </div>
@@ -2626,12 +2634,14 @@ sorry I missed this a-ha moment. Deceptive!
 <p>
 However it seems that several people solved <i>Bit Flip 2</i> by "brute force the
 hashes modulo OSINT." Namely: the BitCoin blockchain has a lot of such hashes,
-so you can probably find one there. Although that's a clever idea, it sort of
-lowers the task in my estimation if that is the intended solution. It's a
-really unfun way to solve problems. It feels a lot like "enter the MD5 hash in
-Google" or "look up the factors on factordb.com" but version 2.0. If anyone has
-a solution to <i>Bit Flip 2</i> that doesn't look up power-guzzling hashes from
-other sources I'm very interested to see what I missed?
+so you can find hashes there that match the requirements. Although that's a
+clever idea, it sort of lowers the task in my estimation greatly if that is the
+intended solution. It's just a really unfun way to solve problems. It feels a
+lot like "enter the MD5 hash in Google" or "look up the factors on
+factordb.com" but version 2.0. Big boy OSINT is still OSINT. If anyone has a
+programmatic or mathematical solution to <i>Bit Flip 2</i> that doesn't look up
+dirty money-laundered power-guzzling hashes from other sources I'm very
+interested to see what I missed?
 </p>
 
 <p>
