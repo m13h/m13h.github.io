@@ -8,7 +8,7 @@ h1,h2,h3,h4,h5,h6,legend{
 }
 
 h1{
-    font-size:175%;
+    font-size:180%;
 }
 
 .subtitle{
@@ -16,11 +16,11 @@ h1{
 }
 
 h2{
-    font-size:150%;
+    font-size:170%;
 }
 
 h3{
-    font-size:125%;
+    font-size:150%;
 }
 
 h4{
@@ -69,8 +69,8 @@ body{
 }
 
 p{
-    font-size:16px;
-    line-height:24px;
+    font-size:18px;
+    line-height:28px;
     margin:0px 0px 24px 0px;
 }
 
@@ -324,7 +324,7 @@ pre.src{
     /* color:#404040; */
     display:block;
     font-family:Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-    font-size:12px;
+    font-size:14px;
     line-height:1.5;
     margin:1px 0px 24px 0px;
     overflow:auto;
@@ -1021,7 +1021,7 @@ footer p{
 
 #content .footnote-reference,#content .citation-reference{
     vertical-align:super;
-    font-size:90%}
+    font-size:100%}
 
 span[id*='MathJax-Span']{
     color:#404040}
@@ -1053,8 +1053,8 @@ h2.footnotes{
 }
 
 .footpara {
-    color: #999;
-    font-size: 90%;
+    color: #888;
+    font-size: 100%;
     font-family:"Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
     padding-bottom: 8px;
     padding-left: 16px;
