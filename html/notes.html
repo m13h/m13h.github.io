@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-07 sø. 18:19 -->
+<!-- 2021-06-08 ti. 04:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Notes from CTF tasks (math/programming-related)</title>
@@ -39,7 +39,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -51,7 +51,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -200,50 +200,26 @@
 <script type="text/javascript" src="styles/readtheorg/js/readtheorg.js"></script>
 <style>pre.src{background:#1f1f10;color:white;} .footref{font-size: 100%;} html,p{font-size: 115%;}</style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -278,7 +254,7 @@ for the JavaScript code in this tag.
 <li><a href="#org008071b">About</a></li>
 <li><a href="#orgf6dc787">N1CTF2020</a>
 <ul>
-<li><a href="#org65d3961">General Comments</a></li>
+<li><a href="#org53a325c">General Comments</a></li>
 <li><a href="#org098693f">crypto:VSS</a></li>
 <li><a href="#orgac1ab50">crypto:FlagBot</a></li>
 <li><a href="#org21b173d">crypto:curve</a></li>
@@ -288,7 +264,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#org4b7335c">Hack.lu 2020</a>
 <ul>
-<li><a href="#orgf426c48">General Comments</a></li>
+<li><a href="#org3ff2b58">General Comments</a></li>
 <li><a href="#org58886df">crypto:Bad Primes</a></li>
 <li><a href="#org0f53f41">misc:BabyJS</a></li>
 <li><a href="#orgc978884">crypto:Conquering Premium Access</a></li>
@@ -298,7 +274,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#org7cf89d7">CyberSecurityRumble 2020</a>
 <ul>
-<li><a href="#orgba592e0">General Comments</a></li>
+<li><a href="#org06f6059">General Comments</a></li>
 <li><a href="#org1eaccd8">crypto:Pady McPadface</a></li>
 <li><a href="#orgbbb613c">crypto:dlog</a></li>
 <li><a href="#orgc0d025f">crypto:ezdsa</a></li>
@@ -366,6 +342,17 @@ for the JavaScript code in this tag.
 <li><a href="#org33ecc5d">Kantan Calc</a></li>
 </ul>
 </li>
+<li><a href="#orgdaf766b">Misc/Zh3r0 2021</a>
+<ul>
+<li><a href="#org95b0cbb">General Comments</a></li>
+<li><a href="#org8fbf42f">Boring MT blah (Zh3r0)</a></li>
+<li><a href="#org21bf2be">A<sub>52</sub> group (unknown CTF)</a></li>
+<li><a href="#org2042557">Unicode troll (unknown CTF)</a></li>
+<li><a href="#org14587ae">homebrew hash function (Zh3r0)</a></li>
+<li><a href="#orgd9f1899">almost-combinadics (Zh3r0)</a></li>
+<li><a href="#orgbf41094">approximate mastermind (Zh3r0)</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -412,9 +399,9 @@ avoid CTFs with uninteresting problems.
 <h2 id="orgf6dc787">N1CTF2020</h2>
 <div class="outline-text-2" id="text-orgf6dc787">
 </div>
-<div id="outline-container-org65d3961" class="outline-3">
-<h3 id="org65d3961">General Comments</h3>
-<div class="outline-text-3" id="text-org65d3961">
+<div id="outline-container-org53a325c" class="outline-3">
+<h3 id="org53a325c">General Comments</h3>
+<div class="outline-text-3" id="text-org53a325c">
 <p>
 An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
 difficulty level. Objectively the task set alone deserves a ~100 rating on
@@ -764,9 +751,9 @@ I'll leave it here to be sad and alone. :(
 <h2 id="org4b7335c">Hack.lu 2020</h2>
 <div class="outline-text-2" id="text-org4b7335c">
 </div>
-<div id="outline-container-orgf426c48" class="outline-3">
-<h3 id="orgf426c48">General Comments</h3>
-<div class="outline-text-3" id="text-orgf426c48">
+<div id="outline-container-org3ff2b58" class="outline-3">
+<h3 id="org3ff2b58">General Comments</h3>
+<div class="outline-text-3" id="text-org3ff2b58">
 <p>
 An unfortunate step down from last weekend's <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
 a much higher rating on <code>CTFTime</code>.
@@ -1175,9 +1162,9 @@ discovered. Print it, ship it, done.
 <h2 id="org7cf89d7">CyberSecurityRumble 2020</h2>
 <div class="outline-text-2" id="text-org7cf89d7">
 </div>
-<div id="outline-container-orgba592e0" class="outline-3">
-<h3 id="orgba592e0">General Comments</h3>
-<div class="outline-text-3" id="text-orgba592e0">
+<div id="outline-container-org06f6059" class="outline-3">
+<h3 id="org06f6059">General Comments</h3>
+<div class="outline-text-3" id="text-org06f6059">
 <p>
 Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
 so forth. The stuff I looked at seemed alright, though I got entangled in some
@@ -1645,7 +1632,7 @@ something else.
 <h2 id="orgfef4d4c">BalsnCTF 2020</h2>
 <div class="outline-text-2" id="text-orgfef4d4c">
 </div>
-<div id="outline-container-orgde0c3d2" class="outline-3">
+<div id="outline-container-balsn2020" class="outline-3">
 <h3 id="balsn2020">General Comments</h3>
 <div class="outline-text-3" id="text-balsn2020">
 <p>
@@ -2187,7 +2174,7 @@ linearly in a list, or logarithmically by exponentiation on a 2x2 matrix.
 <h2 id="org482da6a">DragonCTF 2020</h2>
 <div class="outline-text-2" id="text-org482da6a">
 </div>
-<div id="outline-container-org3a06170" class="outline-3">
+<div id="outline-container-dragon2020" class="outline-3">
 <h3 id="dragon2020">General Comments</h3>
 <div class="outline-text-3" id="text-dragon2020">
 <p>
@@ -2722,7 +2709,7 @@ was even offline at that point) seemed to have tons of tasty goodies.
 <h2 id="orgf2f3515">ASIS 2020</h2>
 <div class="outline-text-2" id="text-orgf2f3515">
 </div>
-<div id="outline-container-orgcc1cac3" class="outline-3">
+<div id="outline-container-asis2020" class="outline-3">
 <h3 id="asis2020">General Comments</h3>
 <div class="outline-text-3" id="text-asis2020">
 <p>
@@ -3081,7 +3068,7 @@ the center, like this:
 </p>
 
 
-<div class="figure">
+<div id="orgf6eceb0" class="figure">
 <p><img src="./data1.png" alt="data1.png" />
 </p>
 </div>
@@ -3100,7 +3087,7 @@ mysterious "A" layer as well, and combining "A" with any of the other channels
 </p>
 
 
-<div class="figure">
+<div id="org5eb9c19" class="figure">
 <p><img src="./data2.png" alt="data2.png" />
 </p>
 </div>
@@ -3196,7 +3183,7 @@ But bottom line: expressions on the form <code>D/DDDDDD</code> can give <i>up to
 comes in. As my database kept filling up I started encountering this:
 </p>
 
-<pre class="example">
+<pre class="example" id="orgb999d64">
 [DEBUG] Sent 0x9 bytes: b'1/102451\n'
 [DEBUG] Received 0x60 bytes: b'sorry, the result of your expression does not contain the given substr: 07718811919\n'
 </pre>
@@ -3205,7 +3192,7 @@ comes in. As my database kept filling up I started encountering this:
 Yet:
 </p>
 
-<pre class="example">
+<pre class="example" id="orgd41ac38">
 &gt;&gt;&gt; getcontext().prec = 200000
 &gt;&gt;&gt; '07718811919' in str(Decimal(1)/102451)
 True
@@ -3221,7 +3208,7 @@ Finally I went on IRC and tried to contact admin. It turned out the server
 actually only calculates fractions to <code>99999</code> digits:
 </p>
 
-<pre class="example">
+<pre class="example" id="org152cb2f">
 [...]
 15:56 &lt;factoreal&gt; see this:
 15:56 &lt;factoreal&gt; if len(formula) &lt;= 8:
@@ -3270,7 +3257,7 @@ offline I guess.
 <h2 id="orgad87b51">JustCTF 2020</h2>
 <div class="outline-text-2" id="text-orgad87b51">
 </div>
-<div id="outline-container-orgf5fe796" class="outline-3">
+<div id="outline-container-justctf2020" class="outline-3">
 <h3 id="justctf2020">General Comments</h3>
 <div class="outline-text-3" id="text-justctf2020">
 <p>
@@ -3666,7 +3653,7 @@ sort of thing.
 <h2 id="org328932e">zer0pts CTF 2021</h2>
 <div class="outline-text-2" id="text-org328932e">
 </div>
-<div id="outline-container-orge105388" class="outline-3">
+<div id="outline-container-zer0pts2021" class="outline-3">
 <h3 id="zer0pts2021">General Comments</h3>
 <div class="outline-text-3" id="text-zer0pts2021">
 <p>
@@ -3680,9 +3667,9 @@ I know <code>poiko</code> enjoyed it though, so it was probably good.
 </p>
 
 <p>
-The motivation I did have was mostly to help out, because I feel I've
+The motivation I <i>did</i> have was mostly to help out because I've
 been a shit team player for a while now, not really finding any
-motivation. But <code>poiko</code> kept posting tasks to me on Discord and I gave
+will to li<code>^W</code>play. <code>poiko</code> kept posting tasks to me on Discord and I gave
 comments when able.
 </p>
 
@@ -3715,7 +3702,7 @@ candidate, so that's what I tried here for a quick solve. I just
 ignored the terms \(u^2\) and \(v\) completely, trying to just minimize
 the simple and linear expression \(2^{86} H_0 v + b - 2^{85} H_1 \pmod
 p\) with a small \(u\). I can 100% guarantee that there's a cleaner and
-more robust way to attack the full polynomial, but I'm dumb would have
+more robust way to attack the full polynomial, but I'm dumb and would have
 to Think or google for it which, like I said, I wanted to avoid.
 </p>
 
@@ -3881,8 +3868,8 @@ server, I just wrote on Discord what I thought the solution would be:
 <p>
 Which it did. I don't really understand what the <code>d</code>, <code>t</code> and <code>z</code>
 variables were doing in the program, they seemed completely
-superfluous? Perhaps the problem author had overlooked the ability to
-give <code>-1</code> for <code>c</code> so that \(c^k\) becomes a trivial factor.
+superfluous? Perhaps the problem author had overlooked the possibility of
+giving <code>-1</code> for <code>c</code> so that \(c^k\) becomes a trivial factor?
 </p>
 </div>
 </div>
@@ -4059,7 +4046,419 @@ below length limit and works.
 
 <p>
 Should have also checked the main site tho, because turns out the CTF
-was already over.
+was already over when I did this one.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdaf766b" class="outline-2">
+<h2 id="orgdaf766b">Misc/Zh3r0 2021</h2>
+<div class="outline-text-2" id="text-orgdaf766b">
+</div>
+<div id="outline-container-org95b0cbb" class="outline-3">
+<h3 id="org95b0cbb">General Comments</h3>
+<div class="outline-text-3" id="text-org95b0cbb">
+<p>
+<code>poiko</code> has been sneaking a few problems to me on the side from
+various CTFs. I didn't take many notes, don't remember most of them,
+but here are some.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8fbf42f" class="outline-3">
+<h3 id="org8fbf42f">Boring MT blah (Zh3r0)</h3>
+<div class="outline-text-3" id="text-org8fbf42f">
+<p>
+Basic problem was as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b294bb;">import</span> numpy.random <span style="color: #b294bb;">as</span> random
+
+<span style="color: #b294bb;">def</span> <span style="color: #81a2be;">rand_32</span><span style="color: #b294bb;">()</span>:
+    <span style="color: #b294bb;">return</span> <span style="color: #81a2be;">int</span>.from_bytes<span style="color: #b294bb;">(</span>os.urandom<span style="color: #81a2be;">(</span>4<span style="color: #81a2be;">)</span>,<span style="color: #b5bd68;">'big'</span><span style="color: #b294bb;">)</span>
+
+<span style="color: #b294bb;">for</span> _ <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">range</span><span style="color: #b294bb;">(</span>2<span style="color: #b294bb;">)</span>:
+    <span style="color: #5a5b5a;"># </span><span style="color: #5a5b5a;">hate to do it twice, but i dont want people bruteforcing it</span>
+    random.seed<span style="color: #b294bb;">(</span>rand_32<span style="color: #81a2be;">()</span><span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">iv</span>,<span style="color: #cc6666;">key</span> = random.<span style="color: #81a2be;">bytes</span><span style="color: #b294bb;">(</span>16<span style="color: #b294bb;">)</span>, random.<span style="color: #81a2be;">bytes</span><span style="color: #b294bb;">(</span>16<span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">cipher</span> = AES.new<span style="color: #b294bb;">(</span>key,iv=iv,mode=AES.MODE_CBC<span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">flag</span> = iv+cipher.encrypt<span style="color: #b294bb;">(</span>flag<span style="color: #b294bb;">)</span>
+</pre>
+</div>
+
+<p>
+So a 32-bit seed is used with <code>numpy.random.seed()</code>, but we have to
+get through two of them.
+</p>
+
+<p>
+When I first looked at the code I was somewhat excited because newer
+<code>numpy</code> uses PCG64, which I think is a really cool RNG, and would be
+quite interesting to reverse, however, the <code>seed()</code> stuff just uses
+the legacy implementation, which is a Mersenne Twister, basically
+equivalent to Python's (though some differences in initialization).
+</p>
+
+<p>
+Mersenne Twister is one of the more boring RNGs (in my opinion), but
+I'm also biased by the fact that it has a lot of finickiness with
+implementation and it's so easy to get stuck on off-by-one bugs or
+stuff like that. Basically, its implementation is more of a hassle
+than the RNG is worth. It also has, in my opinion, a greatly
+disproportionate state size for its quality.
+</p>
+
+<p>
+Anyway, there's two approaches to this problem. One, the "trve" way,
+is to actually directly reverse the 32-bit seed from the 16 bytes of
+output you get for free. Now, I know that this can be done but it is
+also not trivial, because the MT implementations use a
+super-convoluted initailization, and you have to copy all this code
+and make sure you get all the indexing right and it's just a royal
+pain in the ass with all the potential bugs.
+</p>
+
+<p>
+The second approach, the "I don't want to deal with this shit"
+approach, is to note that you can get as many of these outputs as you
+want. So you can build a database of <code>output-bytes -&gt; seed</code> or
+something like that, and then just get enough outputs from the server
+until it's very likely you get two matches. I think the probability
+calculation might go like \(1-(1-\frac{d}{2^{32}})^h\) (?) where \(d\) is
+the number of entries you put in the database and \(h\) is the number of
+times you hit up the server. So calculating ~200 million seeds (not
+too bad, time-wise) while <code>nc</code>-ing the server 400 times (also not too
+bad, because there's no PoW), gives you a fair chance of being able to
+decrypt both ciphers.
+</p>
+
+<p>
+I went for the second approach, which was simple and braindead.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org21bf2be" class="outline-3">
+<h3 id="org21bf2be">A<sub>52</sub> group (unknown CTF)</h3>
+<div class="outline-text-3" id="text-org21bf2be">
+<p>
+I remember one problem he described where you are to find two elements
+in the alternating group \(a,b \in A_{52}\) such that given any deck
+shuffle (of 52 cards) you can give a sequence of \(a b^2 a b^{13} a^{5} \cdots\) which gives that shuffle. I don't know the exact problem
+statement, or what category it was in (guessing <code>rev</code> or <code>misc</code>), but
+it was an interesting little problem for being something I haven't
+seen before.
+</p>
+
+<p>
+Basically what I came up with is to have one element (the big loop)
+cycle the first 51 cards like <code>(0 1 2 … 49 50)</code> and then another (the
+little loop) which cycles the last three cards like <code>(49 50 51)</code>. And
+then you can think of it as a really bad sorting algorithm, where you
+incrementally start to sort the cards in the big loop (<code>0..50</code>) by
+using the 51st place as a register or temporary variable. You shift
+the card you want to move into position 51, then align the rest of the
+cards properly, then shift it out again, rinse repeat until all the
+cards are sorted (or in whatever order you want). There's a special
+case when the card you want to move is attached to the front or back
+of the sequence of already-sorted cards (and you want to move it to
+the other side) in the "big loop," but it's easy to take care of.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2042557" class="outline-3">
+<h3 id="org2042557">Unicode troll (unknown CTF)</h3>
+<div class="outline-text-3" id="text-org2042557">
+<p>
+There was another problem that appeared to be a RNG reverse, but was
+just a troll task.
+</p>
+
+<p>
+You give a seed as hex, it has various conditions applied to it, then
+the digits in your seed is scrambled, and you are given two bytes of
+output in an xorshift64 stream and asked to predict the value. The
+relevant part was:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cc6666;">seed</span> = <span style="color: #81a2be;">input</span><span style="color: #b294bb;">(</span><span style="color: #b5bd68;">"give me the seed: "</span><span style="color: #b294bb;">)</span>
+<span style="color: #cc6666;">seed</span> = seed.strip<span style="color: #b294bb;">()</span>
+
+<span style="color: #b294bb;">if</span><span style="color: #b294bb;">(</span><span style="color: #81a2be;">len</span><span style="color: #81a2be;">(</span>seed<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span> != SEEDS:
+        <span style="color: #b294bb;">print</span><span style="color: #b294bb;">(</span><span style="color: #b5bd68;">"seed should be "</span>+<span style="color: #81a2be;">str</span><span style="color: #81a2be;">(</span>SEEDS<span style="color: #81a2be;">)</span>+<span style="color: #b5bd68;">" bytes long!"</span><span style="color: #b294bb;">)</span>
+        <span style="color: #de935f;">exit</span><span style="color: #b294bb;">()</span>
+
+<span style="color: #cc6666;">seed</span> = <span style="color: #81a2be;">list</span><span style="color: #b294bb;">(</span>seed<span style="color: #b294bb;">)</span>
+random.shuffle<span style="color: #b294bb;">(</span>seed<span style="color: #b294bb;">)</span>
+
+<span style="color: #cc6666;">counts</span> = collections.Counter<span style="color: #b294bb;">(</span>seed<span style="color: #b294bb;">)</span>
+<span style="color: #b294bb;">if</span> counts.most_common<span style="color: #b294bb;">()[</span>0<span style="color: #b294bb;">][</span>1<span style="color: #b294bb;">]</span> &gt; 3:
+                <span style="color: #b294bb;">print</span> <span style="color: #b294bb;">(</span><span style="color: #b5bd68;">"You can't use the same number more than 3 times!"</span><span style="color: #b294bb;">)</span>
+                <span style="color: #de935f;">exit</span><span style="color: #b294bb;">()</span>
+
+<span style="color: #cc6666;">int16</span> = <span style="color: #b294bb;">lambda</span> x: <span style="color: #81a2be;">int</span><span style="color: #b294bb;">(</span>x,16<span style="color: #b294bb;">)</span>
+<span style="color: #cc6666;">seed</span> = <span style="color: #81a2be;">list</span><span style="color: #b294bb;">(</span><span style="color: #81a2be;">map</span><span style="color: #81a2be;">(</span>int16,seed<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span>
+</pre>
+</div>
+
+<p>
+The suspicious part is where it does the <code>Counter()</code> stuff to check
+for repeated digits. I got a hunch and yes, sure enough:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="color: #81a2be;">int</span><span style="color: #b294bb;">(</span><span style="color: #b5bd68;">'1&#1632;&#1776;&#1984;&#2406;&#2534;&#2662;&#2790;&#2918;&#3046;&#3174;&#3302;&#3430;&#3558;&#3664;&#3792;&#3872;&#4160;&#4240;&#6112;&#6160;&#6470;&#6608;&#6784;&#6800;&#6992;&#7088;&#7232;&#7248;&#42528;&#43216;&#43264;&#43472;&#43504;&#43600;&#44016;&#65296;&#66720;&#68912;&#69734;&#69872;&#69942;&#70096;&#70384;&#70736;&#70864;&#71248;&#71360;&#71472;&#71904;&#72784;'</span><span style="color: #b294bb;">)</span>
+100000000000000000000000000000000000000000000000000
+</pre>
+</div>
+
+<p>
+So you can literally just feed it 0 as the seed and xorshift64 is trivially all zeros.
+</p>
+
+<p>
+You can find these weird characters as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #717171;">''</span>.join<span style="color: #b294bb;">(</span><span style="color: #81a2be;">[</span><span style="color: #81a2be;">chr</span><span style="color: #de935f;">(</span>x<span style="color: #de935f;">)</span> <span style="color: #b294bb;">for</span> x <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">range</span><span style="color: #de935f;">(</span>256,0x110000<span style="color: #de935f;">)</span> <span style="color: #b294bb;">if</span> unicodedata.category<span style="color: #de935f;">(</span><span style="color: #81a2be;">chr</span><span style="color: #b5bd68;">(</span>x<span style="color: #b5bd68;">)</span><span style="color: #de935f;">)</span> == <span style="color: #717171;">'Nd'</span> <span style="color: #b294bb;">and</span> unicodedata.digit<span style="color: #de935f;">(</span><span style="color: #81a2be;">chr</span><span style="color: #b5bd68;">(</span>x<span style="color: #b5bd68;">)</span><span style="color: #de935f;">)</span> == 0<span style="color: #81a2be;">]</span><span style="color: #b294bb;">)</span>
+</pre>
+</div>
+
+<p>
+Apparently the task (in whatever CTF it was) was marked with <code>crypto</code> as well, which is why I call it a troll.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org14587ae" class="outline-3">
+<h3 id="org14587ae">homebrew hash function (Zh3r0)</h3>
+<div class="outline-text-3" id="text-org14587ae">
+<p>
+There was a hash function like
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b294bb;">def</span> <span style="color: #81a2be;">hash</span><span style="color: #b294bb;">(</span>text:<span style="color: #81a2be;">bytes</span><span style="color: #b294bb;">)</span>:
+    <span style="color: #cc6666;">text</span> = pad<span style="color: #b294bb;">(</span>text<span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">text</span> = <span style="color: #b294bb;">[</span><span style="color: #81a2be;">int</span>.from_bytes<span style="color: #81a2be;">(</span>text<span style="color: #de935f;">[</span>i:i+4<span style="color: #de935f;">]</span>,<span style="color: #b5bd68;">'big'</span><span style="color: #81a2be;">)</span> <span style="color: #b294bb;">for</span> i <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">range</span><span style="color: #81a2be;">(</span>0,<span style="color: #81a2be;">len</span><span style="color: #de935f;">(</span>text<span style="color: #de935f;">)</span>,4<span style="color: #81a2be;">)</span><span style="color: #b294bb;">]</span>
+    <span style="color: #cc6666;">M</span> = 0xffff
+    <span style="color: #cc6666;">x</span>,<span style="color: #cc6666;">y</span>,<span style="color: #cc6666;">z</span>,<span style="color: #cc6666;">u</span> = 0x0124fdce, 0x89ab57ea, 0xba89370a, 0xfedc45ef
+    <span style="color: #cc6666;">A</span>,<span style="color: #cc6666;">B</span>,<span style="color: #cc6666;">C</span>,<span style="color: #cc6666;">D</span> = 0x401ab257, 0xb7cd34e1, 0x76b3a27c, 0xf13c3adf
+    <span style="color: #cc6666;">RV1</span>,<span style="color: #cc6666;">RV2</span>,<span style="color: #cc6666;">RV3</span>,<span style="color: #cc6666;">RV4</span> = 0xe12f23cd, 0xc5ab6789, 0xf1234567, 0x9a8bc7ef
+    <span style="color: #b294bb;">for</span> i <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">range</span><span style="color: #b294bb;">(</span>0,<span style="color: #81a2be;">len</span><span style="color: #81a2be;">(</span>text<span style="color: #81a2be;">)</span>,4<span style="color: #b294bb;">)</span>:
+        <span style="color: #cc6666;">X</span>,<span style="color: #cc6666;">Y</span>,<span style="color: #cc6666;">Z</span>,<span style="color: #cc6666;">U</span> = text<span style="color: #b294bb;">[</span>i<span style="color: #b294bb;">]</span>^x,text<span style="color: #b294bb;">[</span>i+1<span style="color: #b294bb;">]</span>^y,text<span style="color: #b294bb;">[</span>i+2<span style="color: #b294bb;">]</span>^z,text<span style="color: #b294bb;">[</span>i+3<span style="color: #b294bb;">]</span>^u
+        <span style="color: #cc6666;">RV1</span> ^= <span style="color: #b294bb;">(</span>x := <span style="color: #81a2be;">(</span>X&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>Y&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>Z,1<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>U,1<span style="color: #81a2be;">)</span> ^ A<span style="color: #b294bb;">)</span>
+        <span style="color: #cc6666;">RV2</span> ^= <span style="color: #b294bb;">(</span>y := <span style="color: #81a2be;">(</span>Y&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>Z&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>U,2<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>X,2<span style="color: #81a2be;">)</span> ^ B<span style="color: #b294bb;">)</span>
+        <span style="color: #cc6666;">RV3</span> ^= <span style="color: #b294bb;">(</span>z := <span style="color: #81a2be;">(</span>Z&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>U&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>X,3<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>Y,3<span style="color: #81a2be;">)</span> ^ C<span style="color: #b294bb;">)</span>
+        <span style="color: #cc6666;">RV4</span> ^= <span style="color: #b294bb;">(</span>u := <span style="color: #81a2be;">(</span>U&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>X&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>Y,4<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>Z,4<span style="color: #81a2be;">)</span> ^ D<span style="color: #b294bb;">)</span>
+    <span style="color: #b294bb;">for</span> i <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">range</span><span style="color: #b294bb;">(</span>4<span style="color: #b294bb;">)</span>:
+        <span style="color: #cc6666;">RV1</span> ^= <span style="color: #b294bb;">(</span>x := <span style="color: #81a2be;">(</span>X&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>Y&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>Z,1<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>U,1<span style="color: #81a2be;">)</span> ^ A<span style="color: #b294bb;">)</span>
+        <span style="color: #cc6666;">RV2</span> ^= <span style="color: #b294bb;">(</span>y := <span style="color: #81a2be;">(</span>Y&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>Z&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>U,2<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>X,2<span style="color: #81a2be;">)</span> ^ B<span style="color: #b294bb;">)</span>
+        <span style="color: #cc6666;">RV3</span> ^= <span style="color: #b294bb;">(</span>z := <span style="color: #81a2be;">(</span>Z&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>U&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>X,3<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>Y,3<span style="color: #81a2be;">)</span> ^ C<span style="color: #b294bb;">)</span>
+        <span style="color: #cc6666;">RV4</span> ^= <span style="color: #b294bb;">(</span>u := <span style="color: #81a2be;">(</span>U&amp;0xffff<span style="color: #81a2be;">)</span>*<span style="color: #81a2be;">(</span>M - <span style="color: #de935f;">(</span>X&gt;&gt;16<span style="color: #de935f;">)</span><span style="color: #81a2be;">)</span> ^ ROTL<span style="color: #81a2be;">(</span>Y,4<span style="color: #81a2be;">)</span> ^ ROTR<span style="color: #81a2be;">(</span>Z,4<span style="color: #81a2be;">)</span> ^ D<span style="color: #b294bb;">)</span>
+    <span style="color: #b294bb;">return</span> <span style="color: #81a2be;">int</span>.to_bytes<span style="color: #b294bb;">(</span> <span style="color: #81a2be;">(</span>RV1&lt;&lt;96<span style="color: #81a2be;">)</span>|<span style="color: #81a2be;">(</span>RV2&lt;&lt;64<span style="color: #81a2be;">)</span>|<span style="color: #81a2be;">(</span>RV3&lt;&lt;32<span style="color: #81a2be;">)</span>|RV4 ,16,<span style="color: #b5bd68;">'big'</span><span style="color: #b294bb;">)</span>
+</pre>
+</div>
+
+<p>
+And the goal was to find a collision. Stripping away all the trivially
+reversible fluff, what we want to attack is:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cc6666;">RV1</span> ^= <span style="color: #b294bb;">(</span>X&amp;0xffff<span style="color: #b294bb;">)</span>*<span style="color: #b294bb;">(</span>M - <span style="color: #81a2be;">(</span>Y&gt;&gt;16<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span> ^ ROTL<span style="color: #b294bb;">(</span>Z,1<span style="color: #b294bb;">)</span> ^ ROTR<span style="color: #b294bb;">(</span>U,1<span style="color: #b294bb;">)</span>
+<span style="color: #cc6666;">RV2</span> ^= <span style="color: #b294bb;">(</span>Y&amp;0xffff<span style="color: #b294bb;">)</span>*<span style="color: #b294bb;">(</span>M - <span style="color: #81a2be;">(</span>Z&gt;&gt;16<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span> ^ ROTL<span style="color: #b294bb;">(</span>U,2<span style="color: #b294bb;">)</span> ^ ROTR<span style="color: #b294bb;">(</span>X,2<span style="color: #b294bb;">)</span>
+<span style="color: #cc6666;">RV3</span> ^= <span style="color: #b294bb;">(</span>Z&amp;0xffff<span style="color: #b294bb;">)</span>*<span style="color: #b294bb;">(</span>M - <span style="color: #81a2be;">(</span>U&gt;&gt;16<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span> ^ ROTL<span style="color: #b294bb;">(</span>X,3<span style="color: #b294bb;">)</span> ^ ROTR<span style="color: #b294bb;">(</span>Y,3<span style="color: #b294bb;">)</span>
+<span style="color: #cc6666;">RV4</span> ^= <span style="color: #b294bb;">(</span>U&amp;0xffff<span style="color: #b294bb;">)</span>*<span style="color: #b294bb;">(</span>M - <span style="color: #81a2be;">(</span>X&gt;&gt;16<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span> ^ ROTL<span style="color: #b294bb;">(</span>Y,4<span style="color: #b294bb;">)</span> ^ ROTR<span style="color: #b294bb;">(</span>Z,4<span style="color: #b294bb;">)</span>
+</pre>
+</div>
+
+<p>
+Specifically, the only thing that is nonlinear here is the
+multiplication. I think you could approach this in several ways, like
+a sort of backward search on each block, or try to find out how two
+blocks can cancel each other out, but as a preliminary I put it into
+z3 first. I had a suspicion that you can solve the above for several
+instances of <code>X, Y, Z, U</code> to get a collision in the very first 16
+bytes, or at least I couldn't see why it shouldn't be possible. But
+sure enough, z3 found such an instance pretty quickly (fixing one
+variable to be anything to ground it) and it was just done. Whatever
+else in the data doesn't matter.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgd9f1899" class="outline-3">
+<h3 id="orgd9f1899">almost-combinadics (Zh3r0)</h3>
+<div class="outline-text-3" id="text-orgd9f1899">
+<p>
+The problem was:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b294bb;">def</span> <span style="color: #81a2be;">nk2n</span><span style="color: #b294bb;">(</span>nk<span style="color: #b294bb;">)</span>:
+    <span style="color: #cc6666;">l</span> = <span style="color: #81a2be;">len</span><span style="color: #b294bb;">(</span>nk<span style="color: #b294bb;">)</span>
+    <span style="color: #b294bb;">if</span> l == 1:
+        <span style="color: #b294bb;">return</span> nk<span style="color: #b294bb;">[</span>0<span style="color: #b294bb;">]</span>
+    <span style="color: #b294bb;">elif</span> l == 2:
+        <span style="color: #cc6666;">i</span>,<span style="color: #cc6666;">j</span> = nk
+        <span style="color: #b294bb;">return</span> <span style="color: #b294bb;">(</span><span style="color: #81a2be;">(</span>i+j<span style="color: #81a2be;">)</span> * <span style="color: #81a2be;">(</span>i+j+1<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span> // 2 + j
+    <span style="color: #b294bb;">return</span> nk2n<span style="color: #b294bb;">(</span><span style="color: #81a2be;">[</span>nk2n<span style="color: #de935f;">(</span>nk<span style="color: #b5bd68;">[</span>:l-l//2<span style="color: #b5bd68;">]</span><span style="color: #de935f;">)</span>, nk2n<span style="color: #de935f;">(</span>nk<span style="color: #b5bd68;">[</span>l-l//2:<span style="color: #b5bd68;">]</span><span style="color: #de935f;">)</span><span style="color: #81a2be;">]</span><span style="color: #b294bb;">)</span>
+
+<span style="color: #b294bb;">print</span><span style="color: #b294bb;">(</span>nk2n<span style="color: #81a2be;">(</span>flag<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span>
+<span style="color: #5a5b5a;">#</span><span style="color: #5a5b5a;">2597749519984520018193538914972744028780767067373210633843441892910830749749277631182596420937027368405416666234869030284255514216592219508067528406889067888675964979055810441575553504341722797908073355991646423732420612775191216409926513346494355434293682149298585</span>
+</pre>
+</div>
+
+<p>
+Right off the bat there was a strong "smell" of some sort of "exotic
+base conversion" here, and I mentioned combinatorial number system to
+<code>poiko</code>. He pointed out that indeed, the case of <code>l==2</code> above is
+<code>choose(i+j+1,2)+j</code>. That made it click for me even though the whole
+combinatorial angle isn't really needed or relevant, the idea is just
+that the <code>l==2</code> step is easily reversible:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b294bb;">def</span> <span style="color: #81a2be;">rev</span><span style="color: #b294bb;">(</span>q<span style="color: #b294bb;">)</span>:
+  <span style="color: #5a5b5a;"># </span><span style="color: #5a5b5a;">q == comb(i+j+1,2) + j</span>
+  <span style="color: #cc6666;">r</span> = iroot<span style="color: #b294bb;">(</span>2*q,2<span style="color: #b294bb;">)[</span>0<span style="color: #b294bb;">]</span>
+  <span style="color: #b294bb;">if</span> comb<span style="color: #b294bb;">(</span>r+1,2<span style="color: #b294bb;">)</span> &lt; q: <span style="color: #cc6666;">r</span> += 1
+  <span style="color: #5a5b5a;"># </span><span style="color: #5a5b5a;">r == i+j+1</span>
+  <span style="color: #cc6666;">j</span> = q - comb<span style="color: #b294bb;">(</span>r,2<span style="color: #b294bb;">)</span>
+  <span style="color: #cc6666;">i</span> = r - j - 1
+  <span style="color: #b294bb;">return</span> <span style="color: #b294bb;">(</span>i,j<span style="color: #b294bb;">)</span>
+</pre>
+</div>
+
+<p>
+So you can simply keep calling <code>rev(v)</code> on all the numbers <code>&gt;255</code>
+until all you have is bytes, and the flag comes out.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbf41094" class="outline-3">
+<h3 id="orgbf41094">approximate mastermind (Zh3r0)</h3>
+<div class="outline-text-3" id="text-orgbf41094">
+<p>
+This was a PPC task of solving Mastermind when the server sometimes
+(with a low probability) lies in its responses. Full disclosure is I
+didn't solve this one until after the CTF, so unfortunately no points
+for <code>mode13h</code> but it was interesting enough.
+</p>
+
+<p>
+So my first idea was to do the classical solution, (because the number
+of pegs and colors were low in the challenge games,) which is to
+enumerate all possible solution and weed out ones that didn't match
+the constraints, and, if this leads to 0 possible solutions because
+the server lied at some point, to sort of backtrack and remove one of
+the constraints until it is consistent again. This obviously won't
+work if the server lies too much, but the hope was that I could just
+retry the game until the server lied few enough times,
+probabilistically.
+</p>
+
+<p>
+I did this with <code>numpy</code> to make it somewhat efficient, something like
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b294bb;">def</span> <span style="color: #81a2be;">c_bulls</span><span style="color: #b294bb;">(</span>a,b<span style="color: #b294bb;">)</span>:
+  <span style="color: #b294bb;">return</span> <span style="color: #b294bb;">(</span>a == b<span style="color: #b294bb;">)</span>.<span style="color: #81a2be;">sum</span><span style="color: #b294bb;">(</span>1, dtype=np.int8<span style="color: #b294bb;">)</span>
+
+<span style="color: #b294bb;">def</span> <span style="color: #81a2be;">c_cows</span><span style="color: #b294bb;">(</span>C,a,b<span style="color: #b294bb;">)</span>:
+  <span style="color: #cc6666;">b</span> = <span style="color: #81a2be;">tuple</span><span style="color: #b294bb;">(</span>b<span style="color: #b294bb;">)</span>
+  <span style="color: #cc6666;">c</span> = np.zeros<span style="color: #b294bb;">(</span><span style="color: #81a2be;">(</span>a.shape<span style="color: #de935f;">[</span>0<span style="color: #de935f;">]</span>,<span style="color: #81a2be;">)</span>, a.dtype<span style="color: #b294bb;">)</span>
+  <span style="color: #b294bb;">for</span> k <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">range</span><span style="color: #b294bb;">(</span>C<span style="color: #b294bb;">)</span>:
+    <span style="color: #cc6666;">bc</span> = b.count<span style="color: #b294bb;">(</span>k<span style="color: #b294bb;">)</span>
+    <span style="color: #b294bb;">if</span> bc == 0:
+      <span style="color: #b294bb;">continue</span>
+    <span style="color: #cc6666;">x</span> = <span style="color: #b294bb;">(</span>a==k<span style="color: #b294bb;">)</span>.<span style="color: #81a2be;">sum</span><span style="color: #b294bb;">(</span>1, dtype=np.int8<span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">c</span> += np.<span style="color: #81a2be;">min</span><span style="color: #b294bb;">(</span>x, bc<span style="color: #b294bb;">)</span>
+  <span style="color: #b294bb;">return</span> c
+</pre>
+</div>
+
+<p>
+(Here <code>a</code> is a <code>k×P</code> matrix of "potential solutions." Note also
+<code>c_cows()</code> include the bull count, which I find more intuitive,
+whereas the server essentially uses <code>cows = c_cows() - c_bulls()</code>.)
+</p>
+
+<p>
+To select a next guess I sampled some of the potential solutions and
+found ones that would lead to the most other candidates being
+eliminated no matter the response (min-max). Anyway, it wasn't the
+fastest, and I ran into some weird (hidden) timeout issues and it kept
+failing. I don't know what the timeout on the server actually was,
+because it wasn't explicitly stated, which was annoying.
+</p>
+
+<p>
+I then changed it to use a different approach, where I would generate
+a small set of "best candidates" solutions (initially random) and just
+keep iteritatively randomizing them until reaching some local maximum
+where they would all give approximately the same answers as the
+answers I had gotten from the server, adding more random candidates
+that again get mutated down to "good candidates" when previous ones
+end up identical. For each guess I just used the best candidate I had
+so far.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b294bb;">def</span> <span style="color: #81a2be;">local_mutate</span><span style="color: #b294bb;">(</span><span style="color: #b294bb;">self</span>, ch<span style="color: #b294bb;">)</span>:
+  <span style="color: #cc6666;">tmp</span> = <span style="color: #81a2be;">list</span><span style="color: #b294bb;">(</span>ch<span style="color: #b294bb;">)</span>
+  <span style="color: #cc6666;">f</span> = <span style="color: #b294bb;">self</span>.score<span style="color: #b294bb;">(</span>ch<span style="color: #b294bb;">)</span>
+  <span style="color: #cc6666;">order</span> = <span style="color: #81a2be;">list</span><span style="color: #b294bb;">(</span><span style="color: #81a2be;">range</span><span style="color: #81a2be;">(</span><span style="color: #b294bb;">self</span>.P<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span>
+  random.shuffle<span style="color: #b294bb;">(</span>order<span style="color: #b294bb;">)</span>
+  <span style="color: #b294bb;">for</span> i <span style="color: #b294bb;">in</span> order:
+    p, <span style="color: #cc6666;">tmp</span><span style="color: #b294bb;">[</span>i<span style="color: #b294bb;">]</span> = tmp<span style="color: #b294bb;">[</span>i<span style="color: #b294bb;">]</span>, random.randrange<span style="color: #b294bb;">(</span><span style="color: #b294bb;">self</span>.N<span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">nf</span> = <span style="color: #b294bb;">self</span>.score<span style="color: #b294bb;">(</span>tmp<span style="color: #b294bb;">)</span>
+    <span style="color: #b294bb;">if</span> nf &lt; f:
+      <span style="color: #cc6666;">f</span> = nf
+    <span style="color: #b294bb;">else</span>:
+      <span style="color: #cc6666;">tmp</span><span style="color: #b294bb;">[</span>i<span style="color: #b294bb;">]</span> = p
+  <span style="color: #b294bb;">return</span> f, <span style="color: #81a2be;">tuple</span><span style="color: #b294bb;">(</span>tmp<span style="color: #b294bb;">)</span>
+
+<span style="color: #b294bb;">def</span> <span style="color: #81a2be;">score</span><span style="color: #b294bb;">(</span><span style="color: #b294bb;">self</span>, cand<span style="color: #b294bb;">)</span>:
+  <span style="color: #717171;">"Score a guess based on previous guesses and responses"</span>
+  <span style="color: #cc6666;">f</span> = 0.0
+  <span style="color: #cc6666;">cntc</span> = Counter<span style="color: #b294bb;">(</span>cand<span style="color: #b294bb;">)</span>
+  <span style="color: #b294bb;">for</span> g, r, w <span style="color: #b294bb;">in</span> <span style="color: #b294bb;">self</span>.history:
+    <span style="color: #cc6666;">r_</span> = <span style="color: #81a2be;">sum</span><span style="color: #b294bb;">(</span>x==y <span style="color: #b294bb;">for</span> x,y <span style="color: #b294bb;">in</span> <span style="color: #81a2be;">zip</span><span style="color: #81a2be;">(</span>g,cand<span style="color: #81a2be;">)</span><span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">w_</span> = <span style="color: #81a2be;">sum</span><span style="color: #b294bb;">(</span><span style="color: #81a2be;">(</span>Counter<span style="color: #de935f;">(</span>g<span style="color: #de935f;">)</span> &amp; cntc<span style="color: #81a2be;">)</span>.values<span style="color: #81a2be;">()</span><span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">f</span> += <span style="color: #b294bb;">self</span>.bull_weight * <span style="color: #81a2be;">abs</span><span style="color: #b294bb;">(</span>r_-r<span style="color: #b294bb;">)</span>
+    <span style="color: #cc6666;">f</span> += <span style="color: #81a2be;">abs</span><span style="color: #b294bb;">(</span>w_-w<span style="color: #b294bb;">)</span>
+  <span style="color: #b294bb;">return</span> f
+</pre>
+</div>
+
+<p>
+This is more of a genetic algorithm approach, kind of similar to
+something I've done when finding a factorization where the primes had
+very specific bit patterns applied to them. It turned out this
+approach worked surprisingly well actually, and immediately gave the
+flag:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">b<span style="color: #717171;">'level passed, good job\n'</span>
+b<span style="color: #717171;">'you earned it : zh3r0{wh3n_3asy_g4m3s_b3come_unnecessarily_challenging}\n'</span>
+</pre>
+</div>
+
+<p>
+It was also much faster than the full "brute force" numpy solution,
+even though here I did everything in slow Python code.
 </p>
 </div>
 </div>
