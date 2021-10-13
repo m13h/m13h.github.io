@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-13 on. 13:54 -->
+<!-- 2021-10-14 to. 00:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Notes from CTF tasks (math/programming-related)</title>
@@ -231,7 +231,7 @@
 <li><a href="#orga284376">About</a></li>
 <li><a href="#orge71fea0">N1CTF2020</a>
 <ul>
-<li><a href="#orgdeb3449">General Comments</a></li>
+<li><a href="#org5470057">General Comments</a></li>
 <li><a href="#orgfc32c82">crypto:VSS</a></li>
 <li><a href="#org93b5404">crypto:FlagBot</a></li>
 <li><a href="#org42a0a72">crypto:curve</a></li>
@@ -241,7 +241,7 @@
 </li>
 <li><a href="#orgf1b5cff">Hack.lu 2020</a>
 <ul>
-<li><a href="#org244649d">General Comments</a></li>
+<li><a href="#orgb0e0b77">General Comments</a></li>
 <li><a href="#org8bbb614">crypto:Bad Primes</a></li>
 <li><a href="#org60c3fed">misc:BabyJS</a></li>
 <li><a href="#orgb215406">crypto:Conquering Premium Access</a></li>
@@ -251,7 +251,7 @@
 </li>
 <li><a href="#org5a7ad4c">CyberSecurityRumble 2020</a>
 <ul>
-<li><a href="#orgbc0b960">General Comments</a></li>
+<li><a href="#org5e06ebf">General Comments</a></li>
 <li><a href="#orgf594885">crypto:Pady McPadface</a></li>
 <li><a href="#org41b0ca4">crypto:dlog</a></li>
 <li><a href="#orgc28e707">crypto:ezdsa</a></li>
@@ -387,9 +387,9 @@ avoid CTFs with uninteresting problems.
 <h2 id="orge71fea0">N1CTF2020</h2>
 <div class="outline-text-2" id="text-orge71fea0">
 </div>
-<div id="outline-container-orgdeb3449" class="outline-3">
-<h3 id="orgdeb3449">General Comments</h3>
-<div class="outline-text-3" id="text-orgdeb3449">
+<div id="outline-container-org5470057" class="outline-3">
+<h3 id="org5470057">General Comments</h3>
+<div class="outline-text-3" id="text-org5470057">
 <p>
 An <b>A+</b> CTF! An <i>incredible</i> amount of tasks, from mid-tier to top-tier
 difficulty level. Objectively the task set alone deserves a ~100 rating on
@@ -739,9 +739,9 @@ I&rsquo;ll leave it here to be sad and alone. :(
 <h2 id="orgf1b5cff">Hack.lu 2020</h2>
 <div class="outline-text-2" id="text-orgf1b5cff">
 </div>
-<div id="outline-container-org244649d" class="outline-3">
-<h3 id="org244649d">General Comments</h3>
-<div class="outline-text-3" id="text-org244649d">
+<div id="outline-container-orgb0e0b77" class="outline-3">
+<h3 id="orgb0e0b77">General Comments</h3>
+<div class="outline-text-3" id="text-orgb0e0b77">
 <p>
 An unfortunate step down from last weekend&rsquo;s <a href="n1ctf2020.html">N1CTF2020</a> even though this one has
 a much higher rating on <code>CTFTime</code>.
@@ -1150,9 +1150,9 @@ discovered. Print it, ship it, done.
 <h2 id="org5a7ad4c">CyberSecurityRumble 2020</h2>
 <div class="outline-text-2" id="text-org5a7ad4c">
 </div>
-<div id="outline-container-orgbc0b960" class="outline-3">
-<h3 id="orgbc0b960">General Comments</h3>
-<div class="outline-text-3" id="text-orgbc0b960">
+<div id="outline-container-org5e06ebf" class="outline-3">
+<h3 id="org5e06ebf">General Comments</h3>
+<div class="outline-text-3" id="text-org5e06ebf">
 <p>
 Overall a pretty good CTF. Decent number of tasks, variety, difficulty level and
 so forth. The stuff I looked at seemed alright, though I got entangled in some
@@ -3056,7 +3056,7 @@ the center, like this:
 </p>
 
 
-<div id="orgf98b836" class="figure">
+<div id="orga0a6f42" class="figure">
 <p><img src="./data1.png" alt="data1.png" />
 </p>
 </div>
@@ -3075,7 +3075,7 @@ mysterious &ldquo;A&rdquo; layer as well, and combining &ldquo;A&rdquo; with any
 </p>
 
 
-<div id="org789ded0" class="figure">
+<div id="org2fe755d" class="figure">
 <p><img src="./data2.png" alt="data2.png" />
 </p>
 </div>
@@ -3171,7 +3171,7 @@ But bottom line: expressions on the form <code>D/DDDDDD</code> can give <i>up to
 comes in. As my database kept filling up I started encountering this:
 </p>
 
-<pre class="example" id="orgff09141">
+<pre class="example" id="org87b055b">
 [DEBUG] Sent 0x9 bytes: b'1/102451\n'
 [DEBUG] Received 0x60 bytes: b'sorry, the result of your expression does not contain the given substr: 07718811919\n'
 </pre>
@@ -3180,7 +3180,7 @@ comes in. As my database kept filling up I started encountering this:
 Yet:
 </p>
 
-<pre class="example" id="org62ee16d">
+<pre class="example" id="org9a1ddce">
 &gt;&gt;&gt; getcontext().prec = 200000
 &gt;&gt;&gt; '07718811919' in str(Decimal(1)/102451)
 True
@@ -3196,7 +3196,7 @@ Finally I went on IRC and tried to contact admin. It turned out the server
 actually only calculates fractions to <code>99999</code> digits:
 </p>
 
-<pre class="example" id="org6dfcd78">
+<pre class="example" id="orgee5058d">
 [...]
 15:56 &lt;factoreal&gt; see this:
 15:56 &lt;factoreal&gt; if len(formula) &lt;= 8:
@@ -4726,8 +4726,10 @@ Problem description to flag took around 1.5 hours so a pretty fast problem.
 <h3 id="orgecaebf2">Yet Another PRNG</h3>
 <div class="outline-text-3" id="text-orgecaebf2">
 <p>
-This one was the most fun and enjoyable problem (in my view). I am far from
-certain I found the intended or most optimal solution.
+This one was the most fun and enjoyable problem (in my view). It seemed simple
+enough, it smelled of nuts (as in brain teasers), and I love Euler
+hacking<sup><a id="fnr.23" class="footref" href="#fn.23" role="doc-backlink">23</a></sup>. It was decently challenging and rewarding. I am far from certain
+I found the intended or most optimal solution.
 </p>
 
 <p>
@@ -4756,7 +4758,7 @@ when?) is as follows:
     <span style="color: #dcaeea;">out</span> = s[:,<span style="color: #da8548; font-weight: bold;">0</span>] * [<span style="color: #da8548; font-weight: bold;">2</span>*moduli[<span style="color: #da8548; font-weight: bold;">0</span>], -moduli[<span style="color: #da8548; font-weight: bold;">2</span>], -moduli[<span style="color: #da8548; font-weight: bold;">1</span>]]  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">OBS 2: the order.</span>
     <span style="color: #51afef;">yield</span> <span style="color: #c678dd;">sum</span>(out) % M  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">summed under a fourth modulus</span>
     <span style="color: #dcaeea;">n</span> = (s*A).<span style="color: #c678dd;">sum</span>(<span style="color: #da8548; font-weight: bold;">1</span>) % moduli  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">each stream gets its own modulus</span>
-    <span style="color: #dcaeea;">s</span> = np.c_[s[:,<span style="color: #da8548; font-weight: bold;">1</span>:], n]  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">cycle state</span>
+    <span style="color: #dcaeea;">s</span> = np.c_[s[:,<span style="color: #da8548; font-weight: bold;">1</span>:], n]  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">cycle state: shift out the most recent numbers, add new ones</span>
 
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">9x 32-bit unknowns.</span>
 <span style="color: #dcaeea;">U</span> = np.array([[random.getrandbits(<span style="color: #da8548; font-weight: bold;">32</span>) <span style="color: #51afef;">for</span> _ <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">3</span>)] <span style="color: #51afef;">for</span> _ <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">3</span>)], dtype=<span style="color: #c678dd;">object</span>)
@@ -4769,10 +4771,11 @@ when?) is as follows:
 </div>
 
 <p>
-I spent several wasteful hours going down misguided rabbit holes looking for
-Euler hacks, but at least I had fun doing it. I don&rsquo;t have a proper time
-estimate because I started preliminary analysis before bed and then continued in
-the morning, but I used <i>at least</i> 5 hours on this problem&#x2026;
+I spent several wasteful hours going down misguided rabbit holes chasing clever
+Euler hacks, which was unfruitful, but I had a lot of fun doing it. I don&rsquo;t have
+a proper time estimate because I started preliminary analysis before bed and
+then continued in the morning, but I would say I used <i>at least</i> 5 hours on this
+problem, which I don&rsquo;t regret.
 </p>
 
 <p>
@@ -4789,25 +4792,27 @@ faux-\(\mathbb{Q}\) values in order to unify the moduli calculation to something
 under \(\pmod{m_0 m_1 m_2}\) or similar, but I was probably just being delusional.
 However during this I made two important observations: the moduli were indeed
 very suspicious. For example \(2 m_0 = m_1 + m_2\), which I assume is relevant,
-but I didn&rsquo;t find a direct way to exploit it. I got the feeling there&rsquo;s some
+but I didn&rsquo;t find a <i>direct</i> way to exploit it. I got the feeling there&rsquo;s some
 clever insight I missed here, like &ldquo;oh! but that means we can just think of the
 streams as blah blah in linear algebra&rdquo; but my brain didn&rsquo;t deliver on the blah
 blah part.
 </p>
 
 <p>
-Anyway, the second observation is how how the multipliers switches order when
-giving the final sum, mimicking CRT. The output is (ignoring the \(M\) modulus) \(2
-m_0 (x \pmod{m_0}) - m_2 (y \pmod{m_1}) - m_1 (z \pmod{m_2})\), which is
-equivalent to \((2 m_0 x \pmod{m_{0}^2}) - (m_2 y + m_1 z \pmod{m_1 m_2})\), so
+Anyway, the second observation is how the multipliers switches order when giving
+the final sum, mimicking CRT. The output is (ignoring the \(M\) modulus) \(2 m_0 (x
+\pmod{m_0}) - m_2 (y \pmod{m_1}) - m_1 (z \pmod{m_2})\) (to be fair: this is much
+clearer in the actual task than I made it seem in the numpy golf above), which
+is equivalent to \((2 m_0 x \pmod{m_{0}^2}) - (m_2 y + m_1 z \pmod{m_1 m_2})\), so
 that at least reduces it to two moduli.
 </p>
 
 <p>
 And, but, aha! Now the moduli are twice the bit length, meaning that they&rsquo;re
 &ldquo;applied&rdquo; less. Expanding, we have something like \(2 m_0 (c_0 x_0 + c_1 x_1 +
-c_2 x_2) \pmod{m_{0}^2}\) for example, where all the inner values are 32-bit, so
-the \(k\) in \((\cdots) - r = m_0^2 k\) will also be around 32-bit.
+c_2 x_2) \pmod{m_{0}^2}\) for the first independent stream, where all the inner
+values are 32-bit, so the \(k\) in \((\cdots) - r = m_0^2 k\) will also be around
+32-bit.
 </p>
 
 <p>
@@ -4836,7 +4841,7 @@ there is less than the error introduced by the pseudo-modulus \(m'\).
 <p>
 In the end I had some big, ugly lattice that is too ugly to reproduce here, but
 it succeeded in finding all the original 9 seed values given the correct factor
-of \(M\) for the first four output values.
+of \(M\) for the first four output values (so 16 lattices).
 </p>
 
 <div class="org-src-container">
@@ -4884,11 +4889,11 @@ easily). It wasn&rsquo;t particularly enlightening.
 I tried to Google-the-paper at this point but didn&rsquo;t find anything promising so
 I just started a Wikipedia-hole instead. I came across the projective linear
 group and duh, the rather obvious \(p^2 + p + 1 = \frac{p^3 - 1}{p-1}\) finally
-hit me. Thus I figured it was modelling some operation over the projective
-plane, and from the clue of \(p^3 - 1\) I carefully re-examined the group
-operation while thinking about \(\mathbb{F}_{p^3}\) and yes indeed, it was
-modelling multiplication over \(\mathbb{F}[X]/(p^3-2)\)! (Where \(projective
-\approx monic\), to really abuse math terms.)
+hit me. Thus I figured it was modelling some operation over the projective plane
+(thus all the &ldquo;fractions&rdquo;), and from the clue of \(p^3 - 1\) I carefully
+re-examined the group operation while thinking about \(\mathbb{F}_{p^3}\) and yes
+indeed, it was modelling multiplication over \(\mathbb{Z}_{pq}[X]/(X^3-2)\)!
+(Where \(projective \approx monic\), to really abuse math terms.)
 </p>
 
 <p>
@@ -4920,7 +4925,7 @@ modified with stuff I discovered below.)
       <span style="color: #51afef;">return</span> generic_pow(_pt.__add__, _pt(<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">0</span>), <span style="color: #51afef;">self</span>, n)
     <span style="color: #51afef;">def</span> <span style="color: #c678dd;">pell</span>(<span style="color: #51afef;">self</span>):
       <span style="color: #dcaeea;">x</span>,<span style="color: #dcaeea;">y</span>,<span style="color: #dcaeea;">z</span> = <span style="color: #51afef;">self</span>
-      <span style="color: #51afef;">return</span> (x**<span style="color: #da8548; font-weight: bold;">3</span> + r*y**<span style="color: #da8548; font-weight: bold;">3</span> + r**<span style="color: #da8548; font-weight: bold;">2</span>*z**<span style="color: #da8548; font-weight: bold;">3</span> - <span style="color: #da8548; font-weight: bold;">3</span>*r*x*y*z) % N
+      <span style="color: #51afef;">return</span> (x**<span style="color: #da8548; font-weight: bold;">3</span> + r*y**<span style="color: #da8548; font-weight: bold;">3</span> + r**<span style="color: #da8548; font-weight: bold;">2</span>*z**<span style="color: #da8548; font-weight: bold;">3</span> - <span style="color: #da8548; font-weight: bold;">3</span>*r*x*y*z) % N <span style="color: #5B6268;"># </span><span style="color: #5B6268;">== 1</span>
     <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__neg__</span>(<span style="color: #51afef;">self</span>):
       <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">NotImplemented</span>
     <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__matmul__</span>(<span style="color: #51afef;">self</span>, k):
@@ -4947,7 +4952,28 @@ there it was: everything.
 </p>
 
 <p>
-This paper makes bold claims about how resistant it is to various classical
+Oh yeah, back there I was also trying to look for invariants to find the curve
+in \(\mathbb{A}\) it was following, as I figured there would be one(?). I checked
+all sorts of quadratic forms, some cubics, but never found it. No wonder,
+because as the paper above the curve (cubic Pell) for this particular instance
+turns out to be: \(x^3 + 2y^3 - 6xy + 3\). Jesus. (To be fair, that does mean it&rsquo;s
+easy to find a point, namely <code>(1,1)</code>!)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">Pt</span> = mk_point(<span style="color: #da8548; font-weight: bold;">900397</span>, <span style="color: #da8548; font-weight: bold;">2</span>)
+<span style="color: #dcaeea;">P</span> = Pt(<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">1</span>)
+<span style="color: #dcaeea;">Q</span> = P * <span style="color: #da8548; font-weight: bold;">1337</span>
+<span style="color: #51afef;">assert</span> P.pell() == Q.pell()
+</pre>
+</div>
+
+<p>
+I mean it&rsquo;s cool&#x2026;but for nothing?
+</p>
+
+<p>
+This paper also makes bold claims about how resistant it is to various classical
 attacks et cetera, but then the citations immediately leads to another paper
 (<i>Classical Attacks on a Variant of the RSA Cryptosystem</i>) with a rather dry
 counter:
@@ -4988,6 +5014,16 @@ b<span style="color: #83898d;">"and_implement_the_attacks_from_them}\xfb\x03\\\x
 
 <p>
 Ehh.
+</p>
+
+<p>
+(Edit/addendum: OK, after spoiling myself and reading other writeups etc., it&rsquo;s
+possible the small-\(d\) stuff was the intention. I have a theory: the problem
+author probably/might have just come across the attack-paper above and thought
+it would be cool in and by itself, some classics against something novel, but
+didn&rsquo;t consider that the solvers would be so taken in by the cool group stuff,
+i.e. the novelty, that then coming back down to <i>blah blah&#x2026;Coppersmith&#x2026;blah
+blah</i> in the end would be a disappointment?)
 </p>
 </div>
 </div>
@@ -5148,6 +5184,11 @@ look like I&rsquo;m made of RAM?
 fun fact: Blum-Blum-Shub was the first &ldquo;strong&rdquo; RNGs I was
 properly exposed to, through the excellent <code>calc</code> command-line
 program.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.23" class="footnum" href="#fnr.23" role="doc-backlink">23</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+What I call exploratory mathematics, or experimental mathematics,
+especially when involving classical number theory.
 </p></div></div>
 
 
